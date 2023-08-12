@@ -1,0 +1,27 @@
+@import 'variables';
+
+header {
+  padding: 0 10em;
+  height: 195px;
+  margin: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: rgb(255, 255, 255, 0.75);
+
+  a img {
+    height: 150px;
+  }
+
+  ul {
+    list-style: none;
+
+    a {
+      padding: 1em;
+      text-decoration: none;
+      color: $primary-color;
+    }
+  }
+}

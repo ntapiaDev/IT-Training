@@ -1,1 +1,6 @@
-<h1>IT Training</h1>
+<main>
+  <ng-container *ngIf="!isHomePage()">
+    <app-header></app-header>
+  </ng-container>
+  <router-outlet></router-outlet>
+</main>

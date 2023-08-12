@@ -1,0 +1,49 @@
+@import 'variables';
+
+section {
+  height: 100vh;
+  background-image: url('../../../assets/home.jpg');
+  background-size: cover;
+
+  form {
+    width: 750px;
+    margin-top: 5em;
+    margin-left: 10em;
+    border-radius: 1em;
+    padding: 2em;
+    background-color: rgb(255, 255, 255, 0.75);
+
+    h2 {
+      color: $primary-color;
+    }
+
+    .submit {
+      margin-top: 1em;
+      display: flex;
+      gap: 1em;
+
+      input {
+        padding: 0 2em;
+        flex-grow: 1;
+        background-color: $background-light;
+        font-size: 1em;
+        color: $primary-color;
+
+        &::placeholder {
+          color: $primary-color;
+        }
+      }
+      button {
+        width: 60px;
+        background-color: $secondary-color;
+        cursor: pointer;
+      }
+      input,
+      button {
+        height: 60px;
+        border-radius: 0.5em;
+        border: 1px solid $secondary-color;
+      }
+    }
+  }
+}
