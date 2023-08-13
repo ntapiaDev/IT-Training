@@ -5,44 +5,50 @@ section {
   background-image: url('../../../assets/home.jpg');
   background-size: cover;
 
-  form {
-    width: 750px;
-    margin-top: 5em;
-    margin-left: 10em;
-    border-radius: 1em;
-    padding: 2em;
-    background-color: rgb(255, 255, 255, 0.75);
+  .container {
+    max-width: $max-width;
+    margin: auto;
 
-    h2 {
-      color: $primary-color;
-    }
+    form {
+      width: 750px;
+      margin-top: 5em;
+      border-radius: 1em;
+      padding: 2em;
+      background-color: rgb(255, 255, 255, 0.75);
 
-    .submit {
-      margin-top: 1em;
-      display: flex;
-      gap: 1em;
-
-      input {
-        padding: 0 2em;
-        flex-grow: 1;
-        background-color: $background-light;
-        font-size: 1em;
+      h2 {
         color: $primary-color;
+      }
 
-        &::placeholder {
+      .submit {
+        margin-top: 1em;
+        display: flex;
+        gap: 1em;
+
+        input {
+          padding: 0 2em;
+          flex-grow: 1;
+          background-color: $light-color;
+          font-size: 1em;
           color: $primary-color;
+
+          &::placeholder {
+            color: $primary-color;
+          }
         }
-      }
-      button {
-        width: 60px;
-        background-color: $secondary-color;
-        cursor: pointer;
-      }
-      input,
-      button {
-        height: 60px;
-        border-radius: 0.5em;
-        border: 1px solid $secondary-color;
+
+        button {
+          width: 60px;
+          background-color: $secondary-color;
+          cursor: pointer;
+        }
+
+        input,
+        button {
+          height: 60px;
+          border-radius: 0.5em;
+          border: 1px solid $secondary-color;
+        }
       }
     }
   }
