@@ -8,9 +8,10 @@ section {
   .container {
     max-width: $max-width;
     margin: auto;
+    padding: 1em;
 
     form {
-      width: 750px;
+      max-width: 750px;
       margin-top: 5em;
       border-radius: 1em;
       padding: 2em;

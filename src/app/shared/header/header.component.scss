@@ -7,6 +7,7 @@ header {
     max-width: $max-width;
     height: 195px;
     margin: auto;
+    padding: 1em;
 
     display: flex;
     align-items: center;
@@ -16,9 +17,17 @@ header {
       height: 150px;
     }
 
-    ul a {
-      padding: 1em;
-      color: $primary-color;
+    ul {
+      display: flex;
+
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+      }
+
+      a {
+        padding: 1em;
+        color: $primary-color;
+      }
     }
   }
 }

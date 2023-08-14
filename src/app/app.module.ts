@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
+import { AreaComponent } from './components/area/area.component';
 import { AreasComponent } from './components/areas/areas.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { TrainingComponent } from './pages/training/training.component';
 import { TrainingsComponent } from './pages/trainings/trainings.component';
+import { areasReducer } from './stores/areas/areas.reducer';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,7 @@ import { TrainingsComponent } from './pages/trainings/trainings.component';
     HomeComponent,
     AboutComponent,
     AreasComponent,
+    AreaComponent,
     TrainingsComponent,
     TrainingComponent,
   ],
@@ -28,6 +32,7 @@ import { TrainingsComponent } from './pages/trainings/trainings.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    StoreModule.forRoot({areas: areasReducer}),
   ],
   providers: [],
   bootstrap: [AppComponent]

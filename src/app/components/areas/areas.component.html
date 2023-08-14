@@ -1,1 +1,12 @@
-<p>areas works!</p>
+<section *ngIf="areas$ | async as areas">
+  <div class="container">
+    <h2>Domaines de formations</h2>
+    <div class="area-container">
+      <app-area *ngFor="let area of areas.slice(0, 5)" [area]="area"></app-area>
+      <div>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata...</p>
+        <a routerLink="">Voir la suite</a>
+      </div>
+    </div>
+  </div>
+</section>

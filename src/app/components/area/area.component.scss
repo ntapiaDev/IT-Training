@@ -1,0 +1,35 @@
+@import 'variables';
+
+.card {
+  min-height: 400px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 0.5em;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  p {
+    padding: 1em;
+    background-color: $secondary-color-opac;
+    color: #FFFFFF;
+  }
+
+  div {
+    padding: 2em;
+    background-color: $secondary-color-opac;
+
+    display: flex;
+    justify-content: center;
+
+    a {
+      padding: 0.5em;
+      background-color: $secondary-color;
+      color: #FFFFFF;
+      border: 1px solid #707070;
+      border-radius: 0.5em;
+    }
+  }
+}
