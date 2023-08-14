@@ -1,7 +1,15 @@
 <main>
-  <ng-container *ngIf="!isHomePage()">
+
+  <ng-container *ngIf="!isHomePage(); else homePage">
     <app-header></app-header>
+    <section>
+      <router-outlet></router-outlet>
+    </section>
   </ng-container>
-  <router-outlet></router-outlet>
+
   <app-footer></app-footer>
 </main>
+
+<ng-template #homePage>
+  <router-outlet></router-outlet>
+</ng-template>
