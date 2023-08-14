@@ -6,8 +6,8 @@ import { TrainingsComponent } from './pages/trainings/trainings.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'trainings', component: TrainingsComponent },
-  { path: 'training', component: TrainingComponent },
+  { path: 'formations', component: TrainingsComponent },
+  { path: 'formation/:name', component: TrainingComponent },
 ];
 
 @NgModule({

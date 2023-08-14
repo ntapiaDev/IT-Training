@@ -14,6 +14,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { TrainingComponent } from './pages/training/training.component';
 import { TrainingsComponent } from './pages/trainings/trainings.component';
 import { areasReducer } from './stores/areas/areas.reducer';
+import { trainingsReducer } from './stores/trainings/trainings.reducer';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { areasReducer } from './stores/areas/areas.reducer';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({areas: areasReducer}),
+    StoreModule.forRoot({ areas: areasReducer, trainings: trainingsReducer }),
   ],
   providers: [],
   bootstrap: [AppComponent]
