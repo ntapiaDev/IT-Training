@@ -1,0 +1,42 @@
+@import 'variables';
+
+.infos {
+  display: flex;
+  gap: 1em;
+
+  p {
+    margin-bottom: 1em;
+  }
+
+  img {
+    width: 250px;
+    height: 250px;
+    opacity: 0.25;
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+}
+
+.area-container {
+  margin: 2em 0;
+  padding: 2em;
+  background-color: $secondary-color;
+  border-radius: 0.5em;
+
+  input {
+    width: 100%;
+    padding: 1em;
+  }
+
+  ul {
+    margin-top: 1em;
+
+    a {
+      padding: 0.5em;
+      display: block;
+      color: #FFFFFF;
+    }
+  }
+}

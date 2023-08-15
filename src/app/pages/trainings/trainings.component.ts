@@ -9,7 +9,13 @@ import { Training } from 'src/app/stores/trainings/Training';
   styleUrls: ['./trainings.component.scss']
 })
 export class TrainingsComponent {
+  filterValue = '';
   trainings$: Observable<Training[]> = this.store.select('trainings');
 
   constructor(private store: Store<{ trainings: Training[] }>) { }
+
+  filter(e: Event) {
+    const inputElement = e.target as HTMLInputElement;
+    this.filterValue = inputElement.value;
+  }
 }
