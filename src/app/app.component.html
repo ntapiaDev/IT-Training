@@ -2,6 +2,10 @@
 
   <ng-container *ngIf="!isHomePage(); else homePage">
     <app-header></app-header>
+    <div class="current-page">
+      <div [innerHTML]="getCurrentPageLinks()"></div>
+    </div>
+
     <section>
       <router-outlet></router-outlet>
     </section>

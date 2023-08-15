@@ -1,5 +1,5 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +9,20 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'IT-Training';
 
-  constructor(private router: Router) {}
+  constructor(private location: Location) {}
 
   isHomePage(): boolean {
-    return this.router.url === '/';
+    return this.location.path() === '';
+  }
+
+  getCurrentPageLinks(): string {
+    const params = this.location.path().split('/');
+    let links = "<a href='/' class='custom-link'>Accueil</a>";
+    let url = '';
+    for (let i = 1; i < params.length; i++) {
+      links += ` > <a href='${url + '/' + params[i]}' class='custom-link'>${params[i]}</a>`;
+      url += `/${params[i]}`;
+    }
+    return links;
   }
 }

@@ -1,5 +1,17 @@
 @import 'variables';
 
+.current-page {
+  padding: 1em;
+  background-color: #F1F1F1;
+
+  div {
+    max-width: $max-width;
+    margin: auto;
+    padding-left: 1em;
+    color: #4D535C;
+  }
+}
+
 section {
   max-width: $max-width;
   margin: auto;

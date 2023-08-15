@@ -3,7 +3,7 @@
     <h1>Liste des formations</h1>
     <div class="area-container">
       <!-- <app-training *ngFor="let training of trainings" [training]="training"></app-training> -->
-      <p *ngFor="let training of trainings"><a [routerLink]="['/formation', training.name]">{{ training.name }}</a></p>
+      <p *ngFor="let training of trainings"><a [routerLink]="['/formations', training.name]">{{ training.name }}</a></p>
     </div>
   </div>
 </section>

@@ -7,7 +7,7 @@ export const initialState: Training[] = [
     id: 1,
     name: "Java",
     icon: "java",
-    theme: 1,
+    theme_id: 1,
     days: 57,
     price: 8000
   },
@@ -15,7 +15,7 @@ export const initialState: Training[] = [
     id: 2,
     name: "PHP",
     icon: "php",
-    theme: 1,
+    theme_id: 1,
     days: 35,
     price: 5500
   },
@@ -23,7 +23,7 @@ export const initialState: Training[] = [
     id: 3,
     name: "Python",
     icon: "python",
-    theme: 1,
+    theme_id: 1,
     days: 5,
     price: 1500
   },
