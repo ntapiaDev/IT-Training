@@ -3,7 +3,7 @@
   <ng-container *ngIf="!isHomePage(); else homePage">
     <app-header></app-header>
     <div class="current-page">
-      <div [innerHTML]="getCurrentPageLinks()"></div>
+      <div [innerHTML]="getCurrentPageLinks()" (click)="processLinks($event)"></div>
     </div>
 
     <section>

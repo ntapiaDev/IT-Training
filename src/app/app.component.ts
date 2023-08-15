@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'IT-Training';
 
-  constructor(private location: Location) {}
+  constructor(private location: Location, private router: Router) { }
 
   isHomePage(): boolean {
     return this.location.path() === '';
@@ -24,5 +25,14 @@ export class AppComponent {
       url += `/${params[i]}`;
     }
     return links;
+  }
+
+  processLinks(e: MouseEvent) {
+    const element: HTMLElement = e.target as HTMLElement;
+    if (element.nodeName === 'A') {
+      e.preventDefault();
+      const link = element.getAttribute('href');
+      this.router.navigate([link]);
+    }
   }
 }
