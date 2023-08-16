@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AboutComponent } from './pages/home/about/about.component';
 import { AreaComponent } from './pages/home/area/area.component';
 import { AreasComponent } from './pages/home/areas/areas.component';
+import { AsidePanelComponent } from './pages/training/asidePanel/asidePanel.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -27,6 +28,7 @@ import { trainingsReducer } from './stores/trainings/trainings.reducer';
     AreaComponent,
     TrainingsComponent,
     TrainingComponent,
+    AsidePanelComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,24 +1,22 @@
 <section *ngIf="trainings$ | async as trainings">
-  <div class="container">
-    <h1>Liste des formations</h1>
-    <div class="infos">
-      <div>
-        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore quaerat adipisci dolor illum, neque doloribus, sint magnam ad inventore officia voluptate expedita voluptatum tenetur est.</p>
-        <p>Tu ne sais pas encore ce qui te correspond le mieux. Aide toi avec ce teste d'orientation de carrière gratuit et utilisé par de nombreuses entreprises.<br>
-        <a href="https://app.assessfirst.com/login" target="_blank">https://app.assessfirst.com/login</a></p>
-      </div>
-      <img src="../../../assets/logo-it.png" alt="">
+  <h1>Liste des formations</h1>
+  <div class="infos">
+    <div>
+      <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore quaerat adipisci dolor illum, neque doloribus, sint magnam ad inventore officia voluptate expedita voluptatum tenetur est.</p>
+      <p>Tu ne sais pas encore ce qui te correspond le mieux. Aide toi avec ce test d'orientation de carrière gratuit et utilisé par de nombreuses entreprises.<br>
+      <a href="https://app.assessfirst.com/login" target="_blank">https://app.assessfirst.com/login</a></p>
     </div>
-    <div class="area-container">
-      <input type="text" (input)="filter($event)" placeholder="Rechercher une formation..."/>
-      <ul>
-        <ng-container *ngFor="let training of trainings">
-          <li *ngIf="training.name.toLowerCase().includes(filterValue.toLowerCase())">
-            <a [routerLink]="['/formations', training.name]">> {{ training.name }}</a>
-          </li>
-        </ng-container>
-      </ul>
-    </div>
+    <img src="../../../assets/logo-it.png" alt="">
+  </div>
+  <div class="area-container">
+    <input type="text" (input)="filter($event)" placeholder="Rechercher une formation..."/>
+    <ul>
+      <ng-container *ngFor="let training of trainings">
+        <li *ngIf="training.name.toLowerCase().includes(filterValue.toLowerCase())">
+          <a [routerLink]="['/formations', training.name]">> {{ training.name }}</a>
+        </li>
+      </ng-container>
+    </ul>
   </div>
 </section>

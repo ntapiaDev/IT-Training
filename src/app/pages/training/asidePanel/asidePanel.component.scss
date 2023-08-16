@@ -1,0 +1,70 @@
+@import 'variables';
+
+aside {
+  width: 340px;
+  margin-top: 3em;
+  position: sticky;
+  top: 4em;
+  background-color: $light-color;
+  color: #4D535C;
+  border-radius: 0.5em;
+  overflow: hidden;
+
+  @media screen and (max-width: 768px) {
+    margin: 4em auto 2em;
+  }
+
+  .buttons {
+    display: flex;
+
+    div {
+      width: 100%;
+      padding: 0.5em;
+      text-align: center;
+      border-bottom: 1px solid #707070;
+      border-right: 1px solid $light-color;
+      cursor: pointer;
+
+      &:nth-child(1) {
+        color: $secondary-color;
+      }
+      &:nth-child(2),
+      &:nth-child(3) {
+        background-color: $secondary-color;
+        color: $light-color;
+      }
+    }
+  }
+
+  .container {
+    padding: 1em;
+
+    p:nth-child(1) {
+      margin-bottom: 1em;
+    }
+
+    a {
+      padding: 0.5em;
+      color: #FFFFFF;
+      text-align: center;
+      border-radius: 0.5em;
+
+      &.dates {
+        margin-top: 1em;
+        display: block;
+        background-color: $secondary-color;
+      }
+
+      &.signup {
+        background-color: #FF0008;
+      }
+    }
+
+    .options {
+      margin-top: 1em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}

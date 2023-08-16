@@ -1,10 +1,42 @@
-<div *ngIf="training; else notFound">
-  <h1>Formation {{ training.name }}</h1>
-  <p>Nom : {{ training.name }}</p>
-  <p>Thème : {{ training.theme_id }}</p>
-  <p>Durée : {{ training.days }} jours</p>
-  <p>Prix : {{ training.price }}€</p>
-</div>
+<section *ngIf="training; else notFound">
+  <div class="container">
+    <h1>{{ training.name }}</h1>
+    <p>{{ training.description }}</p>
+
+    <div class="icons">
+      <p class="icon">Icone {{ training.remote ? "Remote" : "Présentiel" }}</p>
+      <p class="icon">Icone Niveau</p>
+    </div>
+
+    <h2>A qui s'adresse cette formation ?</h2>
+    <div class="target">
+      <div>
+        <h4>Pour qui ?</h4>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut.</p>
+      </div>
+      <div>
+        <h4>Prérequis</h4>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut.</p>
+        <a href="">Disposez-vous des compétences nécessaires pour suivre cette formation ? Testez-vous !</a>
+      </div>
+    </div>
+
+    <h2>Le programme :</h2>
+    <ul>
+      <li>Chapitre 1</li>
+      <li>Chapitre 2</li>
+      <li>Chapitre 3</li>
+      <li>Chapitre 4</li>
+      <li>Chapitre 5</li>
+    </ul>
+  </div>
+  <app-asidePanel
+    [reference]="training.reference"
+    [days]="training.days"
+    [price]="training.price"
+    [remote]="training.remote"
+  ></app-asidePanel>
+</section>
 
 <ng-template #notFound>
   <p>Cette formation n'existe pas, <a routerLink="../../formations">retourner à la liste des formations</a>.</p>
