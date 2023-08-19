@@ -27,7 +27,7 @@ section {
         gap: 1em;
 
         input {
-          padding: 0 2em;
+          padding: 0 1em;
           flex-grow: 1;
           background-color: $light-color;
           font-size: 1em;
@@ -39,14 +39,13 @@ section {
         }
 
         button {
-          width: 60px;
+          padding: 0.5em;
           background-color: $secondary-color;
           cursor: pointer;
         }
 
         input,
         button {
-          height: 60px;
           border-radius: 0.5em;
           border: 1px solid $secondary-color;
         }

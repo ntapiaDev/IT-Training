@@ -27,6 +27,10 @@ header {
       a {
         padding: 1em;
         color: $primary-color;
+
+        @media screen and (max-width: 768px) {
+        padding: 0;
+      }
       }
     }
   }
