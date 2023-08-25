@@ -1,4 +1,4 @@
-@import 'variables';
+@import "variables";
 
 *,
 *::before,
@@ -6,27 +6,28 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
-}
-
-ul {
-  list-style: none;
-}
-
-a {
-  text-decoration: none;
+  font-family: "Roboto", sans-serif;
 }
 
 h1 {
   margin: 1em 0;
 }
+
 h1,
 h2 {
   font-size: 3em;
   color: $primary-color;
 }
 
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
 .custom-link {
-  color: #4D535C;
+  color: #4d535c;
   text-transform: capitalize;
 }

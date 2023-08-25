@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Area } from 'src/app/stores/areas/Area';
+import { Area } from 'src/app/core/models/Area';
 
 @Component({
   selector: 'app-areas',
