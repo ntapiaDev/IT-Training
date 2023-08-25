@@ -4,7 +4,7 @@
     <div (click)="changeTab(2)" [ngClass]="{'active': currentTab === 2}">Intra</div>
     <div (click)="changeTab(3)" [ngClass]="{'active': currentTab === 3}">Sur mesure</div>
   </div>
-  <div class="container" *ngIf="currentTab === 1" [@fadeIn]>
+  <div class="container" [@fadeIn]="currentTab === 1">
     <p>Formation {{ remote ? "à distance" : "en présentiel"}}.</p>
     <p>Référence : <b>{{ reference }}</b></p>
     <p>Durée : <b>{{ days }} jours ({{ days * 7 }} heures)</b></p>
@@ -16,10 +16,10 @@
       <span>Appeler</span>
     </div>
   </div>
-  <div class="container" *ngIf="currentTab === 2" [@fadeIn]>
+  <div class="container" [@fadeIn]="currentTab === 2">
     <p>Intra</p>
   </div>
-  <div class="container" *ngIf="currentTab === 3" [@fadeIn]>
+  <div class="container" [@fadeIn]="currentTab === 3">
     <p>Sur mesure</p>
   </div>
 </aside>
