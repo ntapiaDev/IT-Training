@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { getAreas } from './areas.actions';
-import { Area } from './Area';
+import { Area } from '../../models/Area';
 
 export const initialState: Area[] = [
   {

@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { getTrainings } from './trainings.actions';
-import { Training } from './Training';
+import { Training } from '../../models/Training';
 
 export const initialState: Training[] = [
   {

@@ -1,7 +1,7 @@
 @import 'variables';
 
 aside {
-  width: 340px;
+  width: $min-width;
   margin-top: 3em;
   position: sticky;
   top: 4em;
@@ -45,7 +45,7 @@ aside {
 
     a {
       padding: 0.5em;
-      color: #FFFFFF;
+      color: $white;
       text-align: center;
       border-radius: 0.5em;
 
@@ -56,7 +56,7 @@ aside {
       }
 
       &.signup {
-        background-color: #FF0008;
+        background-color: $red;
       }
     }
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Training } from 'src/app/stores/trainings/Training';
+import { Training } from 'src/app/core/models/Training';
 
 @Component({
   selector: 'app-trainings',
