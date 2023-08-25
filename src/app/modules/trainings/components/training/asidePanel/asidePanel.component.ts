@@ -1,9 +1,18 @@
 import { Component, Input } from '@angular/core';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-asidePanel',
   templateUrl: './asidePanel.component.html',
-  styleUrls: ['./asidePanel.component.scss']
+  styleUrls: ['./asidePanel.component.scss'],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms ease-in-out', style({ opacity: 1 }))
+      ]),
+    ])
+  ]
 })
 export class AsidePanelComponent {
   @Input() reference!: string;
