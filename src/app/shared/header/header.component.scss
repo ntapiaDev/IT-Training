@@ -25,7 +25,7 @@ header {
       }
     }
 
-    ul {
+    .desktop {
       display: flex;
 
       @media screen and (max-width: 768px) {
@@ -68,6 +68,22 @@ header {
 
       .line3-active {
         transform: translateY(-8px) rotate(-45deg);
+      }
+    }
+
+    .mobile {
+      width: 100%;
+      position: absolute;
+      top: 95px;
+      left: 0;
+      background-color: rgb(255, 255, 255, 0.75);
+      overflow: hidden;
+      z-index: 10;
+
+      a {
+        color: $secondary-color;
+        padding: 0.5em 1em;
+        display: block;
       }
     }
   }
