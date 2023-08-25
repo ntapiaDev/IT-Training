@@ -10,4 +10,10 @@ export class AsidePanelComponent {
   @Input() days!: number;
   @Input() price!: number;
   @Input() remote!: boolean;
+
+  currentTab = 1;
+
+  changeTab(index: number) {
+    this.currentTab = index;
+  }
 }

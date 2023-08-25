@@ -21,17 +21,15 @@ aside {
       width: 100%;
       padding: 0.5em;
       text-align: center;
+      color: $light-color;
+      background-color: $secondary-color;
       border-bottom: 1px solid #707070;
       border-right: 1px solid $light-color;
       cursor: pointer;
 
-      &:nth-child(1) {
+      &.active {
         color: $secondary-color;
-      }
-      &:nth-child(2),
-      &:nth-child(3) {
-        background-color: $secondary-color;
-        color: $light-color;
+        background-color: $light-color;
       }
     }
   }
