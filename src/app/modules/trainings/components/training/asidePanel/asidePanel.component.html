@@ -1,10 +1,10 @@
 <aside>
   <div class="buttons">
-    <div>Inter</div>
-    <div>Intra</div>
-    <div>Sur mesure</div>
+    <div (click)="changeTab(1)" [ngClass]="{'active': currentTab === 1}">Inter</div>
+    <div (click)="changeTab(2)" [ngClass]="{'active': currentTab === 2}">Intra</div>
+    <div (click)="changeTab(3)" [ngClass]="{'active': currentTab === 3}">Sur mesure</div>
   </div>
-  <div class="container">
+  <div class="container" [@fadeIn]="currentTab === 1">
     <p>Formation {{ remote ? "à distance" : "en présentiel"}}.</p>
     <p>Référence : <b>{{ reference }}</b></p>
     <p>Durée : <b>{{ days }} jours ({{ days * 7 }} heures)</b></p>
@@ -15,5 +15,11 @@
       <span>Email</span>
       <span>Appeler</span>
     </div>
+  </div>
+  <div class="container" [@fadeIn]="currentTab === 2">
+    <p>Intra</p>
+  </div>
+  <div class="container" [@fadeIn]="currentTab === 3">
+    <p>Sur mesure</p>
   </div>
 </aside>
