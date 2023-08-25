@@ -12,6 +12,11 @@
         <li><a routerLink="">Inscription</a></li>
         <li><a routerLink="">Connexion</a></li>
       </ul>
+      <div class="burger" (click)="toggleBurger()">
+        <div class="line" [ngClass]="{'line1-active': isBurgerOpen}"></div>
+        <div class="line" [ngClass]="{'line2-active': isBurgerOpen}"></div>
+        <div class="line" [ngClass]="{'line3-active': isBurgerOpen}"></div>
+      </div>
     </nav>
   </div>
 </header>

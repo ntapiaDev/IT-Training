@@ -13,24 +13,61 @@ header {
     align-items: center;
     justify-content: space-between;
 
+    @media screen and (max-width: 768px) {
+      height: 95px;
+    }
+
     a img {
       height: 150px;
+
+      @media screen and (max-width: 768px) {
+        height: 50px;
+      }
     }
 
     ul {
       display: flex;
 
       @media screen and (max-width: 768px) {
-        flex-direction: column;
+        display: none;
       }
 
       a {
         padding: 1em;
         color: $primary-color;
-
-        @media screen and (max-width: 768px) {
-        padding: 0;
       }
+    }
+
+    .burger {
+      width: 30px;
+      height: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+
+      @media screen and (min-width: 768px) {
+        display: none;
+      }
+
+      .line {
+        width: 30px;
+        height: 4px;
+        background-color: $primary-color;
+        transition: all 0.3s ease;
+      }
+
+      .line1-active {
+        transform: translateY(8px) rotate(45deg);
+      }
+
+      .line2-active {
+        opacity: 0;
+        transform: translateX(-100vw);
+      }
+
+      .line3-active {
+        transform: translateY(-8px) rotate(-45deg);
       }
     }
   }
