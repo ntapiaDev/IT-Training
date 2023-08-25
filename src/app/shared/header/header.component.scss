@@ -13,24 +13,77 @@ header {
     align-items: center;
     justify-content: space-between;
 
-    a img {
-      height: 150px;
+    @media screen and (max-width: 768px) {
+      height: 95px;
     }
 
-    ul {
+    a img {
+      height: 150px;
+
+      @media screen and (max-width: 768px) {
+        height: 50px;
+      }
+    }
+
+    .desktop {
       display: flex;
 
       @media screen and (max-width: 768px) {
-        flex-direction: column;
+        display: none;
       }
 
       a {
         padding: 1em;
         color: $primary-color;
-
-        @media screen and (max-width: 768px) {
-        padding: 0;
       }
+    }
+
+    .burger {
+      width: 30px;
+      height: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+
+      @media screen and (min-width: 768px) {
+        display: none;
+      }
+
+      .line {
+        width: 30px;
+        height: 4px;
+        background-color: $primary-color;
+        transition: all 0.3s ease;
+      }
+
+      .line1-active {
+        transform: translateY(8px) rotate(45deg);
+      }
+
+      .line2-active {
+        opacity: 0;
+        transform: translateX(-100vw);
+      }
+
+      .line3-active {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+    }
+
+    .mobile {
+      width: 100%;
+      position: absolute;
+      top: 95px;
+      left: 0;
+      background-color: rgb(255, 255, 255, 0.75);
+      overflow: hidden;
+      z-index: 10;
+
+      a {
+        color: $secondary-color;
+        padding: 0.5em 1em;
+        display: block;
       }
     }
   }

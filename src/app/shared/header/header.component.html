@@ -4,7 +4,20 @@
       <img src="assets/logo-home.png" alt="">
     </a>
     <nav>
-      <ul>
+      <ul class="desktop">
+        <li><a routerLink="/formations">Formations</a></li>
+        <li><a routerLink="">Particulier</a></li>
+        <li><a routerLink="">Entreprise</a></li>
+        <li><a routerLink="">Qui sommes-nous ?</a></li>
+        <li><a routerLink="">Inscription</a></li>
+        <li><a routerLink="">Connexion</a></li>
+      </ul>
+      <div class="burger" (click)="toggleBurger()">
+        <div class="line" [ngClass]="{'line1-active': isBurgerOpen}"></div>
+        <div class="line" [ngClass]="{'line2-active': isBurgerOpen}"></div>
+        <div class="line" [ngClass]="{'line3-active': isBurgerOpen}"></div>
+      </div>
+      <ul class="mobile" [@opened]="isBurgerOpen" (click)="toggleBurger()">
         <li><a routerLink="/formations">Formations</a></li>
         <li><a routerLink="">Particulier</a></li>
         <li><a routerLink="">Entreprise</a></li>
