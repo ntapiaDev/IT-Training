@@ -7,13 +7,17 @@ import { AboutComponent } from './components/about/about.component';
 import { AreasComponent } from './components/areas/areas.component';
 import { AreaComponent } from './components/area/area.component';
 import { LandingComponent } from './components/landing/landing.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterFormComponent } from './components/register/register-form.component';
 
 @NgModule({
   declarations: [
     LandingComponent,
     AboutComponent,
     AreasComponent,
-    AreaComponent
+    AreaComponent,
+    LoginComponent,
+    RegisterFormComponent
   ],
   imports: [
     CommonModule,
