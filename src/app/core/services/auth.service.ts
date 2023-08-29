@@ -70,8 +70,8 @@ export class AuthService {
 
   getSession(): Session {
     return {
-        role: UserRole.Admin,
-        token: 'jwtoken12345'
+        role: UserRole.null,
+        token: ''
     }
   }
 }

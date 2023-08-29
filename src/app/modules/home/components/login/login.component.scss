@@ -1,57 +1,59 @@
-$primary-color: #1E4F9E;
-$secondary-color: #121275;
-$secondary-color-opac: rgba(18, 18, 117, 0.8);
-$light-color: #D4DFF1;
+@import 'variables';
+
+h1 {
+  text-align: center;
+}
 
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 
   form {
-    background-color: $light-color; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background-color: $light-color;
+    margin-bottom: 4em;
+    padding: 2rem 4rem;
     border-radius: 8px;
-    padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 300px;
-
+    
     label {
+      font-size: 1.2rem;
       font-weight: bold;
-      margin-bottom: 4px;
+      color: $primary-color;
     }
-
+    
     input {
-      width: 90%;
-      padding: 10px;
-      margin-bottom: 12px;
-      border: 1px solid #ccc;
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid $secondary-color;
       border-radius: 4px;
     }
-
+    
     button {
-      width: 50%;
-      padding: 10px;
-      background-color: $secondary-color; 
+      background-color: $primary-color;
       color: white;
+      padding: 0.5rem 1rem;
       border: none;
       border-radius: 4px;
       cursor: pointer;
-      transition: background-color 0.2s;
-
+      transition: background-color 0.3s ease;
+      
       &:hover {
-        background-color: $secondary-color; 
+        background-color: $secondary-color-opac;
       }
-
-      &[disabled] {
-        background-color: #ccc;
+      
+      &:disabled {
+        background-color: $secondary-color;
         cursor: not-allowed;
       }
     }
-
+    
     .error-message {
-      color: red;
-      margin-top: 10px;
+      color: $primary-color;
     }
   }
 }
