@@ -6,6 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { HomeModule } from './modules/home/home.module';
 import { TrainingsModule } from './modules/trainings/trainings.module';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -24,6 +25,7 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     HomeModule,
     TrainingsModule,
+    DashboardModule,
     StoreModule.forRoot({ areas: areasReducer, trainings: trainingsReducer }),
     SharedModule
   ],
