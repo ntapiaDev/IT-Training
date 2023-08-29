@@ -1,6 +1,8 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { getSession } from './core/stores/session/session.actions';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,11 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'IT-Training';
 
-  constructor(private location: Location, private router: Router) { }
+  constructor(private location: Location, private router: Router, private store: Store) { }
+
+  ngOnInit(): void {
+    this.store.dispatch(getSession());
+  }
 
   isHomePage(): boolean {
     return this.location.path() === '';
@@ -21,7 +27,7 @@ export class AppComponent {
     let links = "<a href='/' class='custom-link'>Accueil</a>";
     let url = '';
     for (let i = 1; i < params.length; i++) {
-      links += ` > <a href='${url + '/' + params[i]}' class='custom-link'>${params[i]}</a>`;
+      links += ` > <a href='${url + '/' + params[i]}' class='custom-link'>${params[i].replace(/-/g, ' ')}</a>`;
       url += `/${params[i]}`;
     }
     return links;
