@@ -38,7 +38,8 @@ import { SharedModule } from './shared/shared.module';
       session: sessionReducer,
       trainings: trainingsReducer
     }),
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [
