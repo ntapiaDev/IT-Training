@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { trigger, state, transition, style, animate } from '@angular/animations';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Session } from 'src/app/core/models/Session';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +18,10 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
   ]
 })
 export class HeaderComponent {
+  session$: Observable<Session> = this.store.select('session');
   isBurgerOpen: boolean = false;
+
+  constructor(private store: Store<{ session: Session }>) {}
 
   toggleBurger() {
     this.isBurgerOpen = !this.isBurgerOpen;
