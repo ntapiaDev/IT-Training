@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { CookieService } from 'ngx-cookie-service';
+import { Session, UserRole } from '../models/Session';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class AuthService {
   private readonly serverUrl = 'http://localhost:8080';
   private readonly tokenKey = 'auth_token';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   login(username: string, password: string): Observable<any> {
     if (!username || !password) {
@@ -64,5 +66,12 @@ export class AuthService {
         return throwError('Erreur lors de l\'inscription.');
       })
     );
+  }
+
+  getSession(): Session {
+    return {
+        role: UserRole.Admin,
+        token: 'jwtoken12345'
+    }
   }
 }
