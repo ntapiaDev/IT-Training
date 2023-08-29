@@ -10,8 +10,8 @@
         <li><a routerLink="">Entreprise</a></li>
         <li><a routerLink="">Qui sommes-nous ?</a></li>
         <ng-container *ngIf="!(session$ | async)?.token">
-          <li><a routerLink="">Inscription</a></li>
-          <li><a routerLink="">Connexion</a></li>
+          <li><a routerLink="/inscription">Inscription</a></li>
+          <li><a routerLink="/connexion">Connexion</a></li>
         </ng-container>
         <li *ngIf="(session$ | async)?.token"><a routerLink="/tableau-de-bord">Tableau de bord</a></li>
       </ul>
@@ -25,11 +25,8 @@
         <li><a routerLink="">Particulier</a></li>
         <li><a routerLink="">Entreprise</a></li>
         <li><a routerLink="">Qui sommes-nous ?</a></li>
-        <ng-container *ngIf="!(session$ | async)?.token">
-          <li><a routerLink="">Inscription</a></li>
-          <li><a routerLink="">Connexion</a></li>
-        </ng-container>
-        <li *ngIf="(session$ | async)?.token"><a routerLink="/tableau-de-bord">Tableau de bord</a></li>
+        <li><a routerLink="">Inscription</a></li>
+        <li><a routerLink="">Connexion</a></li>
       </ul>
     </nav>
   </div>
