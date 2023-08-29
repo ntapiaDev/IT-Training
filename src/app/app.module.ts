@@ -12,6 +12,8 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { areasReducer } from './core/stores/areas/areas.reducer';
 import { trainingsReducer } from './core/stores/trainings/trainings.reducer';
 import { SharedModule } from './shared/shared.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; 
+import { AuthInterceptor } from "./core/interceptors/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -25,9 +27,10 @@ import { SharedModule } from './shared/shared.module';
     HomeModule,
     TrainingsModule,
     StoreModule.forRoot({ areas: areasReducer, trainings: trainingsReducer }),
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [
     AppComponent
   ]
