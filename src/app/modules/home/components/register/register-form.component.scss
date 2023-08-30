@@ -1,7 +1,9 @@
 @import 'variables';
 
 section {
+  max-width: $max-width;
   height: 100vh;
+  margin: auto;
   display: grid;
   grid-template: repeat(3, 1fr) / 1FR 1FR 1FR;
 

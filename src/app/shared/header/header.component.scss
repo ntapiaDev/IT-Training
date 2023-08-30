@@ -5,7 +5,7 @@ header {
 
   .container {
     max-width: $max-width;
-    height: 195px;
+    height: 186px;
     margin: auto;
     padding: 1em;
 
@@ -14,7 +14,7 @@ header {
     justify-content: space-between;
 
     @media screen and (max-width: 768px) {
-      height: 95px;
+      height: 86px;
     }
 
     a img {
