@@ -18,6 +18,10 @@ export class AppComponent {
     this.store.dispatch(getSession());
   }
 
+  isAuthPage(): boolean {
+    return ['/inscription', '/connexion'].includes(this.location.path());
+  }
+
   isHomePage(): boolean {
     return this.location.path() === '';
   }

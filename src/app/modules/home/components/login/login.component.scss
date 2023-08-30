@@ -1,59 +1,72 @@
 @import 'variables';
 
-h1 {
-  text-align: center;
-}
+section {
+  height: 100vh;
+  display: grid;
+  grid-template: repeat(3, 1fr) / 1FR 1FR 1FR;
 
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  .link {
+    height: 150px;
+    margin: 1em;
+  }
+
+  h1 {
+    margin: auto;
+  }
 
   form {
+    grid-column: 2;
+    grid-row: 2;
+    padding: 4em 2em 2em;
+    background-color: $secondary-color;
+    border-radius: 0.5em;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    background-color: $light-color;
-    margin-bottom: 4em;
-    padding: 2rem 4rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    
-    label {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: $primary-color;
+    gap: 1em;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      label {
+        width: 40%;
+        color: $white;
+      }
+     
+      input {
+        width: 60%;
+        padding: 0.5em;
+        border: none;
+        border-radius: 0.25em;
+      }
     }
-    
-    input {
-      width: 100%;
-      padding: 0.5rem;
-      border: 1px solid $secondary-color;
-      border-radius: 4px;
-    }
-    
+
     button {
-      background-color: $primary-color;
-      color: white;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 4px;
+      width: 100px;
+      padding: 0.5em;
+      margin-left: auto;
+      color: $secondary-color;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-      
-      &:hover {
-        background-color: $secondary-color-opac;
-      }
-      
-      &:disabled {
-        background-color: $secondary-color;
-        cursor: not-allowed;
-      }
     }
-    
-    .error-message {
-      color: $primary-color;
+
+    span a {
+      margin-right: 1em;
+      font-size: 0.75em;
+      text-decoration: underline;
+      color: $white;
     }
+
+    .error-container {
+      height: 1em;
+      color: $red;
+    }
+  }
+
+  .logo {
+    grid-column: 3;
+    grid-row: 2;
+    height: 250px;
+    margin: auto;
   }
 }
