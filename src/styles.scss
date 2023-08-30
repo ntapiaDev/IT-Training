@@ -11,12 +11,17 @@
 
 h1 {
   margin: 1em 0;
+  text-transform: uppercase;
 }
 
 h1,
 h2 {
   font-size: 3em;
   color: $primary-color;
+
+  @media screen and (max-width: 768px) {
+    font-size: 2em;
+  }
 }
 
 a {

@@ -15,12 +15,12 @@ export class AuthService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
-  login(username: string, password: string): Observable<any> {
-    if (!username || !password) {
+  login(email: string, password: string): Observable<any> {
+    if (!email || !password) {
       return throwError('Veuillez fournir un nom d\'utilisateur et un mot de passe.');
     }
 
-    return this.http.post(`${this.serverUrl}/login`, { username, password }).pipe(
+    return this.http.post(`${this.serverUrl}/login`, { email, password }).pipe(
       catchError(error => {
         return throwError('Erreur lors de l\'authentification.');
       })
@@ -51,13 +51,13 @@ export class AuthService {
     return this.getToken() !== null;
   }
 
-  register(username: string, password: string): Observable<any> {
-    if (!username || !password) {
+  register(email: string, password: string): Observable<any> {
+    if (!email || !password) {
       return throwError('Veuillez fournir un nom d\'utilisateur et un mot de passe.');
     }
 
     const userData = {
-      username,
+      email,
       password
     };
 

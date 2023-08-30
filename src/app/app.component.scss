@@ -1,21 +1,27 @@
-@import 'variables';
+@import "variables";
 
-.current-page {
-  padding: 1em;
-  background-color: #F1F1F1;
-  position: sticky;
-  top: 0;
+main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 
-  div {
+  .current-page {
+    padding: 1em;
+    background-color: #f1f1f1;
+    position: sticky;
+    top: 0;
+
+    div {
+      max-width: $max-width;
+      margin: auto;
+      padding-left: 1em;
+      color: #4d535c;
+    }
+  }
+
+  section {
     max-width: $max-width;
     margin: auto;
-    padding-left: 1em;
-    color: #4D535C;
+    padding: 1em;
   }
-}
-
-section {
-  max-width: $max-width;
-  margin: auto;
-  padding: 1em;
 }

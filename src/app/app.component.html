@@ -1,16 +1,21 @@
 <main>
-
-  <ng-container *ngIf="!isHomePage(); else homePage">
-    <app-header></app-header>
-    <div class="current-page">
-      <div [innerHTML]="getCurrentPageLinks()" (click)="processLinks($event)"></div>
-    </div>
-    <section>
-      <router-outlet></router-outlet>
-    </section>
+  <ng-container *ngIf="isAuthPage(); else website">
+    <router-outlet></router-outlet>
   </ng-container>
 
-  <app-footer></app-footer>
+  <ng-template #website>
+    <ng-container *ngIf="!isHomePage(); else homePage">
+      <app-header></app-header>
+      <div class="current-page">
+        <div [innerHTML]="getCurrentPageLinks()" (click)="processLinks($event)"></div>
+      </div>
+      <section>
+        <router-outlet></router-outlet>
+      </section>
+    </ng-container>
+
+    <app-footer></app-footer>
+  </ng-template>
 </main>
 
 <ng-template #homePage>

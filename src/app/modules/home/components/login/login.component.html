@@ -1,13 +1,26 @@
-<h1>Connexion</h1>
-<div class="login-container">
+<section>
+  <a routerLink="/">
+    <img class="link" src="assets/logo-home.png" alt="">
+  </a>
+  <h1>Connexion</h1>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <label for="username">Nom d'utilisateur</label>
-    <input type="text" id="username" name="username" formControlName="username" placeholder="Entrez votre nom d'utilisateur" required>
-
-    <label for="password">Mot de passe</label>
-    <input type="password" id="password" name="password" formControlName="password" placeholder="Entrez votre mot de passe" required>
-
+    <div>
+      <label for="email">Email</label>
+      <input type="text" id="email" formControlName="email" required>
+    </div>
+    <div>
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" formControlName="password" required>
+    </div>
+    <span>
+      <a routerLink="/inscription">S'inscrire</a>
+      <a routerLink="/">Mot de passe oublié</a>
+      <a routerLink="/">Problème de connexion</a>
+    </span>
+    <div class="error-container">
+      <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+    </div>
     <button type="submit" [disabled]="isLoading">Se connecter</button>
-    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
   </form>
-</div>
+  <img class="logo" src="assets/logo-it-light.svg" alt="">
+</section>
