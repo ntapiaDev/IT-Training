@@ -15,7 +15,7 @@ export class LoginComponent {
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService) {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -28,9 +28,9 @@ export class LoginComponent {
     this.isLoading = true;
     this.errorMessage = null;
 
-    const { username, password } = this.loginForm.value;
+    const { email, password } = this.loginForm.value;
 
-    this.authService.login(username, password).subscribe({
+    this.authService.login(email, password).subscribe({
       next: (isAuthenticated) => {
         this.isLoading = false;
         if (isAuthenticated) {

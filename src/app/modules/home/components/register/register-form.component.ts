@@ -9,7 +9,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 })
 export class RegisterFormComponent implements OnInit {
   registerForm: FormGroup = this.formBuilder.group({
-    username: ['', Validators.required],
+    email: ['', Validators.required],
     password: ['', Validators.required],
     confirmPassword: ['', Validators.required]
   });
@@ -30,7 +30,7 @@ export class RegisterFormComponent implements OnInit {
 
     this.errorMessage = '';
 
-    const username = this.registerForm.value.username;
+    const email = this.registerForm.value.email;
     const password = this.registerForm.value.password;
     const confirmPassword = this.registerForm.value.confirmPassword;
 
@@ -41,7 +41,7 @@ export class RegisterFormComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.authService.register(username, password).subscribe(
+    this.authService.register(email, password).subscribe(
       response => {
         this.isLoading = false;
         console.log('Inscription réussie !', response);
