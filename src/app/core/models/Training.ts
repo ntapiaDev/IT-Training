@@ -7,5 +7,6 @@ export interface Training {
   theme_id: number,
   days: number,
   price: number,
-  remote: boolean
+  remote: boolean,
+  [key: string]: any;
 }

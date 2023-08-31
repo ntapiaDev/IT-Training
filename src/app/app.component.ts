@@ -22,6 +22,10 @@ export class AppComponent {
     return ['/inscription', '/connexion'].includes(this.location.path());
   }
 
+  isAdminPage(): boolean {
+    return this.location.path().startsWith('/admin');
+  }
+
   isHomePage(): boolean {
     return this.location.path() === '';
   }
