@@ -1,13 +1,116 @@
+@import "variables";
+
+$icon: #b0b2b5;
+$light-grey: #f1f1f1;
+$dark-grey: #4d535c;
+
+h3 {
+  color: $primary-color;
+  text-transform: capitalize;
+}
+
+svg {
+  fill: $icon;
+  transition: 0.3s;
+
+  &:hover {
+    fill: $primary-color;
+  }
+}
+
+.actions {
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .search-container {
+    position: relative;
+
+    input {
+      padding: 4px 26px;
+      border: 1px solid $dark-grey;
+      border-radius: 0.5em;
+    }
+
+    svg {
+      position: absolute;
+      top: 3px;
+      left: 4px;
+
+      &:hover {
+        fill: $icon;
+      }
+    }
+  }
+
+  .add {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+
+    svg {
+        cursor: pointer;
+    }
+
+    button {
+      padding: 4px 14px;
+      color: $white;
+      background-color: $primary-color;
+      border: 1px solid $primary-color;
+      border-radius: 0.5em;
+      cursor: pointer;
+    }
+  }
+}
+
 table {
-    border-collapse: collapse;
+  width: 100%;
+  margin-top: 1em;
+  border-collapse: collapse;
 
-    th {
-        text-transform: capitalize;
+  tr {
+    &:nth-child(even) {
+      background-color: $white;
     }
+    &:nth-child(odd) {
+      background-color: $light-grey;
+    }
+    &:nth-child(1) {
+      color: $white;
+      background-color: $secondary-color;
+    }
+  }
 
-    th, td {
-        padding: 0.5em;
-        text-align: center;
-        border: 1px solid black;
+  th {
+    text-transform: capitalize;
+
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25em;
+
+      svg {
+        cursor: pointer;
+      }
     }
+  }
+
+  th,
+  td {
+    padding: 0.5em;
+    text-align: center;
+    border-top: 1px solid $dark-grey;
+    border-bottom: 1px solid $dark-grey;
+
+    &.action {
+      width: 20px;
+      padding: 0.5em 0;
+
+      svg {
+        cursor: pointer;
+      }
+    }
+  }
 }
