@@ -8,6 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { AdminModule } from './modules/admin/admin.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { HomeModule } from './modules/home/home.module';
 import { TrainingsModule } from './modules/trainings/trainings.module';
@@ -32,6 +33,7 @@ import { SharedModule } from './shared/shared.module';
     HomeModule,
     TrainingsModule,
     DashboardModule,
+    AdminModule,
     EffectsModule.forRoot([SessionEffects]),
     StoreModule.forRoot({
       areas: areasReducer,
