@@ -1,2 +1,13 @@
-<p>back-office works!</p>
-<router-outlet></router-outlet>
+<div class="container">
+  <div class="menu">
+    <nav>
+      <ul>
+        <li><a routerLink="formations">Formations</a></li>
+        <li><a routerLink="domaines">Domaines</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="table">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+@import "variables";
+
+.container {
+    display: flex;
+
+    .menu {
+        
+    }
+
+    .table {
+        flex-grow: 1;
+    }
+}

@@ -1,1 +1,8 @@
-<p>table works!</p>
+<table>
+    <tr>
+        <th *ngFor="let key of currentKeys">{{ key }}</th>
+    </tr>
+    <tr *ngFor="let data of currentData$ | async">
+        <td *ngFor="let key of currentKeys">{{ data[key] }}</td>
+    </tr>
+</table>

@@ -1,5 +1,5 @@
 <main>
-  <ng-container *ngIf="isAuthPage(); else website">
+  <ng-container *ngIf="isAuthPage() || isAdminPage(); else website">
     <router-outlet></router-outlet>
   </ng-container>
 

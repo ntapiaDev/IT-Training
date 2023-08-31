@@ -8,9 +8,9 @@ const routes: Routes = [
     path: '', component: BackOfficeComponent,
     children: [
       { path: 'formations', component: TableComponent },
-      { path: 'domaines', component: TableComponent },
-    ],
-  },
+      { path: 'domaines', component: TableComponent }
+    ]
+  }
 ];
 
 @NgModule({
