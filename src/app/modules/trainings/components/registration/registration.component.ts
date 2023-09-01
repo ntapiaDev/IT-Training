@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Training } from 'src/app/core/models/Training';
 
 @Component({
@@ -11,12 +12,14 @@ import { Training } from 'src/app/core/models/Training';
 })
 export class RegistrationComponent {
   registerForm: FormGroup;
-  reference?: string;
-  training?: Training;
+  trainingsList: Observable<Training[]> = this.store.select('trainings');
+  trainings: Training[] = [];
+  selectedTraining: string = '';
+  references: string[];
   formTarget: string = 'particulier';
 
-  constructor(private route: ActivatedRoute, private store: Store<{ trainings: Training[] }>) {
-    // Récuprer les infos du user si il y a une session
+  constructor(private route: ActivatedRoute, private router: Router, private store: Store<{ trainings: Training[] }>) {
+    // Récupérer les infos du user si il y a une session
     this.registerForm = new FormGroup({
       lastName: new FormControl('', [Validators.required]),
       firstName: new FormControl('', [Validators.required]),
@@ -27,10 +30,36 @@ export class RegistrationComponent {
       city: new FormControl('', [Validators.required]),
       country: new FormControl('', [Validators.required])
     });
-    this.reference = this.route.snapshot.params['reference'];
+    this.references = this.route.snapshot.params['reference']?.split('&') ?? [];
+    this.loadTrainings();    
+  }
+
+  loadTrainings() {
     this.store.select('trainings').subscribe(trainings => {
-      this.training = trainings.find(training => training.reference === this.reference);
+      this.trainings = trainings.filter(training => this.references?.includes(training.reference));
     })
+  }
+
+  filterTrainings(training: Training): boolean {
+    const match = training.name.toLowerCase().includes(this.selectedTraining.toLowerCase());
+    const alreadySelected = this.trainings.some(t => t.id === training.id);
+    return match && !alreadySelected;
+  }
+
+  addTraining(ref: string) {
+    const references = this.route.snapshot.params['reference']?.concat('&') ?? '';
+    this.references.push(ref);
+    this.loadTrainings();
+    this.selectedTraining = '';
+    this.router.navigate([`formations/inscription/${references + ref}`]);
+  }
+
+  deleteTraining(ref: string) {
+    const references = this.route.snapshot.params['reference'].slice(0, -6);
+    this.references = this.references.filter(r => r !== ref);
+    this.loadTrainings();
+    this.selectedTraining = '';
+    this.router.navigate([`formations/inscription/${references}`]);
   }
 
   apply(target: string) {
@@ -49,6 +78,7 @@ export class RegistrationComponent {
   }
 
   register() {
+    //Ajouter les références
     console.log(this.registerForm.value);
   }
 }
