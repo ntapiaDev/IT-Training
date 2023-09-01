@@ -1,6 +1,7 @@
 @import "variables";
 
 .container {
+
   .search {
     margin-top: -1em;
     padding: 2em 4em;
@@ -9,11 +10,25 @@
     display: flex;
     justify-content: space-between;
 
+    @media screen and (max-width: 768px) {
+      padding: 1em;
+      text-align: center;
+
+      div {
+          width: 100%;
+        }
+    }
+
     .search-container {
+      width: 400px;
       position: relative;
 
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
+
       input {
-        width: 400px;
+        width: 100%;
         padding: 8px;
         border: 1px solid #4d535c;
         border-radius: 0.5em;
@@ -33,6 +48,10 @@
         overflow: hidden;
         position: absolute;
 
+        @media screen and (max-width: 768px) {
+          width: 100%;
+        }
+
         li {
           padding: 0.5em;
           cursor: pointer;
@@ -50,6 +69,10 @@
 
     img {
       width: 200px;
+
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
     }
   }
 
@@ -58,6 +81,10 @@
     max-width: 980px;
     margin: 4em auto 3em;
     color: $dark-grey;
+
+    @media screen and (max-width: 768px) {
+      margin: 2em auto 1em;
+    }
   }
 
   .empty {
@@ -84,6 +111,7 @@
   }
 
   .register {
+
     .training {
       margin-bottom: 1em;
       padding: 1em 2em;
@@ -126,6 +154,11 @@
         display: flex;
         justify-content: space-between;
 
+        @media screen and (max-width: 768px) {
+          flex-direction: column;
+          gap: 0.5em;
+        }
+
         b {
           display: block;
         }
@@ -157,10 +190,18 @@
       display: flex;
       flex-direction: column;
 
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
+
       .formGroup {
         margin-bottom: 1em;
         display: flex;
         gap: 1em;
+
+        @media screen and (max-width: 768px) {
+          flex-direction: column;
+        }
 
         input {
           width: 100%;
@@ -170,6 +211,10 @@
 
           &.small {
             width: 100px;
+
+            @media screen and (max-width: 768px) {
+              width: 100%;
+            }
           }
         }
       }

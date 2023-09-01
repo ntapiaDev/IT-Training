@@ -25,4 +25,14 @@ main {
     margin: auto;
     padding: 1em;
   }
+
+  .phone {
+  
+    svg {
+      fill: $primary-color;
+      position: fixed;
+      top: calc(50% - 25px);
+      right: 2em;
+    }
+  }
 }
