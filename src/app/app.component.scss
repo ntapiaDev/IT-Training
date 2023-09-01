@@ -27,6 +27,10 @@ main {
   }
 
   .phone {
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
   
     svg {
       fill: $primary-color;

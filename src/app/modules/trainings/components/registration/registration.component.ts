@@ -17,6 +17,7 @@ export class RegistrationComponent {
   selectedTraining: string = '';
   references: string[];
   formTarget: string = 'particulier';
+  storage: string | null;
 
   constructor(private route: ActivatedRoute, private router: Router, private store: Store<{ trainings: Training[] }>) {
     // Récupérer les infos du user si il y a une session
@@ -30,7 +31,15 @@ export class RegistrationComponent {
       city: new FormControl('', [Validators.required]),
       country: new FormControl('', [Validators.required])
     });
-    this.references = this.route.snapshot.params['reference']?.split('&') ?? [];
+    this.storage = localStorage.getItem('trainings');
+    if (this.storage?.length && this.storage?.length > 2) {
+      this.references = JSON.parse(this.storage);
+      const references = this.references.join('&');
+      this.router.navigate([`formations/inscription/${references}`]);
+    } else {
+      this.references = this.route.snapshot.params['reference']?.split('&') ?? [];
+      localStorage.setItem('trainings', JSON.stringify(this.references));
+    }
     this.loadTrainings();    
   }
 
@@ -49,6 +58,7 @@ export class RegistrationComponent {
   addTraining(ref: string) {
     const references = this.route.snapshot.params['reference']?.concat('&') ?? '';
     this.references.push(ref);
+    localStorage.setItem('trainings', JSON.stringify(this.references));
     this.loadTrainings();
     this.selectedTraining = '';
     this.router.navigate([`formations/inscription/${references + ref}`]);
@@ -59,6 +69,9 @@ export class RegistrationComponent {
     this.references = this.references.filter(r => r !== ref);
     this.loadTrainings();
     this.selectedTraining = '';
+    const storage: string[] = JSON.parse(this.storage || '');
+    const newStorage: string = JSON.stringify(storage.filter(item => item !== ref));
+    localStorage.setItem('trainings', newStorage);
     this.router.navigate([`formations/inscription/${references}`]);
   }
 
