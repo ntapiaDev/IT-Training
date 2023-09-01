@@ -78,6 +78,10 @@ section {
       padding: 0.5em;
       margin-left: auto;
       color: $secondary-color;
+      border-radius: 0.5em;
+      border: 1px solid $light-grey;
+      font-weight: bold;
+      background-color: #ffffff;
       cursor: pointer;
     }
 

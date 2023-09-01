@@ -1,10 +1,19 @@
 <section>
   <app-header></app-header>
   <div class="container">
-    <form [formGroup]="form" (submit)="submit()">
+    <div class="form">
       <h2>Trouvez votre formation</h2>
       <div class="submit">
-        <input type="text" formControlName="search" placeholder="Rechercher une formation, un métier ou un mot clé...">
+        <div>
+          <input type="text" placeholder="Rechercher une formation..." [(ngModel)]="input">
+          <ul class="select" *ngIf="input">
+            <ng-container *ngFor="let training of (trainings | async)">
+              <li *ngIf="training.name.toLowerCase().includes(this.input.toLowerCase())">
+                <a [routerLink]="['/formations', training.name]">{{ training.name }}</a>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
         <button type="submit">
           <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
             <path id="search"
@@ -13,7 +22,7 @@
           </svg>
         </button>
       </div>
-    </form>
+    </div>
   </div>
 </section>
 

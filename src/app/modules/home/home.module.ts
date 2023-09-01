@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { AboutComponent } from './components/about/about.component';
@@ -24,6 +24,7 @@ import { RegisterFormComponent } from './components/register/register-form.compo
   imports: [
     CommonModule,
     HomeRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     SharedModule
   ]

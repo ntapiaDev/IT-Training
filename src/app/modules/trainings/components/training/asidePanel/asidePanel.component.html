@@ -11,7 +11,7 @@
     <p>Prix : <b>{{ price }}€ TTC</b></p>
     <a routerLink="" class="dates">Dates et villes disponibles</a>
     <div class="options">
-      <a routerLink="" class="signup">S'inscrire</a>
+      <a [routerLink]="['/formations/inscription', reference]" class="signup">S'inscrire</a>
       <span>Email</span>
       <span>Appeler</span>
     </div>
