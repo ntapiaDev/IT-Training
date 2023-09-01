@@ -1,8 +1,8 @@
-@import 'variables';
+@import "variables";
 
 section {
   height: 100vh;
-  background-image: url('/assets/home.jpg');
+  background-image: url("/assets/home.jpg");
   background-size: cover;
 
   .container {
@@ -10,7 +10,7 @@ section {
     margin: auto;
     padding: 1em;
 
-    form {
+    .form {
       max-width: 750px;
       margin-top: 5em;
       border-radius: 1em;
@@ -26,15 +26,49 @@ section {
         display: flex;
         gap: 1em;
 
-        input {
-          padding: 0 1em;
+        div {
           flex-grow: 1;
-          background-color: $light-color;
-          font-size: 1em;
-          color: $primary-color;
+          position: relative;
 
-          &::placeholder {
+          input {
+            width: 100%;
+            height: 100%;
+            padding: 0 1em;
+            flex-grow: 1;
+            background-color: $light-color;
+            font-size: 1em;
             color: $primary-color;
+
+            &::placeholder {
+              color: $primary-color;
+            }
+          }
+
+          .select {
+            width: 100%;
+            border-radius: 0.5em;
+            background-color: $white;
+            border: 1px solid $dark-grey;
+            overflow: hidden;
+            position: absolute;
+    
+            @media screen and (max-width: 768px) {
+              width: 100%;
+            }
+    
+            li {
+              padding: 0.5em;
+              cursor: pointer;
+
+              a {
+                color: $dark-grey;
+                display: block;
+              }
+    
+              &:hover {
+                background-color: $light-grey;
+              }
+            }
           }
         }
 

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Training } from 'src/app/core/models/Training';
 
 @Component({
   selector: 'app-landing',
@@ -7,12 +9,8 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent {
+  input: string = '';
+  trainings: Observable<Training[]> = this.store.select('trainings')
 
-  form = new FormGroup({
-    search: new FormControl('')
-  });
-
-  async submit() {
-    console.log(this.form.value.search);
-  }
+  constructor(private store: Store<{ trainings: Training[] }>) { }
 }
