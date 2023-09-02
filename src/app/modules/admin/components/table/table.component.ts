@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Area } from 'src/app/core/models/Area';
 import { Training } from 'src/app/core/models/Training';
-import { AreasService } from 'src/app/core/services/areas.service';
-import { TrainingsService } from 'src/app/core/services/trainings.service';
+import { AreaService } from 'src/app/core/services/area.service';
+import { TrainingService } from 'src/app/core/services/training.service';
 
 @Component({
   selector: 'app-table',
@@ -14,23 +14,23 @@ import { TrainingsService } from 'src/app/core/services/trainings.service';
 })
 export class TableComponent {
   currentTab: string;
-  currentService!: AreasService | TrainingsService;
+  currentService!: AreaService | TrainingService;
   currentData$!: Observable<Area[] | Training[]>;
   currentKeys!: string[];
 
   constructor(
     private route: ActivatedRoute,
-    private areasService: AreasService,
-    private trainingsService: TrainingsService,
+    private areaService: AreaService,
+    private trainingService: TrainingService,
     private store: Store<{ areas: Area[], trainings: Training[] }>
   ) {
     this.currentTab = route.snapshot.url[0].path;
 
     if (this.currentTab === 'domaines') {
-      this.currentService = areasService;
+      this.currentService = areaService;
       this.currentData$ = this.store.select('areas');
     } else if (this.currentTab === 'formations') {
-      this.currentService = trainingsService;
+      this.currentService = trainingService;
       this.currentData$ = this.store.select('trainings');
     }
     this.currentData$.subscribe(data => this.currentKeys = Object.keys(data[0]));

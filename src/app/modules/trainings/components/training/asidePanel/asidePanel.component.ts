@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { trigger, state, transition, style, animate } from '@angular/animations';
+import { TrainingService } from 'src/app/core/services/training.service';
 
 @Component({
   selector: 'app-asidePanel',
@@ -18,6 +19,7 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
   ]
 })
 export class AsidePanelComponent {
+  @Input() id!: number;
   @Input() reference!: string;
   @Input() days!: number;
   @Input() price!: number;
@@ -25,7 +27,13 @@ export class AsidePanelComponent {
 
   currentTab = 1;
 
+  constructor(private trainingService: TrainingService) { }
+
   changeTab(index: number) {
     this.currentTab = index;
+  }
+
+  register(id: number) {
+    this.trainingService.storage.add(id);
   }
 }
