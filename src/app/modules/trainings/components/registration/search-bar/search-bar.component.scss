@@ -1,0 +1,71 @@
+@import "variables";
+
+.search {
+  margin-top: -1em;
+  padding: 2em 4em;
+  background-color: $secondary-color;
+  border-radius: 0 0 1em 1em;
+  display: flex;
+  justify-content: space-between;
+
+  @media screen and (max-width: 768px) {
+    padding: 1em;
+    text-align: center;
+  }
+
+  h1 {
+    color: $white;
+  }
+
+  .search-container {
+    width: 400px;
+    position: relative;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #4d535c;
+      border-radius: 0.5em;
+    }
+
+    svg {
+      position: absolute;
+      top: 7px;
+      right: 7px;
+    }
+
+    .select {
+      width: 400px;
+      border-radius: 0.5em;
+      background-color: $white;
+      border: 1px solid $dark-grey;
+      overflow: hidden;
+      position: absolute;
+
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
+
+      li {
+        padding: 0.5em;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $light-grey;
+        }
+      }
+    }
+  }
+
+  img {
+    width: 200px;
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+}

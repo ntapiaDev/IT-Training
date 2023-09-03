@@ -1,4 +1,5 @@
 @import "variables";
+@import 'ngx-toastr/toastr';
 
 *,
 *::before,
@@ -36,3 +37,11 @@ ul {
   color: #4d535c;
   text-transform: capitalize;
 }
+
+// .toast-success {
+//   background-color: $primary-color;
+// }
+
+// .toast-error {
+//   background-color: $primary-color;
+// }

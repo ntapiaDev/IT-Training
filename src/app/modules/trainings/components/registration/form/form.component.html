@@ -1,0 +1,39 @@
+<form class="choice">
+  <div (click)="apply('particulier')">
+    <label for="particulier">Particulier</label>
+    <input type="radio" id="particulier" name="choice" checked />
+  </div>
+  <div (click)="apply('entreprise')">
+    <label for="entreprise">Entreprise</label>
+    <input type="radio" id="entreprise" name="choice" />
+  </div>
+</form>
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+  <div *ngIf="formTarget === 'entreprise'">
+    <div class="formGroup">
+      <input type="text" formControlName="company" placeholder="Entreprise" />
+      <input type="text" formControlName="business" placeholder="Raison sociale" />
+    </div>
+    <div class="formGroup">
+      <input type="text" formControlName="size" placeholder="Effectif" />
+      <input type="text" formControlName="position" placeholder="Fonction" />
+    </div>
+  </div>
+  <div class="formGroup">
+    <input type="text" formControlName="lastName" placeholder="Nom" />
+    <input type="text" formControlName="firstName" placeholder="Prénom" />
+  </div>
+  <div class="formGroup">
+    <input type="text" formControlName="email" placeholder="Email" />
+    <input type="text" formControlName="phone" placeholder="Téléphone" />
+  </div>
+  <div class="formGroup">
+    <input type="text" formControlName="adresse" placeholder="Adresse" />
+    <input class="small" type="text" formControlName="code" placeholder="Code postal" />
+  </div>
+  <div class="formGroup">
+    <input type="text" formControlName="city" placeholder="Ville" />
+    <input class="small" type="text" formControlName="country" placeholder="Pays" />
+  </div>
+  <button>Envoyer</button>
+</form>
