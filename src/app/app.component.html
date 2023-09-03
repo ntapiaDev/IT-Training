@@ -20,7 +20,7 @@
     <app-footer></app-footer>
   </ng-template>
 
-  <a routerLink="contact" class="phone">
+  <a routerLink="contact" class="phone" *ngIf="!isAdminPage()">
     <svg
       width="50"
       height="50"

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { Area } from 'src/app/core/models/Area';
 import { Training } from 'src/app/core/models/Training';
 import { AreaService } from 'src/app/core/services/area.service';
@@ -58,5 +57,10 @@ export class TableComponent {
       this.reversed = false;
     }
     this.currentData = newData;
+  }
+
+  delete(id: number) {
+    //Supprimer les données dans le service
+    this.store.dispatch({ type: `[${this.currentTab}] Supprimer ${this.currentTab}`, id });
   }
 }
