@@ -13,6 +13,7 @@ import { TrainingService } from 'src/app/core/services/training.service';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent {
+  @Input() data!: Area | Training;
   @Input() keys!: string[];
   @Input() service!: AreaService | TrainingService;
   @Input() tab!: string;
@@ -26,7 +27,7 @@ export class FormComponent {
 
   ngOnInit() {
     for (let key of this.keys) {
-      this.form.addControl(key, new FormControl('', [key !== 'id' ? Validators.required : Validators.nullValidator]));
+      this.form.addControl(key, new FormControl(this.data ? this.data[key] : '', [key !== 'id' ? Validators.required : Validators.nullValidator]));
     }
   }
 
@@ -35,8 +36,7 @@ export class FormComponent {
       this.toastr.error('Vous devez remplir tous les champs!');
       return;
     }
-    //Choisir l'action en fonction de l'id (add ou update)
-    //Ajouter les données dans le service
+
     switch (this.tab) {
       case 'domaines':
         const area: Area = {
@@ -44,9 +44,17 @@ export class FormComponent {
           name: this.form.value.name,
           icon: this.form.value.icon
         }
-        //Ajouter d'id renvoyée depuis le back
-        this.store.dispatch({ type: '[domaines] Ajouter domaine', area });
+        if (!area.id) {
+          //Ajouter les données avec le service
+          //Ajouter d'id renvoyée depuis le back
+          area.id = Math.round(Math.random() * 100) + 100;
+          this.store.dispatch({ type: '[domaines] Ajouter domaine', area });
+        } else {
+          //Modifier les données avec le service
+          this.store.dispatch({ type: '[domaines] Editer domaine', area });
+        }
         break;
+
       case 'formations':
         const training: Training = {
           id: this.form.value.id,
@@ -57,12 +65,20 @@ export class FormComponent {
           theme_id: parseInt(this.form.value.theme_id),
           days: parseInt(this.form.value.days),
           price: parseInt(this.form.value.price),
-          remote: this.form.value.remote === 'true',
+          remote: ['true', true].includes(this.form.value.remote)
         }
-        //Ajouter d'id renvoyée depuis le back
-        this.store.dispatch({ type: '[formations] Ajouter formation', training });
+        if (!training.id) {
+          //Ajouter les données avec le service
+          //Ajouter d'id renvoyée depuis le back
+          training.id = Math.round(Math.random() * 100) + 100;
+          this.store.dispatch({ type: '[formations] Ajouter formation', training });
+        } else {
+          //Modifier les données avec le service
+          this.store.dispatch({ type: '[formations] Editer formation', training });
+        }
+        break;
     }
-    this.toastr.success('Entrée ajoutée avec succès!');
+    this.toastr.success('Entrée ajoutée ou modifiée avec succès!');
     this.closeModaleEvent.emit();
   }
 }

@@ -18,6 +18,7 @@ export class TableComponent {
   currentData!: Area[] | Training[];
   currentKeys: string[];
 
+  data!: Area | Training;
   filter: string = '';
   modaleAction: string = '';
   modaleId: number = 0;
@@ -45,6 +46,7 @@ export class TableComponent {
   }
 
   toggleModale(action: string = '', id: number = 0) {
+    this.data = this.currentData.find(data => data.id === id)!;
     this.modaleAction = action;
     this.modaleId = id;
     this.modaleIsOpen = !this.modaleIsOpen

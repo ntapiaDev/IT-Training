@@ -39,14 +39,13 @@
     </td>
   </tr>
 </table>
-<div class="modale" *ngIf="modaleIsOpen" (click)="toggleModale()">
-  <div (click)="stopPropagation($event)">
-    <app-form *ngIf="modaleAction === 'add'" [keys]="currentKeys" [service]="currentService" [tab]="currentTab" (closeModaleEvent)="toggleModale()"></app-form>
-    <div *ngIf="modaleAction === 'delete'" class="container">
-      <p>Voulez-vous vraiment supprimer cette entrée ?</p>
-      <div>
-        <button (click)="delete()">Oui</button><button (click)="toggleModale()">Non</button>
-      </div>
+<div class="modale" *ngIf="modaleIsOpen">
+  <app-form *ngIf="['add', 'edit'].includes(modaleAction)" [data]="data" [keys]="currentKeys" [service]="currentService" [tab]="currentTab" (closeModaleEvent)="toggleModale()"></app-form>
+  <div *ngIf="modaleAction === 'delete'" class="container">
+    <p>Voulez-vous vraiment supprimer cette entrée ?</p>
+    <div>
+      <button (click)="delete()">Oui</button>
+      <button (click)="toggleModale()">Non</button>
     </div>
   </div>
 </div>
