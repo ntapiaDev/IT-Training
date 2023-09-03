@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { deleteArea, getAreas } from './areas.actions';
+import { addArea, deleteArea, getAreas } from './areas.actions';
 import { Area } from '../../models/Area';
 
 export const initialState: Area[] = [
@@ -33,5 +33,6 @@ export const initialState: Area[] = [
 export const areasReducer = createReducer(
   initialState,
   on(getAreas, (state, { areas }) => areas),
+  on(addArea, (state, { area }) => [...state, area]),
   on(deleteArea, (state, { id }) => state.filter((area) => area.id !== id)),
 );

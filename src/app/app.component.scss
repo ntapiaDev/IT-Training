@@ -5,6 +5,17 @@ main {
   display: flex;
   flex-direction: column;
 
+  .admin-panel {
+    padding: 0.5em;
+    position: fixed;
+    top: 0;
+    right: 4em;
+    background-color: $medium-grey;
+    color: $primary-color;
+    border-radius: 0 0 1em 1em;
+    border: 1px solid $secondary-color;
+  }
+
   .current-page {
     padding: 1em;
     background-color: #f1f1f1;
@@ -31,7 +42,7 @@ main {
     @media screen and (max-width: 768px) {
       display: none;
     }
-  
+
     svg {
       fill: $primary-color;
       position: fixed;

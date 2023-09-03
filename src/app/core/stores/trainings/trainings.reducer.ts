@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { deleteTraining, getTrainings } from './trainings.actions';
+import { addTraining, deleteTraining, getTrainings } from './trainings.actions';
 import { Training } from '../../models/Training';
 
 export const initialState: Training[] = [
@@ -41,5 +41,6 @@ export const initialState: Training[] = [
 export const trainingsReducer = createReducer(
   initialState,
   on(getTrainings, (state, { trainings }) => trainings),
+  on(addTraining, (state, { training }) => [...state, training]),
   on(deleteTraining, (state, { id }) => state.filter((training) => training.id !== id)),
 );

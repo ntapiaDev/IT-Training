@@ -16,7 +16,7 @@ export class TableComponent {
   currentTab: string;
   currentService!: AreaService | TrainingService;
   currentData!: Area[] | Training[];
-  currentKeys!: string[];
+  currentKeys: string[];
 
   filter: string = '';
   modaleAction: string = '';

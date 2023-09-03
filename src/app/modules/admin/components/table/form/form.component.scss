@@ -1,0 +1,18 @@
+@import "variables";
+
+form {
+  padding: 1em;
+  background-color: $white;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  input {
+    width: 100%;
+  }
+
+  button {
+    padding: 0.5em;
+    cursor: pointer;
+  }
+}
