@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
 import { Area } from 'src/app/core/models/Area';
 import { Training } from 'src/app/core/models/Training';
 import { AreaService } from 'src/app/core/services/area.service';
@@ -18,6 +19,9 @@ export class TableComponent {
   currentKeys!: string[];
 
   filter: string = '';
+  modaleAction: string = '';
+  modaleId: number = 0;
+  modaleIsOpen: boolean = false
   reversed: boolean = false;
   selected: string = '';
 
@@ -25,7 +29,8 @@ export class TableComponent {
     private route: ActivatedRoute,
     private areaService: AreaService,
     private trainingService: TrainingService,
-    private store: Store<{ areas: Area[], trainings: Training[] }>
+    private store: Store<{ areas: Area[], trainings: Training[] }>,
+    private toastr: ToastrService
   ) {
     this.currentTab = route.snapshot.url[0].path;
 
@@ -37,6 +42,16 @@ export class TableComponent {
       this.store.select('trainings').subscribe(data => this.currentData = data);;
     }
     this.currentKeys = Object.keys(this.currentData[0]);
+  }
+
+  toggleModale(action: string = '', id: number = 0) {
+    this.modaleAction = action;
+    this.modaleId = id;
+    this.modaleIsOpen = !this.modaleIsOpen
+  }
+
+  stopPropagation(event: Event) {
+    event.stopPropagation();
   }
 
   filterData(data: Area[] | Training[]) {
@@ -59,8 +74,11 @@ export class TableComponent {
     this.currentData = newData;
   }
 
-  delete(id: number) {
+  delete() {
+    const id = this.modaleId;
     //Supprimer les données dans le service
     this.store.dispatch({ type: `[${this.currentTab}] Supprimer ${this.currentTab}`, id });
+    this.toastr.success('Entrée supprimée avec succès!');
+    this.toggleModale();
   }
 }
