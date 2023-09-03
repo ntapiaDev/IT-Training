@@ -46,7 +46,7 @@ import { SharedModule } from './shared/shared.module';
   providers: [provideToastr({
     timeOut: 3000,
     positionClass: 'toast-top-center',
-    preventDuplicates: true,
+    // preventDuplicates: true,
   }), { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [
     AppComponent

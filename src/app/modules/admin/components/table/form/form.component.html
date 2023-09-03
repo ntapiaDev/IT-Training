@@ -1,0 +1,9 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <label *ngFor="let key of keys" [hidden]="key === 'id'">{{ key }}
+    <input type="text" [formControlName]="key">
+  </label>
+  <div>
+    <button type="submit">Envoyer</button>
+    <button type="button" (click)="closeModaleEvent.emit()">Annuler</button>
+  </div>
+</form>

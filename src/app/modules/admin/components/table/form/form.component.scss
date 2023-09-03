@@ -1,0 +1,40 @@
+@import "variables";
+
+form {
+  width: 512px;
+  padding: 1em;
+  background-color: $white;
+  border: 3px double $secondary-color;
+  border-radius: 0.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  label {
+    text-transform: capitalize;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid $dark-grey;
+    border-radius: 0.5em;
+  }
+
+  div {
+    display: flex;
+    gap: 1em;
+
+    button {
+      width: 100%;
+      padding: 0.5em;
+      padding: 0.5em;
+      background-color: $light-grey;
+      color: $secondary-color;
+      font-weight: bold;
+      border: 1px solid $dark-grey;
+      border-radius: 0.5em;
+      cursor: pointer;
+    }
+  }
+}
