@@ -15,10 +15,12 @@ import { TrainingService } from 'src/app/core/services/training.service';
 export class TableComponent {
   currentTab: string;
   currentService!: AreaService | TrainingService;
-  currentData$!: Observable<Area[] | Training[]>;
+  currentData!: Area[] | Training[];
   currentKeys!: string[];
 
   filter: string = '';
+  reversed: boolean = false;
+  selected: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -30,15 +32,31 @@ export class TableComponent {
 
     if (this.currentTab === 'domaines') {
       this.currentService = areaService;
-      this.currentData$ = this.store.select('areas');
+      this.store.select('areas').subscribe(data => this.currentData = data);
     } else if (this.currentTab === 'formations') {
       this.currentService = trainingService;
-      this.currentData$ = this.store.select('trainings');
+      this.store.select('trainings').subscribe(data => this.currentData = data);;
     }
-    this.currentData$.subscribe(data => this.currentKeys = Object.keys(data[0]));
+    this.currentKeys = Object.keys(this.currentData[0]);
   }
 
-  filterData(data: Area[] | Training[] | null) {
-    return data?.filter(data => data.name.toLowerCase().includes(this.filter.toLowerCase()))
+  filterData(data: Area[] | Training[]) {
+    return data.filter(data => data.name.toLowerCase().includes(this.filter.toLowerCase()));
+  }
+
+  order(key: string) {
+    const doReverse = this.selected === key;
+    if (!doReverse) {
+      this.selected = key;
+      this.reversed = false;
+    }
+    const newData = [...this.currentData].sort((a, b) => a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0);
+    if (doReverse && !this.reversed) {
+      newData.reverse();
+      this.reversed = true;
+    } else {
+      this.reversed = false;
+    }
+    this.currentData = newData;
   }
 }
