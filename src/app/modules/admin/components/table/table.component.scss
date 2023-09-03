@@ -1,9 +1,5 @@
 @import "variables";
 
-$icon: #b0b2b5;
-$light-grey: #f1f1f1;
-$dark-grey: #4d535c;
-
 h3 {
   color: $primary-color;
   text-transform: capitalize;
@@ -74,7 +70,7 @@ table {
       background-color: $white;
     }
     &:nth-child(odd) {
-      background-color: $light-grey;
+      background-color: $medium-grey;
     }
     &:nth-child(1) {
       color: $white;

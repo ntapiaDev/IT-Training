@@ -18,6 +18,8 @@ export class TableComponent {
   currentData$!: Observable<Area[] | Training[]>;
   currentKeys!: string[];
 
+  filter: string = '';
+
   constructor(
     private route: ActivatedRoute,
     private areaService: AreaService,
@@ -34,5 +36,9 @@ export class TableComponent {
       this.currentData$ = this.store.select('trainings');
     }
     this.currentData$.subscribe(data => this.currentKeys = Object.keys(data[0]));
+  }
+
+  filterData(data: Area[] | Training[] | null) {
+    return data?.filter(data => data.name.toLowerCase().includes(this.filter.toLowerCase()))
   }
 }
