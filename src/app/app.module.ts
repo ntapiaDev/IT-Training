@@ -19,6 +19,7 @@ import { AuthInterceptor } from "./core/interceptors/auth.interceptor";
 import { areasReducer } from './core/stores/areas/areas.reducer';
 import { sessionReducer } from './core/stores/session/session.reducer';
 import { trainingsReducer } from './core/stores/trainings/trainings.reducer';
+import { trainingSessionsReducer } from './core/stores/trainingSession/trainingSessions.reducer'; 
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
@@ -39,7 +40,8 @@ import { SharedModule } from './shared/shared.module';
     StoreModule.forRoot({
       areas: areasReducer,
       session: sessionReducer,
-      trainings: trainingsReducer
+      trainings: trainingsReducer,
+      trainingSessions: trainingSessionsReducer
     }),
     SharedModule
   ],

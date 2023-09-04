@@ -4,8 +4,10 @@ import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { Area } from 'src/app/core/models/Area';
 import { Training } from 'src/app/core/models/Training';
+import { TrainingSession } from 'src/app/core/models/TrainingSession';
 import { AreaService } from 'src/app/core/services/area.service';
 import { TrainingService } from 'src/app/core/services/training.service';
+import { TrainingSessionService } from 'src/app/core/services/trainingSession.service';
 
 @Component({
   selector: 'app-table',
@@ -14,11 +16,11 @@ import { TrainingService } from 'src/app/core/services/training.service';
 })
 export class TableComponent {
   currentTab: string;
-  currentService!: AreaService | TrainingService;
-  currentData!: Area[] | Training[];
+  currentService!: AreaService | TrainingService | TrainingSessionService;
+  currentData!: (Area | Training | TrainingSession)[];
   currentKeys: string[];
 
-  data!: Area | Training;
+  data!: Area | Training | TrainingSession;
   filter: string = '';
   modaleAction: string = '';
   modaleId: number = 0;
@@ -30,7 +32,8 @@ export class TableComponent {
     private route: ActivatedRoute,
     private areaService: AreaService,
     private trainingService: TrainingService,
-    private store: Store<{ areas: Area[], trainings: Training[] }>,
+    private trainingSessionService: TrainingSessionService,
+    private store: Store<{ areas: Area[], trainings: Training[], trainingSessions: TrainingSession[] }>,
     private toastr: ToastrService
   ) {
     this.currentTab = route.snapshot.url[0].path;
@@ -40,7 +43,10 @@ export class TableComponent {
       this.store.select('areas').subscribe(data => this.currentData = data);
     } else if (this.currentTab === 'formations') {
       this.currentService = trainingService;
-      this.store.select('trainings').subscribe(data => this.currentData = data);;
+      this.store.select('trainings').subscribe(data => this.currentData = data);
+    } else if (this.currentTab === 'sessions') {
+      this.currentService = trainingSessionService;
+      this.store.select('trainingSessions').subscribe(data => this.currentData = data);
     }
     this.currentKeys = Object.keys(this.currentData[0]);
   }
@@ -49,14 +55,14 @@ export class TableComponent {
     this.data = this.currentData.find(data => data.id === id)!;
     this.modaleAction = action;
     this.modaleId = id;
-    this.modaleIsOpen = !this.modaleIsOpen
+    this.modaleIsOpen = !this.modaleIsOpen;
   }
 
   stopPropagation(event: Event) {
     event.stopPropagation();
   }
 
-  filterData(data: Area[] | Training[]) {
+  filterData(data: (Area | Training | TrainingSession)[]) {
     return data.filter(data => data.name.toLowerCase().includes(this.filter.toLowerCase()));
   }
 

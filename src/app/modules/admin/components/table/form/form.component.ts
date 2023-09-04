@@ -4,8 +4,10 @@ import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { Area } from 'src/app/core/models/Area';
 import { Training } from 'src/app/core/models/Training';
+import { TrainingSession } from 'src/app/core/models/TrainingSession';
 import { AreaService } from 'src/app/core/services/area.service';
 import { TrainingService } from 'src/app/core/services/training.service';
+import { TrainingSessionService } from 'src/app/core/services/trainingSession.service';
 
 @Component({
   selector: 'app-form',
@@ -13,9 +15,9 @@ import { TrainingService } from 'src/app/core/services/training.service';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent {
-  @Input() data!: Area | Training;
+  @Input() data!: Area | Training | TrainingSession;
   @Input() keys!: string[];
-  @Input() service!: AreaService | TrainingService;
+  @Input() service!: AreaService | TrainingService | TrainingSessionService;
   @Input() tab!: string;
   @Output() closeModaleEvent: EventEmitter<void> = new EventEmitter<void>();
 
@@ -75,6 +77,24 @@ export class FormComponent {
         } else {
           //Modifier les données avec le service
           this.store.dispatch({ type: '[formations] Editer formation', training });
+        }
+        break;
+
+      case 'sessions':
+        const trainingSession: TrainingSession = {
+          id: this.form.value.id,
+          name: this.form.value.name,
+          formation_id: parseInt(this.form.value.formation_id),
+          date: parseInt(this.form.value.date)
+        }
+        if (!trainingSession.id) {
+          //Ajouter les données avec le service
+          //Ajouter d'id renvoyée depuis le back
+          trainingSession.id = Math.round(Math.random() * 100) + 100;
+          this.store.dispatch({ type: '[sessions] Ajouter session', trainingSession });
+        } else {
+          //Modifier les données avec le service
+          this.store.dispatch({ type: '[sessions] Editer session', trainingSession });
         }
         break;
     }
