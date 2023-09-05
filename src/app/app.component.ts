@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { getSession } from './core/stores/session/session.actions';
+import { appInit } from './core/stores/app.actions';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent {
   constructor(private location: Location, private router: Router, private store: Store) { }
 
   ngOnInit(): void {
+    this.store.dispatch(appInit());
     this.store.dispatch(getSession());
   }
 
