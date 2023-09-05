@@ -21,6 +21,7 @@ import { sessionReducer } from './core/stores/session/session.reducer';
 import { trainingsReducer } from './core/stores/trainings/trainings.reducer';
 import { trainingSessionsReducer } from './core/stores/trainingSession/trainingSessions.reducer'; 
 import { SharedModule } from './shared/shared.module';
+import { themesReducer } from './core/stores/themes/themes.reducer';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { SharedModule } from './shared/shared.module';
     StoreModule.forRoot({
       areas: areasReducer,
       session: sessionReducer,
+      themes: themesReducer,
       trainings: trainingsReducer,
       trainingSessions: trainingSessionsReducer
     }),

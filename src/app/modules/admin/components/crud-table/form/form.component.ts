@@ -3,9 +3,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { Area } from 'src/app/core/models/Area';
+import { Theme } from 'src/app/core/models/Theme';
 import { Training } from 'src/app/core/models/Training';
 import { TrainingSession } from 'src/app/core/models/TrainingSession';
 import { AreaService } from 'src/app/core/services/area.service';
+import { ThemeService } from 'src/app/core/services/theme.service';
 import { TrainingService } from 'src/app/core/services/training.service';
 import { TrainingSessionService } from 'src/app/core/services/trainingSession.service';
 
@@ -15,9 +17,9 @@ import { TrainingSessionService } from 'src/app/core/services/trainingSession.se
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent {
-  @Input() data!: Area | Training | TrainingSession;
+  @Input() data!: Area | Theme | Training | TrainingSession;
   @Input() keys!: string[];
-  @Input() service!: AreaService | TrainingService | TrainingSessionService;
+  @Input() service!: AreaService | ThemeService | TrainingService | TrainingSessionService;
   @Input() tab!: string;
   @Output() closeModaleEvent: EventEmitter<void> = new EventEmitter<void>();
 
@@ -54,6 +56,23 @@ export class FormComponent {
         } else {
           //Modifier les données avec le service
           this.store.dispatch({ type: '[domaines] Editer domaine', area });
+        }
+        break;
+
+      case 'themes':
+        const theme: Theme = {
+          id: this.form.value.id,
+          name: this.form.value.name,
+          icon: this.form.value.icon
+        }
+        if (!theme.id) {
+          //Ajouter les données avec le service
+          //Ajouter d'id renvoyée depuis le back
+          theme.id = Math.round(Math.random() * 100) + 100;
+          this.store.dispatch({ type: '[themes] Ajouter theme', theme });
+        } else {
+          //Modifier les données avec le service
+          this.store.dispatch({ type: '[themes] Editer theme', theme });
         }
         break;
 

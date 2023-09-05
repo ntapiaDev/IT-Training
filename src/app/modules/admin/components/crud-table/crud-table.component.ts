@@ -3,9 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { Area } from 'src/app/core/models/Area';
+import { Theme } from 'src/app/core/models/Theme';
 import { Training } from 'src/app/core/models/Training';
 import { TrainingSession } from 'src/app/core/models/TrainingSession';
 import { AreaService } from 'src/app/core/services/area.service';
+import { ThemeService } from 'src/app/core/services/theme.service';
 import { TrainingService } from 'src/app/core/services/training.service';
 import { TrainingSessionService } from 'src/app/core/services/trainingSession.service';
 
@@ -16,11 +18,11 @@ import { TrainingSessionService } from 'src/app/core/services/trainingSession.se
 })
 export class CrudTableComponent {
   currentTab: string;
-  currentService!: AreaService | TrainingService | TrainingSessionService;
-  currentData!: (Area | Training | TrainingSession)[];
+  currentService!: AreaService | ThemeService | TrainingService | TrainingSessionService;
+  currentData!: (Area | Theme | Training | TrainingSession)[];
   currentKeys: string[];
 
-  data!: Area | Training | TrainingSession;
+  data!: Area | Theme |Training | TrainingSession;
   filter: string = '';
   modaleAction: string = '';
   modaleId: number = 0;
@@ -31,9 +33,10 @@ export class CrudTableComponent {
   constructor(
     private route: ActivatedRoute,
     private areaService: AreaService,
+    private themeService: ThemeService,
     private trainingService: TrainingService,
     private trainingSessionService: TrainingSessionService,
-    private store: Store<{ areas: Area[], trainings: Training[], trainingSessions: TrainingSession[] }>,
+    private store: Store<{ areas: Area[], themes: Theme[], trainings: Training[], trainingSessions: TrainingSession[] }>,
     private toastr: ToastrService
   ) {
     this.currentTab = route.snapshot.url[0].path;
@@ -41,6 +44,9 @@ export class CrudTableComponent {
     if (this.currentTab === 'domaines') {
       this.currentService = areaService;
       this.store.select('areas').subscribe(data => this.currentData = data);
+    } else if (this.currentTab === 'themes') {
+      this.currentService = themeService;
+      this.store.select('themes').subscribe(data => this.currentData = data);
     } else if (this.currentTab === 'formations') {
       this.currentService = trainingService;
       this.store.select('trainings').subscribe(data => this.currentData = data);
@@ -62,7 +68,7 @@ export class CrudTableComponent {
     event.stopPropagation();
   }
 
-  filterData(data: (Area | Training | TrainingSession)[]) {
+  filterData(data: (Area | Theme | Training | TrainingSession)[]) {
     return data.filter(data => data.name.toLowerCase().includes(this.filter.toLowerCase()));
   }
 

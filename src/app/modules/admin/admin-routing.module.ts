@@ -9,6 +9,7 @@ const routes: Routes = [
     children: [
       { path: 'formations', component: CrudTableComponent },
       { path: 'domaines', component: CrudTableComponent },
+      { path: 'themes', component: CrudTableComponent },
       { path: 'sessions', component: CrudTableComponent }
     ]
   }
