@@ -1,6 +1,6 @@
 export interface Theme {
     id: number,
-    name: string,
+    nom: string,
     icon: string,
     [key: string]: any;
   }

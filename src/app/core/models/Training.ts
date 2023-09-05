@@ -1,6 +1,6 @@
 export interface Training {
   id: number,
-  name: string,
+  nom: string,
   reference: string,
   description: string,
   icon: string,

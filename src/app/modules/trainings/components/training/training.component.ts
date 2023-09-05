@@ -21,7 +21,7 @@ export class TrainingComponent {
     //   trainings.length === 0 ? this.store.dispatch({ type: '[Trainings] Load Trainings' }) : null
     // );
     this.store.select('trainings').subscribe(trainings => {
-      this.training = trainings.find(training => training.name === this.name);
+      this.training = trainings.find(training => training.nom === this.name);
       if (!this.training) {
         this.router.navigate(['../formations']);
       }

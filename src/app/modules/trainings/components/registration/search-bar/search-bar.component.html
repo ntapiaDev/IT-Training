@@ -16,7 +16,7 @@
       <ul class="select" *ngIf="selectedTraining">
         <ng-container *ngFor="let training of (trainings | async)">
           <li *ngIf="filterTrainings(training)" (click)="addTraining(training.id)">
-            {{ training.name }}
+            {{ training.nom }}
           </li>
         </ng-container>
       </ul>

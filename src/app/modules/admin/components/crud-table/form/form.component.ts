@@ -45,7 +45,7 @@ export class FormComponent {
       case 'domaines':
         const area: Area = {
           id: this.form.value.id,
-          name: this.form.value.name,
+          nom: this.form.value.name,
           icon: this.form.value.icon
         }
         if (!area.id) {
@@ -62,7 +62,7 @@ export class FormComponent {
       case 'themes':
         const theme: Theme = {
           id: this.form.value.id,
-          name: this.form.value.name,
+          nom: this.form.value.name,
           icon: this.form.value.icon
         }
         if (!theme.id) {
@@ -79,7 +79,7 @@ export class FormComponent {
       case 'formations':
         const training: Training = {
           id: this.form.value.id,
-          name: this.form.value.name,
+          nom: this.form.value.name,
           reference: this.form.value.reference,
           description: this.form.value.description,
           icon: this.form.value.icon,
@@ -102,7 +102,7 @@ export class FormComponent {
       case 'sessions':
         const trainingSession: TrainingSession = {
           id: this.form.value.id,
-          name: this.form.value.name,
+          nom: this.form.value.name,
           formation_id: parseInt(this.form.value.formation_id),
           date: parseInt(this.form.value.date)
         }

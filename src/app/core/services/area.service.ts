@@ -6,37 +6,11 @@ import { Area } from '../models/Area';
   providedIn: 'root'
 })
 export class AreaService {
-  private readonly serverUrl = 'http://localhost:8080';
+  private readonly serverUrl = 'http://localhost:8080/themes';
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Area[] {
-    return [
-      {
-        id: 1,
-        name: "Informatique",
-        icon: "informatique"
-      },
-      {
-        id: 2,
-        name: "Management",
-        icon: "management"
-      },
-      {
-        id: 3,
-        name: "Ressources Humaines",
-        icon: "rh"
-      },
-      {
-        id: 4,
-        name: "Finance",
-        icon: "finance"
-      },
-      {
-        id: 5,
-        name: "Marketing",
-        icon: "marketing"
-      }
-    ]
+  getAll() {
+    return this.http.get<Area[]>(this.serverUrl);
   }
 }

@@ -15,7 +15,7 @@ export class SearchBarComponent {
   selectedTraining: string = '';
 
   filterTrainings(training: Training): boolean {
-    const match = training.name.toLowerCase().includes(this.selectedTraining.toLowerCase());
+    const match = training.nom.toLowerCase().includes(this.selectedTraining.toLowerCase());
     const alreadySelected = this.selectedTrainings.some(t => t.id === training.id);
     return match && !alreadySelected;
   }

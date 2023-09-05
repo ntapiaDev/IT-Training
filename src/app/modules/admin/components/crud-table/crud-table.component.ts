@@ -20,7 +20,7 @@ export class CrudTableComponent {
   currentTab: string;
   currentService!: AreaService | ThemeService | TrainingService | TrainingSessionService;
   currentData!: (Area | Theme | Training | TrainingSession)[];
-  currentKeys: string[];
+  currentKeys: string[] = [];
 
   data!: Area | Theme |Training | TrainingSession;
   filter: string = '';
@@ -41,20 +41,24 @@ export class CrudTableComponent {
   ) {
     this.currentTab = route.snapshot.url[0].path;
 
+    const init = (data: (Area | Theme | Training | TrainingSession)[]) => {
+      this.currentData = data;
+      if (data.length) this.currentKeys = Object.keys(data[0]);
+    }
+
     if (this.currentTab === 'domaines') {
       this.currentService = areaService;
-      this.store.select('areas').subscribe(data => this.currentData = data);
+      this.store.select('areas').subscribe(data => init(data));
     } else if (this.currentTab === 'themes') {
       this.currentService = themeService;
-      this.store.select('themes').subscribe(data => this.currentData = data);
+      this.store.select('themes').subscribe(data => init(data));
     } else if (this.currentTab === 'formations') {
       this.currentService = trainingService;
-      this.store.select('trainings').subscribe(data => this.currentData = data);
+      this.store.select('trainings').subscribe(data => init(data));
     } else if (this.currentTab === 'sessions') {
       this.currentService = trainingSessionService;
-      this.store.select('trainingSessions').subscribe(data => this.currentData = data);
+      this.store.select('trainingSessions').subscribe(data => init(data));
     }
-    this.currentKeys = Object.keys(this.currentData[0]);
   }
 
   toggleModale(action: string = '', id: number = 0) {
@@ -64,12 +68,8 @@ export class CrudTableComponent {
     this.modaleIsOpen = !this.modaleIsOpen;
   }
 
-  stopPropagation(event: Event) {
-    event.stopPropagation();
-  }
-
   filterData(data: (Area | Theme | Training | TrainingSession)[]) {
-    return data.filter(data => data.name.toLowerCase().includes(this.filter.toLowerCase()));
+    return data.filter(data => !data.nom || data.nom?.toLowerCase().includes(this.filter.toLowerCase()));
   }
 
   order(key: string) {

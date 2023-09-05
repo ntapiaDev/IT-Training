@@ -6,37 +6,11 @@ import { Theme } from '../models/Theme';
   providedIn: 'root'
 })
 export class ThemeService {
-  private readonly serverUrl = 'http://localhost:8080';
+  private readonly serverUrl = 'http://localhost:8080/sousthemes';
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Theme[] {
-    return [
-      {
-        id: 1,
-        name: "Langages de programmation",
-        icon: "langages"
-      },
-      {
-        id: 2,
-        name: "Bases de données",
-        icon: "bases"
-      },
-      {
-        id: 3,
-        name: "No-Code",
-        icon: "no-code"
-      },
-      {
-        id: 4,
-        name: "Sécurité informatique",
-        icon: "securite"
-      },
-      {
-        id: 5,
-        name: "Réseau",
-        icon: "reseau"
-      }
-    ]
+  getAll() {
+    return this.http.get<Theme[]>(this.serverUrl);
   }
 }

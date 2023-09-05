@@ -26,11 +26,11 @@ export class AppEffects {
           this.TrainingSessionService.getAll()          
         ]).pipe(
           map(([areas, themes, trainings, trainingSessions]) => {
-            return {
-                areasActions: areasActions.getAreas({ areas: [areas] }),
-                themesActions: themesActions.getThemes({ themes: [themes] }),
-                trainingsActions: trainingsActions.getTrainings({ trainings: [trainings] }),
-                trainingSessionsActions: trainingSessionsActions.getTrainingSessions({ trainingSessions: [trainingSessions] })
+            return {    
+                areasActions: areasActions.getAreas({ areas }),
+                themesActions: themesActions.getThemes({ themes }),
+                trainingsActions: trainingsActions.getTrainings({ trainings }),
+                trainingSessionsActions: trainingSessionsActions.getTrainingSessions({ trainingSessions })
             };
           })
         );

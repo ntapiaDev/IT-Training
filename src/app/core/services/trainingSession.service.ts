@@ -6,30 +6,11 @@ import { TrainingSession } from '../models/TrainingSession';
   providedIn: 'root'
 })
 export class TrainingSessionService {
-  private readonly serverUrl = 'http://localhost:8080';
+  private readonly serverUrl = 'http://localhost:8080/sessions';
 
   constructor(private http: HttpClient) { }
 
-  getAll(): TrainingSession[] {
-    return [
-      {
-        id: 1,
-        name: "Java - Rouen",
-        formation_id: 1,
-        date: 16
-      },
-      {
-        id: 2,
-        name: "Java - Paris",
-        formation_id: 1,
-        date: 16
-      },
-      {
-        id: 3,
-        name: "PHP - Rouen",
-        formation_id: 2,
-        date: 16
-      },
-    ]
+  getAll() {
+    return this.http.get<TrainingSession[]>(this.serverUrl);
   }
 }
