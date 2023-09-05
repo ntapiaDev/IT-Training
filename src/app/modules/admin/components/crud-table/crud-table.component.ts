@@ -10,11 +10,11 @@ import { TrainingService } from 'src/app/core/services/training.service';
 import { TrainingSessionService } from 'src/app/core/services/trainingSession.service';
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  selector: 'app-crud-table',
+  templateUrl: './crud-table.component.html',
+  styleUrls: ['./crud-table.component.scss']
 })
-export class TableComponent {
+export class CrudTableComponent {
   currentTab: string;
   currentService!: AreaService | TrainingService | TrainingSessionService;
   currentData!: (Area | Training | TrainingSession)[];
