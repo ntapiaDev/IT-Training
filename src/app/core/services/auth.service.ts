@@ -4,6 +4,7 @@ import { Observable, throwError, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import { Session, UserRole } from '../models/Session';
+import { TrainingService } from './training.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
   private readonly serverUrl = 'http://localhost:8080';
   private readonly tokenKey = 'auth_token';
 
-  constructor(private http: HttpClient, private cookieService: CookieService) { }
+  constructor(private http: HttpClient, private cookieService: CookieService, private trainingService: TrainingService) { }
 
   login(email: string, password: string): Observable<any> {
     if (!email || !password) {
@@ -71,7 +72,8 @@ export class AuthService {
   getSession(): Session {
     return {
         role: UserRole.null,
-        token: ''
+        token: '',
+        cart: this.trainingService.storage.getSize()
     }
   }
 }

@@ -10,7 +10,7 @@
         <li><a routerLink="">Entreprise</a></li>
         <li><a routerLink="">Qui sommes-nous ?</a></li>
         <ng-container *ngIf="!(session$ | async)?.token">
-          <li><a routerLink="/formations/inscription">S'inscrire à une formation</a></li>
+          <li><a routerLink="/formations/inscription">S'inscrire à une formation ({{ (session$ | async)?.cart }})</a></li>
           <li><a routerLink="/connexion">Mon compte</a></li>
         </ng-container>
         <li *ngIf="(session$ | async)?.token"><a routerLink="/tableau-de-bord">Tableau de bord</a></li>
