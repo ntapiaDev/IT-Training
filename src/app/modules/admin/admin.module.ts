@@ -6,6 +6,7 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { BackOfficeComponent } from './components/back-office/back-office.component';
 import { CrudTableComponent } from './components/crud-table/crud-table.component';
 import { FormComponent } from './components/crud-table/form/form.component';
+import { CustomServices } from './components/crud-table/Custom';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FormComponent } from './components/crud-table/form/form.component';
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule
-  ]
+  ],
+  providers: [CustomServices]
 })
 export class AdminModule { }

@@ -6,10 +6,7 @@ import { Area } from 'src/app/core/models/Area';
 import { Theme } from 'src/app/core/models/Theme';
 import { Training } from 'src/app/core/models/Training';
 import { TrainingSession } from 'src/app/core/models/TrainingSession';
-import { AreaService } from 'src/app/core/services/area.service';
-import { ThemeService } from 'src/app/core/services/theme.service';
-import { TrainingService } from 'src/app/core/services/training.service';
-import { TrainingSessionService } from 'src/app/core/services/trainingSession.service';
+import { CustomService, CustomType } from '../Custom';
 
 @Component({
   selector: 'app-form',
@@ -17,9 +14,9 @@ import { TrainingSessionService } from 'src/app/core/services/trainingSession.se
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent {
-  @Input() data!: Area | Theme | Training | TrainingSession;
+  @Input() data!: CustomType;
   @Input() keys!: string[];
-  @Input() service!: AreaService | ThemeService | TrainingService | TrainingSessionService;
+  @Input() service!: CustomService;
   @Input() tab!: string;
   @Output() closeModaleEvent: EventEmitter<void> = new EventEmitter<void>();
 
@@ -117,6 +114,7 @@ export class FormComponent {
         }
         break;
     }
+    
     this.toastr.success('Entrée ajoutée ou modifiée avec succès!');
     this.closeModaleEvent.emit();
   }
