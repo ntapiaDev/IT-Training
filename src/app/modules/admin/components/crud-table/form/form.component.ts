@@ -34,16 +34,26 @@ export class FormComponent {
       return;
     }
     const data = getData(this.form, this.tab);
+
     if (!data.id) {
-      //Ajouter les données avec le service
-      //Ajouter d'id renvoyée depuis le back
-      data.id = Math.round(Math.random() * 100) + 100;
-      this.store.dispatch({ type: `[${this.tab}] Ajouter ${this.tab}`, data });
+      this.service.add(data).subscribe({
+        next: (response: any) => {
+          data.id = response.id;
+          this.store.dispatch({ type: `[${this.tab}] Ajouter ${this.tab}`, data });
+          this.toastr.success('Entrée ajoutée avec succès!');
+          this.closeModaleEvent.emit();
+        },
+        error: () => this.toastr.error('Une erreur s\'est produite lors de la requête HTTP.')
+      });
     } else {
-      //Modifier les données avec le service
-      this.store.dispatch({ type: `[${this.tab}] Editer ${this.tab}`, data });
+      this.service.update(data).subscribe({
+        next: () => {
+          this.store.dispatch({ type: `[${this.tab}] Editer ${this.tab}`, data })
+          this.toastr.success('Entrée modifiée avec succès!');
+          this.closeModaleEvent.emit();
+        },
+        error: () => this.toastr.error('Une erreur s\'est produite lors de la requête HTTP.')
+      });
     }
-    this.toastr.success('Entrée ajoutée ou modifiée avec succès!');
-    this.closeModaleEvent.emit();
   }
 }

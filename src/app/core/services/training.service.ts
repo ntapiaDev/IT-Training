@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Store } from '@ngrx/store';
 import { Training } from '../models/Training';
@@ -9,11 +9,28 @@ import { Training } from '../models/Training';
 })
 export class TrainingService {
   private readonly serverUrl = 'http://localhost:8080/formations';
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    }),
+  };
 
   constructor(private http: HttpClient, private store: Store, private toastr: ToastrService) { }
 
   getAll() {
     return this.http.get<Training[]>(this.serverUrl);
+  }
+
+  add(training: Training) {
+    return this.http.post(this.serverUrl, training, this.httpOptions);
+  }
+
+  update(training: Training) {
+    return this.http.put(`${this.serverUrl}/${training.id}`, training, this.httpOptions);
+  }
+
+  delete(id: number) {
+    return this.http.delete(`${this.serverUrl}/${id}`);
   }
 
   storage = {

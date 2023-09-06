@@ -36,7 +36,7 @@ export class CrudTableComponent {
     this.currentService = currentService;
     selectedStore.subscribe(data => {
       this.currentData = data;
-      if (data.length) this.currentKeys = Object.keys(data[0]);
+      if (data.length) this.currentKeys = Object.keys(data[0]).filter(key => ['number', 'string'].includes(typeof data[0][key]));
     });
   }
 
@@ -69,9 +69,13 @@ export class CrudTableComponent {
 
   delete() {
     const id = this.modaleId;
-    //Supprimer les données dans le service
-    this.store.dispatch({ type: `[${this.currentTab}] Supprimer ${this.currentTab}`, id });
-    this.toastr.success('Entrée supprimée avec succès!');
-    this.toggleModale();
+    this.currentService.delete(id).subscribe({
+      next: () => {
+        this.store.dispatch({ type: `[${this.currentTab}] Supprimer ${this.currentTab}`, id });
+        this.toastr.success('Entrée supprimée avec succès!');
+        this.toggleModale();
+      },
+      error: () => this.toastr.error('Une erreur s\'est produite lors de la requête HTTP.')
+    });
   }
 }
