@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Area } from 'src/app/core/models/Area';
@@ -48,6 +49,48 @@ export const init = (currentTab: string, customServices: CustomServices, store: 
     currentService = customServices.trainingSessionService;
     selectedStore = store.select('trainingSessions');
   }
-  
   return [currentService, selectedStore];
+}
+
+export const getData = (form: FormGroup, tab: string) => {
+  let data!: CustomType;
+
+  switch (tab) {
+    case 'domaines':
+      data = {
+        id: form.value.id,
+        nom: form.value.nom,
+        icon: form.value.icon
+      };
+      break;
+    case 'themes':
+      data = {
+        id: form.value.id,
+        nom: form.value.name,
+        icon: form.value.icon
+      };
+      break;
+    case 'formations':
+      data = {
+        id: form.value.id,
+        nom: form.value.name,
+        reference: form.value.reference,
+        description: form.value.description,
+        icon: form.value.icon,
+        theme_id: parseInt(form.value.theme_id),
+        days: parseInt(form.value.days),
+        price: parseInt(form.value.price),
+        remote: ['true', true].includes(form.value.remote)
+      };
+      break;
+    case 'sessions':
+      data = {
+        id: form.value.id,
+        nom: form.value.name,
+        formation_id: parseInt(form.value.formation_id),
+        date: parseInt(form.value.date)
+      };
+      break;
+  }
+  return data;
 }

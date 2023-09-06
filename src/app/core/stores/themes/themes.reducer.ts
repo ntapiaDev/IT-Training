@@ -7,10 +7,10 @@ export const initialState: Theme[] = [];
 export const themesReducer = createReducer(
   initialState,
   on(getThemes, (state, { themes }) => themes),
-  on(addTheme, (state, { theme }) => [...state, theme]),
-  on(editTheme, (state, { theme }) =>
+  on(addTheme, (state, { data }) => [...state, data]),
+  on(editTheme, (state, { data }) =>
     state.map((existingTheme) =>
-    existingTheme.id === theme.id ? theme : existingTheme
+    existingTheme.id === data.id ? data : existingTheme
     )
   ),
   on(deleteTheme, (state, { id }) => state.filter((theme) => theme.id !== id)),

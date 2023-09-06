@@ -7,10 +7,10 @@ export const initialState: TrainingSession[] = [];
 export const trainingSessionsReducer = createReducer(
   initialState,
   on(getTrainingSessions, (_, { trainingSessions }) => trainingSessions),
-  on(addTrainingSession, (state, { trainingSession }) => [...state, trainingSession]),
-  on(editTrainingSession, (state, { trainingSession }) =>
+  on(addTrainingSession, (state, { data }) => [...state, data]),
+  on(editTrainingSession, (state, { data }) =>
     state.map((existingTrainingSession) =>
-    existingTrainingSession.id === trainingSession.id ? trainingSession : existingTrainingSession
+    existingTrainingSession.id === data.id ? data : existingTrainingSession
     )
   ),
   on(deleteTrainingSession, (state, { id }) => state.filter((trainingSession) => trainingSession.id !== id))

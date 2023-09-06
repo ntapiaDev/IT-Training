@@ -7,10 +7,10 @@ export const initialState: Training[] = [];
 export const trainingsReducer = createReducer(
   initialState,
   on(getTrainings, (_, { trainings }) => trainings),
-  on(addTraining, (state, { training }) => [...state, training]),
-  on(editTraining, (state, { training }) =>
+  on(addTraining, (state, { data }) => [...state, data]),
+  on(editTraining, (state, { data }) =>
     state.map((existingTraining) =>
-    existingTraining.id === training.id ? training : existingTraining
+    existingTraining.id === data.id ? data : existingTraining
     )
   ),
   on(deleteTraining, (state, { id }) => state.filter((training) => training.id !== id))
