@@ -1,4 +1,4 @@
-@import 'variables';
+@import "variables";
 
 .infos {
   display: flex;
@@ -9,8 +9,8 @@
   }
 
   img {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
     opacity: 0.25;
 
     @media screen and (max-width: 768px) {
@@ -24,19 +24,51 @@
   padding: 2em;
   background-color: $secondary-color;
   border-radius: 0.5em;
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
 
-  input {
-    width: 100%;
-    padding: 1em;
+  @media screen and (max-width: 768px) {
+    padding: 0.5em;
+    flex-direction: column;
   }
 
-  ul {
-    margin-top: 1em;
+  .list {
+    flex-grow: 1;
 
-    a {
-      padding: 0.5em;
-      display: block;
-      color: #FFFFFF;
+    .input {
+      width: 100%;
+      position: relative;
+
+      input {
+        width: 100%;
+        padding: 1em;
+        border: 1px solid $secondary-color;
+        border-radius: 0.5em;
+      }
+
+      svg {
+        position: absolute;
+        top: 7px;
+        right: 7px;
+        fill: $secondary-color;
+    }
+    }
+
+    ul {
+      margin-top: 1em;
+      display: flex;
+      flex-wrap: wrap;
+
+      li {
+        width: 50%;
+
+        a {
+          padding: 0.5em;
+          display: block;
+          color: #ffffff;
+        }
+      }
     }
   }
 }

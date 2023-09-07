@@ -6,13 +6,15 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { FormComponent } from './components/registration/form/form.component';
 import { SearchBarComponent } from './components/registration/search-bar/search-bar.component';
 import { SelectedTrainingComponent } from './components/registration/selected-training/selected-training.component';
-import { TrainingsComponent } from './components/trainings/trainings.component';
-import { TrainingComponent } from './components/training/training.component';
 import { AsidePanelComponent } from './components/training/asidePanel/asidePanel.component';
+import { TrainingComponent } from './components/training/training.component';
+import { TrainingsComponent } from './components/trainings/trainings.component';
+import { MapComponent } from './components/trainings/map/map.component';
 
 @NgModule({
   declarations: [
     TrainingsComponent,
+    MapComponent,
     TrainingComponent,
     AsidePanelComponent,
     RegistrationComponent,
