@@ -16,8 +16,11 @@ aside {
   }
 
   .map {
+    position: relative;
+
     img {
-      width: 100%;
+      width: 95%;
+      transform: translateX(3px) rotate(-11deg);
     }
   }
 

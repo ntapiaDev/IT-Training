@@ -9,12 +9,14 @@ import { SelectedTrainingComponent } from './components/registration/selected-tr
 import { AsidePanelComponent } from './components/training/asidePanel/asidePanel.component';
 import { TrainingComponent } from './components/training/training.component';
 import { TrainingsComponent } from './components/trainings/trainings.component';
-import { MapComponent } from './components/trainings/map/map.component';
+import { MapComponent } from './components/map/map.component';
+import { MarkerComponent } from './components/map/marker/marker.component';
 
 @NgModule({
   declarations: [
     TrainingsComponent,
     MapComponent,
+    MarkerComponent,
     TrainingComponent,
     AsidePanelComponent,
     RegistrationComponent,
