@@ -22,7 +22,7 @@ export class CrudTableComponent {
   modaleId: number = 0;
   modaleIsOpen: boolean = false
   reversed: boolean = false;
-  selected: string = '';
+  selected: string = 'id';
 
   constructor(
     private route: ActivatedRoute,
