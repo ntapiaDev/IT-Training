@@ -1,0 +1,49 @@
+<div class="details" [style.height.px]="isOpen ? maxHeight : height">
+  <div #container class="container">
+    <div class="title">
+      <h3>Formation Java - <span [style.color]="true ? '#409E1E' : '#FF0008'">{{true ? 'OK' : 'En attente'}}</span></h3>
+      <span class="button" (click)="handleClose()">X</span>
+    </div>
+    <div class="legend">Informatique - Langages de programmation</div>
+    <div class="infos">
+        <div><b>Nom du référent :</b> Référent</div>
+        <div>
+            <span><b>Durée</b> : 3 jours</span>
+            <span><b>Date de début</b> : 08/09/2023</span>
+            <span><b>Date de fin</b> : 11/09/2023</span>
+            <span><b>Prix</b> : 999€</span>
+        </div>
+        <div><b>Nombre de participants :</b>8/12</div>
+        <div><b>Formation à distance :</b>Non</div>
+        <div class="split">
+            <div class="col">
+                <h4>Liste des candidats :</h4>
+                <ul>
+                    <li><span>Cédric BOUCHER</span></li>
+                    <li><span>Mehdi GAMOUH</span></li>
+                    <li><span>Nicolas TAPIA</span></li>
+                    <li><span>Un petit chat</span></li>
+                    <li><span>Un gros chien</span></li>
+                    <li><span>Quentin LeLutin</span></li>
+                    <li><span>Alexandre LaGrande</span></li>
+                    <li><span>Une chaise De Bureau</span></li>
+                </ul>
+            </div>
+            <div class="col">
+                <h4>Centre de formation :</h4>
+                <span><b>Nom de l'entreprise :</b> IT-Training Rouen</span>
+                <span><b>Responsable :</b> Jean Francis NDJUIKO</span>
+                <span><b>Adresse :</b> 21 rue des chats, 75101 PARIS</span>
+            </div>
+        </div>
+        <div class="col programme">
+            <h4>Programme :</h4>
+            <p><b>Chapitre 1 :</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum voluptas, illum atque sapiente animi sunt a incidunt, nostrum ab maiores architecto accusantium itaque totam consequatur.</p>
+            <p><b>Chapitre 2 :</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, voluptate quibusdam. Pariatur temporibus perspiciatis laudantium, in nostrum, at voluptas inventore, nemo reiciendis neque nihil? Asperiores voluptates ad iste eveniet quae.</p>
+            <p><b>Chapitre 3 :</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat omnis adipisci, molestias necessitatibus doloremque esse.</p>
+            <p><b>Chapitre 4 :</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga quasi inventore labore omnis ullam quam quaerat ut repellendus facilis culpa, accusantium nemo quae reiciendis natus?</p>
+            <p><b>Chapitre 5 :</b> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae placeat sapiente et assumenda ratione, mollitia temporibus quia dolorum id tempora.</p>
+        </div>
+    </div>
+  </div>
+</div>

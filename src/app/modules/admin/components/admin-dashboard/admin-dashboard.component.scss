@@ -78,17 +78,15 @@ table {
   border-collapse: collapse;
 
   tr {
-    &:nth-child(even) {
-      background-color: $white;
-    }
-
-    &:nth-child(odd) {
-      background-color: $medium-grey;
-    }
+    background-color: $white;
 
     &:nth-child(1) {
       color: $white;
       background-color: $secondary-color;
+    }
+
+    &:nth-child(4n) {
+      background-color: $medium-grey;
     }
   }
 
@@ -125,11 +123,17 @@ table {
         svg {
           cursor: pointer;
 
-          &:hover {
+          &:hover,
+          &.open {
             fill: $primary-color;
           }
         }
       }
+    }
+
+    &.details {
+      padding: 0;
+      border: none;
     }
   }
 }

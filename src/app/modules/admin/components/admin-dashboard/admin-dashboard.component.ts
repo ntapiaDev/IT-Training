@@ -10,15 +10,25 @@ import { TrainingSession } from 'src/app/core/models/TrainingSession';
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent {
-  filter: string = '';
+  filter = '';
   data!: TrainingSession[];
-  sessions$: Observable<TrainingSession[]> = this.store.select('trainingSessions');
-  modaleAction: string = '';
-  modaleId: number = 0;
-  modaleIsOpen: boolean = false;
-  selected: number = 1;
-  reversed: boolean = false;
-  currentTab: number = 1;
+  sessions$ = this.store.select('trainingSessions');
+  modaleAction = '';
+  modaleId = 0;
+  modaleIsOpen = false;
+  selected = 1;
+  reversed = false;
+  currentTab = 1;
+  detailsId = 0;
+
+  //FAKE DATA
+  session = {
+    id: 1,
+    nom: 'Super Session',
+    formation_id: 1,
+    date: 12345
+  }
+  detailedSession: number = 1;
 
   constructor(private store: Store<{ trainingSessions: TrainingSession[]} >, private toastr: ToastrService) { }
 
