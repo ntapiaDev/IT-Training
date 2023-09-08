@@ -106,8 +106,6 @@ section {
           .svg{
             width: 30px;
             height: 30px;
-            background-repeat: no-repeat;
-            background-size: contain;
           }
           .IT{
             width: 40px;
@@ -117,7 +115,7 @@ section {
         button{
           width: 53%;
           padding: 7px;
-          color: $light-color ;
+          color: #fff ;
           border-radius: 9px;
           border: none;
           background-color: $secondary-color;

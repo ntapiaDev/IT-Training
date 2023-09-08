@@ -10,6 +10,7 @@ import { ContactFormComponent } from './components/contact-form/contact-form.com
 import { LandingComponent } from './components/landing/landing.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterFormComponent } from './components/register/register-form.component';
+import { WhatComponent } from './components/what/what.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { RegisterFormComponent } from './components/register/register-form.compo
     AreaComponent,
     LoginComponent,
     RegisterFormComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    WhatComponent
   ],
   imports: [
     CommonModule,
