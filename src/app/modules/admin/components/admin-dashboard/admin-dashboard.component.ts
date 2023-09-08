@@ -20,6 +20,7 @@ export class AdminDashboardComponent {
   reversed = false;
   currentTab = 1;
   detailsId = 0;
+  formIsOpen = false;
 
   //FAKE DATA
   session = {
@@ -31,6 +32,10 @@ export class AdminDashboardComponent {
   detailedSession: number = 1;
 
   constructor(private store: Store<{ trainingSessions: TrainingSession[]} >, private toastr: ToastrService) { }
+
+  toogleForm() {
+    this.formIsOpen = !this.formIsOpen;
+  }
 
   toggleModale(action: string = '', id: number = 0) {
     // this.data = this.sessions$.find(data => data.id === id)!;

@@ -8,109 +8,113 @@
     </svg>
   </div>
   <div class="add">
-    <button (click)="toggleModale('add')">Ajouter</button>
+    <button (click)="toogleForm()">{{ formIsOpen ? 'Retour aux sessions' : 'Ajouter' }}</button>
     <svg width="20" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
       <path d="M1664 896q0 156-61 298t-164 245-245 164-298 61q-172 0-327-72.5t-264-204.5q-7-10-6.5-22.5t8.5-20.5l137-138q10-9 25-9 16 2 23 12 73 95 179 147t225 52q104 0 198.5-40.5t163.5-109.5 109.5-163.5 40.5-198.5-40.5-198.5-109.5-163.5-163.5-109.5-198.5-40.5q-98 0-188 35.5t-160 101.5l137 138q31 30 14 69-17 40-59 40h-448q-26 0-45-19t-19-45v-448q0-42 40-59 39-17 69 14l130 129q107-101 244.5-156.5t284.5-55.5q156 0 298 61t245 164 164 245 61 298z" />
     </svg>
   </div>
 </div>
 
-<div class="select">
-  <div (click)="selectData(1)" [ngClass]="{'selected': currentTab === 1}">Inter</div>
-  <div (click)="selectData(2)" [ngClass]="{'selected': currentTab === 2}">Intra</div>
-  <div (click)="selectData(3)" [ngClass]="{'selected': currentTab === 3}">Sur mesure</div>
-</div>
+<app-add-session *ngIf="formIsOpen"></app-add-session>
 
-<table>
-  <tr>
-    <th>
-        <span class="order" (click)="order(1)">
-            ID
-            <svg width="15" height="15" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" [class.selected]="selected === 1">
-              <path d="M1408 1088q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45zm0-384q0 26-19 45t-45 19h-896q-26 0-45-19t-19-45 19-45l448-448q19-19 45-19t45 19l448 448q19 19 19 45z"/>
-            </svg>
-        </span>
-    </th>
-    <th>
-        <span class="order" (click)="order(2)">
-            Formation
-            <svg width="15" height="15" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" [class.selected]="selected === 2">
-              <path d="M1408 1088q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45zm0-384q0 26-19 45t-45 19h-896q-26 0-45-19t-19-45 19-45l448-448q19-19 45-19t45 19l448 448q19 19 19 45z"/>
-            </svg>
-        </span>
-    </th>
-    <th>
-        <span class="order" (click)="order(3)">
-            Date
-            <svg width="15" height="15" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" [class.selected]="selected === 3">
-              <path d="M1408 1088q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45zm0-384q0 26-19 45t-45 19h-896q-26 0-45-19t-19-45 19-45l448-448q19-19 45-19t45 19l448 448q19 19 19 45z"/>
-            </svg>
-        </span>
-    </th>
-    <th>
-        <span class="order" (click)="order(4)">
-            Référent
-            <svg width="15" height="15" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" [class.selected]="selected === 4">
-              <path d="M1408 1088q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45zm0-384q0 26-19 45t-45 19h-896q-26 0-45-19t-19-45 19-45l448-448q19-19 45-19t45 19l448 448q19 19 19 45z"/>
-            </svg>
-        </span>
-    </th>
-    <th>
-        <span class="order" (click)="order(5)">
-            Centre
-            <svg width="15" height="15" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" [class.selected]="selected === 5">
-              <path d="M1408 1088q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45zm0-384q0 26-19 45t-45 19h-896q-26 0-45-19t-19-45 19-45l448-448q19-19 45-19t45 19l448 448q19 19 19 45z"/>
-            </svg>
-        </span>
-    </th>
-    <th>
-        <span class="order" (click)="order(6)">
-            Participants
-            <svg width="15" height="15" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" [class.selected]="selected === 6">
-              <path d="M1408 1088q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45zm0-384q0 26-19 45t-45 19h-896q-26 0-45-19t-19-45 19-45l448-448q19-19 45-19t45 19l448 448q19 19 19 45z"/>
-            </svg>
-        </span>
-    </th>
-    <th>
-        <span class="order" (click)="order(7)">
-            Remote
-            <svg width="15" height="15" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" [class.selected]="selected === 7">
-              <path d="M1408 1088q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45zm0-384q0 26-19 45t-45 19h-896q-26 0-45-19t-19-45 19-45l448-448q19-19 45-19t45 19l448 448q19 19 19 45z"/>
-            </svg>
-        </span>
-    </th>
-    <th colspan="3">Actions</th>
-  </tr>
-  <ng-container><!-- NGFOR SESSIONS -->
+<div class="container" *ngIf="!formIsOpen">
+  <div class="select">
+    <div (click)="selectData(1)" [ngClass]="{'selected': currentTab === 1}">Inter</div>
+    <div (click)="selectData(2)" [ngClass]="{'selected': currentTab === 2}">Intra</div>
+    <div (click)="selectData(3)" [ngClass]="{'selected': currentTab === 3}">Sur mesure</div>
+  </div>
+
+  <table>
     <tr>
-      <td></td><!-- NGFOR DATA dans SESSION -->
-      <td></td><!-- NGFOR DATA dans SESSION -->
-      <td></td><!-- NGFOR DATA dans SESSION -->
-      <td></td><!-- NGFOR DATA dans SESSION -->
-      <td></td><!-- NGFOR DATA dans SESSION -->
-      <td></td><!-- NGFOR DATA dans SESSION -->
-      <td></td><!-- NGFOR DATA dans SESSION -->
-      <td class="actions-container">
-        <div class="actions-list">
-          <svg width="20" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" (click)="detailedSession = session.id" [class.open]="detailedSession === session.id">
-              <path d="M1664 960q-152-236-381-353 61 104 61 225 0 185-131.5 316.5t-316.5 131.5-316.5-131.5-131.5-316.5q0-121 61-225-229 117-381 353 133 205 333.5 326.5t434.5 121.5 434.5-121.5 333.5-326.5zm-720-384q0-20-14-34t-34-14q-125 0-214.5 89.5t-89.5 214.5q0 20 14 34t34 14 34-14 14-34q0-86 61-147t147-61q20 0 34-14t14-34zm848 384q0 34-20 69-140 230-376.5 368.5t-499.5 138.5-499.5-139-376.5-368q-20-35-20-69t20-69q140-229 376.5-368t499.5-139 499.5 139 376.5 368q20 35 20 69z"/>
-          </svg>
-          <svg width="20" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" (click)="toggleModale('edit', 1)">
-            <path d="M888 1184l116-116-152-152-116 116v56h96v96h56zm440-720q-16-16-33 1l-350 350q-17 17-1 33t33-1l350-350q17-17 1-33zm80 594v190q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h832q63 0 117 25 15 7 18 23 3 17-9 29l-49 49q-14 14-32 8-23-6-45-6h-832q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-126q0-13 9-22l64-64q15-15 35-7t20 29zm-96-738l288 288-672 672h-288v-288zm444 132l-92 92-288-288 92-92q28-28 68-28t68 28l152 152q28 28 28 68t-28 68z" />
-          </svg>
-          <svg width="20" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" (click)="toggleModale('delete', 1)">
-            <path d="M704 1376v-704q0-14-9-23t-23-9h-64q-14 0-23 9t-9 23v704q0 14 9 23t23 9h64q14 0 23-9t9-23zm256 0v-704q0-14-9-23t-23-9h-64q-14 0-23 9t-9 23v704q0 14 9 23t23 9h64q14 0 23-9t9-23zm256 0v-704q0-14-9-23t-23-9h-64q-14 0-23 9t-9 23v704q0 14 9 23t23 9h64q14 0 23-9t9-23zm-544-992h448l-48-117q-7-9-17-11h-317q-10 2-17 11zm928 32v64q0 14-9 23t-23 9h-96v948q0 83-47 143.5t-113 60.5h-832q-66 0-113-58.5t-47-141.5v-952h-96q-14 0-23-9t-9-23v-64q0-14 9-23t23-9h309l70-167q15-37 54-63t79-26h320q40 0 79 26t54 63l70 167h309q14 0 23 9t9 23z" />
-          </svg>
-        </div>
-      </td>
+      <th>
+          <span class="order" (click)="order(1)">
+              ID
+              <svg width="15" height="15" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" [class.selected]="selected === 1">
+                <path d="M1408 1088q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45zm0-384q0 26-19 45t-45 19h-896q-26 0-45-19t-19-45 19-45l448-448q19-19 45-19t45 19l448 448q19 19 19 45z"/>
+              </svg>
+          </span>
+      </th>
+      <th>
+          <span class="order" (click)="order(2)">
+              Formation
+              <svg width="15" height="15" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" [class.selected]="selected === 2">
+                <path d="M1408 1088q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45zm0-384q0 26-19 45t-45 19h-896q-26 0-45-19t-19-45 19-45l448-448q19-19 45-19t45 19l448 448q19 19 19 45z"/>
+              </svg>
+          </span>
+      </th>
+      <th>
+          <span class="order" (click)="order(3)">
+              Date
+              <svg width="15" height="15" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" [class.selected]="selected === 3">
+                <path d="M1408 1088q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45zm0-384q0 26-19 45t-45 19h-896q-26 0-45-19t-19-45 19-45l448-448q19-19 45-19t45 19l448 448q19 19 19 45z"/>
+              </svg>
+          </span>
+      </th>
+      <th>
+          <span class="order" (click)="order(4)">
+              Référent
+              <svg width="15" height="15" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" [class.selected]="selected === 4">
+                <path d="M1408 1088q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45zm0-384q0 26-19 45t-45 19h-896q-26 0-45-19t-19-45 19-45l448-448q19-19 45-19t45 19l448 448q19 19 19 45z"/>
+              </svg>
+          </span>
+      </th>
+      <th>
+          <span class="order" (click)="order(5)">
+              Centre
+              <svg width="15" height="15" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" [class.selected]="selected === 5">
+                <path d="M1408 1088q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45zm0-384q0 26-19 45t-45 19h-896q-26 0-45-19t-19-45 19-45l448-448q19-19 45-19t45 19l448 448q19 19 19 45z"/>
+              </svg>
+          </span>
+      </th>
+      <th>
+          <span class="order" (click)="order(6)">
+              Participants
+              <svg width="15" height="15" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" [class.selected]="selected === 6">
+                <path d="M1408 1088q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45zm0-384q0 26-19 45t-45 19h-896q-26 0-45-19t-19-45 19-45l448-448q19-19 45-19t45 19l448 448q19 19 19 45z"/>
+              </svg>
+          </span>
+      </th>
+      <th>
+          <span class="order" (click)="order(7)">
+              Remote
+              <svg width="15" height="15" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" [class.selected]="selected === 7">
+                <path d="M1408 1088q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45zm0-384q0 26-19 45t-45 19h-896q-26 0-45-19t-19-45 19-45l448-448q19-19 45-19t45 19l448 448q19 19 19 45z"/>
+              </svg>
+          </span>
+      </th>
+      <th colspan="3">Actions</th>
     </tr>
-    <tr>
-      <td colspan="8" class="details">
-        <app-details [isOpen]="detailedSession === session.id" [session]="session" (closeDetails)="detailedSession = 0"></app-details>
-      </td>
-    </tr>
-  </ng-container>
-</table>
+    <ng-container><!-- NGFOR SESSIONS -->
+      <tr>
+        <td></td><!-- NGFOR DATA dans SESSION -->
+        <td></td><!-- NGFOR DATA dans SESSION -->
+        <td></td><!-- NGFOR DATA dans SESSION -->
+        <td></td><!-- NGFOR DATA dans SESSION -->
+        <td></td><!-- NGFOR DATA dans SESSION -->
+        <td></td><!-- NGFOR DATA dans SESSION -->
+        <td></td><!-- NGFOR DATA dans SESSION -->
+        <td class="actions-container">
+          <div class="actions-list">
+            <svg width="20" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" (click)="detailedSession = session.id" [class.open]="detailedSession === session.id">
+                <path d="M1664 960q-152-236-381-353 61 104 61 225 0 185-131.5 316.5t-316.5 131.5-316.5-131.5-131.5-316.5q0-121 61-225-229 117-381 353 133 205 333.5 326.5t434.5 121.5 434.5-121.5 333.5-326.5zm-720-384q0-20-14-34t-34-14q-125 0-214.5 89.5t-89.5 214.5q0 20 14 34t34 14 34-14 14-34q0-86 61-147t147-61q20 0 34-14t14-34zm848 384q0 34-20 69-140 230-376.5 368.5t-499.5 138.5-499.5-139-376.5-368q-20-35-20-69t20-69q140-229 376.5-368t499.5-139 499.5 139 376.5 368q20 35 20 69z"/>
+            </svg>
+            <svg width="20" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" (click)="toggleModale('edit', 1)">
+              <path d="M888 1184l116-116-152-152-116 116v56h96v96h56zm440-720q-16-16-33 1l-350 350q-17 17-1 33t33-1l350-350q17-17 1-33zm80 594v190q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h832q63 0 117 25 15 7 18 23 3 17-9 29l-49 49q-14 14-32 8-23-6-45-6h-832q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-126q0-13 9-22l64-64q15-15 35-7t20 29zm-96-738l288 288-672 672h-288v-288zm444 132l-92 92-288-288 92-92q28-28 68-28t68 28l152 152q28 28 28 68t-28 68z" />
+            </svg>
+            <svg width="20" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" (click)="toggleModale('delete', 1)">
+              <path d="M704 1376v-704q0-14-9-23t-23-9h-64q-14 0-23 9t-9 23v704q0 14 9 23t23 9h64q14 0 23-9t9-23zm256 0v-704q0-14-9-23t-23-9h-64q-14 0-23 9t-9 23v704q0 14 9 23t23 9h64q14 0 23-9t9-23zm256 0v-704q0-14-9-23t-23-9h-64q-14 0-23 9t-9 23v704q0 14 9 23t23 9h64q14 0 23-9t9-23zm-544-992h448l-48-117q-7-9-17-11h-317q-10 2-17 11zm928 32v64q0 14-9 23t-23 9h-96v948q0 83-47 143.5t-113 60.5h-832q-66 0-113-58.5t-47-141.5v-952h-96q-14 0-23-9t-9-23v-64q0-14 9-23t23-9h309l70-167q15-37 54-63t79-26h320q40 0 79 26t54 63l70 167h309q14 0 23 9t9 23z" />
+            </svg>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="8" class="details">
+          <app-details [isOpen]="detailedSession === session.id" [session]="session" (closeDetails)="detailedSession = 0"></app-details>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+</div>
 
 <div class="modale" *ngIf="modaleIsOpen">
   <div *ngIf="modaleAction === 'delete'" class="container">

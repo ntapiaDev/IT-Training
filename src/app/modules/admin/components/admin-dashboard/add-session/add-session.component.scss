@@ -1,0 +1,12 @@
+@import "variables";
+
+.container {
+    margin-top: 1em;
+    background-color: $white;
+
+    h3 {
+        padding: 0.5em;
+        background-color: $secondary-color;
+        color: $white;
+    }
+}
