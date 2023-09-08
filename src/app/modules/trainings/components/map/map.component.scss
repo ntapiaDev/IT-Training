@@ -9,6 +9,10 @@ aside {
   flex-direction: column;
   align-items: center;
 
+  &.training {
+    background-color: $light-color;
+  }
+
   h4 {
     font-size: 1.5em;
     margin: 1em;

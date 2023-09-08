@@ -16,9 +16,10 @@ aside {
 
   .buttons {
     display: flex;
+    flex-wrap: wrap;
 
     div {
-      width: 100%;
+      flex-grow: 1;
       padding: 0.5em;
       text-align: center;
       color: $light-color;
@@ -26,6 +27,10 @@ aside {
       border-bottom: 1px solid #707070;
       border-right: 1px solid $light-color;
       cursor: pointer;
+
+      &:nth-child(1) {
+        width: 100%;
+      }
 
       &.active {
         color: $secondary-color;
