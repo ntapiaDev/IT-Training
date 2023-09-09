@@ -1,4 +1,4 @@
-<input type="text" placeholder="Entrez votre adresse" [(ngModel)]="address" (input)="getAddress()">
+<input type="text" placeholder="Entrez une adresse" [(ngModel)]="address" (input)="getAddress()">
 <div *ngFor="let address of adressList" (click)="setAddress(address)">
   {{ address.properties.label }}
   <i>{{ address.properties.context }}</i>

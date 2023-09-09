@@ -1,0 +1,45 @@
+<div class="container">
+  <h3>Ajouter un formateur</h3>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <h4>Identité</h4>
+    <label>Nom :
+      <input type="text" formControlName="nom">
+    </label>
+    <label>Prénom :
+      <input type="text" formControlName="prenom">
+    </label>
+    <label>Numéro de sécurité sociale :
+      <input type="text" formControlName="sécurité_sociale">
+    </label>
+    <label>Numéro de siret :
+      <input type="text" formControlName="siret">
+    </label>
+    <h4>Contact</h4>
+    <label>Adresse email :
+      <input type="email" formControlName="email">
+    </label>
+    <label>Téléphone :
+      <input type="text" formControlName="telephone">
+    </label>
+    <app-address-form (addressEvent)="loadAddress($event)"></app-address-form>
+    <div formGroupName="adresse">
+      <label>Numéro :
+        <input type="text" formControlName="numero">
+      </label>
+      <label>Rue :
+        <input type="text" formControlName="adresse">
+      </label>
+      <div formGroupName="ville">
+        <label>Code postale :
+          <input type="text" formControlName="code_postal">
+        </label>
+        <label>Ville :
+          <input type="text" formControlName="nom">
+        </label>
+        <input type="number" formControlName="long" hidden>
+        <input type="number" formControlName="lat" hidden>
+      </div>
+    </div>
+    <button>Envoyer</button>
+  </form>
+</div>
