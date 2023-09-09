@@ -24,7 +24,7 @@ export class AddSessionComponent {
       nb_participants: [0, Validators.required],
       remote: [false, Validators.required],
       prix: [0, Validators.required]
-    })
+    });
   }
 
   getEndDate = (start: Date, duration: number) => {
