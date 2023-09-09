@@ -29,12 +29,17 @@ export class AdminDashboardComponent {
     formation_id: 1,
     date: 12345
   }
-  detailedSession: number = 1;
+  detailedSession = 0;
 
   constructor(private store: Store<{ trainingSessions: TrainingSession[]} >, private toastr: ToastrService) { }
 
   toogleForm() {
     this.formIsOpen = !this.formIsOpen;
+    this.detailedSession = 0;
+  }
+
+  toggleDetails(id: number) {
+    this.detailedSession = this.detailedSession ? 0 : id;
   }
 
   toggleModale(action: string = '', id: number = 0) {

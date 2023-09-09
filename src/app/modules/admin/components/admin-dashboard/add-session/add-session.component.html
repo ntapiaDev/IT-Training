@@ -1,4 +1,68 @@
 <div class="container">
-    <h3>Création d'une session</h3>
-    
+  <h3>Création d'une session</h3>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <h4>Nom de la formation </h4>
+    <label>Formation :
+      <select formControlName="formation_id">
+        <option value="1">Java</option>
+        <option value="2">PHP</option>
+      </select>
+    </label>
+    <div class="type">
+      <h4>Type de session</h4>
+      <label>Inter :
+        <input type="radio" formControlName="type" value="Inter">
+      </label>
+      <label>Intra :
+        <input type="radio" formControlName="type" value="Intra">
+      </label>
+      <label>Sur mesure :
+        <input type="radio" formControlName="type" value="Sur mesure">
+      </label>
+    </div>
+    <div class="dates">
+      <h4>Dates de la session</h4>
+      <label>Date de début :
+        <input type="date" formControlName="date_début" [(ngModel)]="startDate" (input)="formatEndDate()">
+      </label>
+      <label>Durée :
+        <input type="number" formControlName="durée" [(ngModel)]="duration" (input)="formatEndDate()">
+      </label>
+      <label>Date de début :
+        <input type="date" formControlName="date_fin" [(ngModel)]="endDate">
+      </label>
+    </div>
+    <h4>Adresse de la session</h4>
+    <label>Structure :
+      <select formControlName="structure">
+        <option value="1">Centre de Rouen</option>
+        <option value="2">Centre de Dieppe</option>
+      </select>
+    </label>
+    <h4>Responsable de la session</h4>
+    <label>Formateur référent :
+      <select formControlName="referent">
+        <option value="1">Julien</option>
+        <option value="2">Jimmylan</option>
+      </select>
+    </label>
+    <h4>Nombre de participants</h4>
+    <label>Participants
+      <input type="number" formControlName="nb_participants">
+    </label>
+    <div class="remote">
+      <h4>Formation à distance</h4>
+      <label>Présentiel :
+        <input type="radio" formControlName="type" value="false">
+      </label>
+      <label>Distanciel :
+        <input type="radio" formControlName="type" value="true">
+      </label>
+    </div>
+    <h4>Prix de la session</h4>
+    <label>Prix :
+      <input type="number" formControlName="prix">
+    </label>
+    <button>Envoyer</button>
+  </form>
 </div>

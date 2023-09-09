@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-session',
@@ -8,18 +8,22 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class AddSessionComponent {
   form: FormGroup;
+  startDate?: Date;
+  duration?: number;
+  endDate?: any;
 
   constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
-      nom: [''],
-      type: [''],
-      date: [new Date()],
-      duration: [0],
-      structure: [0],
-      referent: [0],
-      nb_participants: [0],
-      price: [0],
-      remote: [false]
+      formation_id: [0, Validators.required],
+      type: ['', Validators.required],
+      date_début: [new Date(), Validators.required],
+      durée: [0, Validators.required],
+      date_fin: [new Date(), Validators.required],
+      structure: [0, Validators.required],
+      referent: [0, Validators.required],
+      nb_participants: [0, Validators.required],
+      remote: [false, Validators.required],
+      prix: [0, Validators.required]
     })
   }
 
@@ -32,4 +36,18 @@ export class AddSessionComponent {
     }
     return date;
   };
+
+  formatEndDate() {
+    if (this.startDate && this.duration) {
+      const endDate = this.getEndDate(this.startDate, this.duration);
+      const day = endDate.getDate().toString().padStart(2, '0');
+      const month = (endDate.getMonth() + 1).toString().padStart(2, '0')
+      const year = endDate.getFullYear().toString();
+      this.endDate = `${year}-${month}-${day}`;
+    }
+  }
+
+  submit = () => {
+    console.log(this.form.value);
+  }
 }
