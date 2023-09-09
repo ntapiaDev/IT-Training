@@ -1,0 +1,18 @@
+input {
+  width: 100%;
+  padding: 0.5em 1em;
+}
+
+div {
+  padding: 0.5em 1em;
+  background-color: #FFFFFF;
+
+  i {
+    display: block;
+  }
+
+  &:hover {
+    background-color: #EEEEEE;
+    cursor: pointer;
+  }
+}
