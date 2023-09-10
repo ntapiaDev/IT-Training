@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { FullAddress } from 'src/app/core/models/Address';
 
 @Component({
@@ -12,7 +13,7 @@ export class AddCenterComponent {
 
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
       nom: ['', Validators.required],
       adresse: this.formBuilder.group({
@@ -45,6 +46,7 @@ export class AddCenterComponent {
 
   submit() {
     console.log(this.form.value);
+    this.toastr.success('Centre ajouté avec succès!')
     this.centerAdded.emit();
   }
 }

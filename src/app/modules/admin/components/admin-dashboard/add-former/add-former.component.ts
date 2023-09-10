@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { FullAddress } from 'src/app/core/models/Address';
 
 @Component({
@@ -12,7 +13,7 @@ export class AddFormerComponent {
 
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
@@ -50,6 +51,7 @@ export class AddFormerComponent {
 
   submit() {
     console.log(this.form.value);
+    this.toastr.success('Formateur ajouté avec succès!')
     this.formerAdded.emit();
   }
 }

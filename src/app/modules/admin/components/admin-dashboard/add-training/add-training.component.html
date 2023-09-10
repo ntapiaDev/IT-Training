@@ -1,3 +1,38 @@
-<app-add-area></app-add-area>
-<app-add-theme></app-add-theme>
-<p>add-training works!</p>
+<div id="container">
+
+  <app-add-area></app-add-area>
+  <app-add-theme></app-add-theme>
+
+  <h3>Ajouter une formation</h3>
+  <div class="container">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <h4>Nom de la formation</h4>
+      <label>Nom :
+        <input type="text" formControlName="nom">
+      </label>
+      <h4>Description de la formation</h4>
+      <label>Description :
+        <input type="text" formControlName="description">
+      </label>
+      <h4>Prix de la formation</h4>
+      <label>Prix :
+        <input type="number" formControlName="prix">
+      </label>
+      <h4>Durée de la formation</h4>
+      <label>Durée :
+        <input type="text" formControlName="duree">
+      </label>
+      <h4>Prérequis de la formation</h4>
+      <label>Prérequis :
+        <input type="text" formControlName="prerequis">
+      </label>
+      <label>Thème :
+        <select formControlName="theme_id">
+          <option value="1">Langages de programmation</option>
+          <option value="2">Réseaux informatiques</option>
+        </select>
+      </label>
+      <button>Envoyer</button>
+    </form>
+  </div>
+</div>
