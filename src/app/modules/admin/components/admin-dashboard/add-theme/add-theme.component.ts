@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
@@ -8,13 +8,14 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./add-theme.component.scss']
 })
 export class AddThemeComponent {
+  @Input() isOpen = false;
+  @Output() closeEvent = new EventEmitter<boolean>();
   @ViewChild('container') container?: ElementRef;
 
   form: FormGroup;
 
   height = 0;
   maxHeight = 0;
-  isOpen = false;
 
   constructor(private formBuilder: FormBuilder, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
@@ -28,9 +29,12 @@ export class AddThemeComponent {
     this.maxHeight = this.container?.nativeElement.offsetHeight;
   }
 
+  toggle() {
+    this.closeEvent.emit(this.isOpen);
+  }
+
   submit() {
     console.log(this.form.value);
     this.toastr.success('Thème ajouté avec succès!');
-    this.isOpen = false;
   }
 }

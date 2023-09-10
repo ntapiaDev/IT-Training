@@ -16,16 +16,15 @@
     flex-direction: column;
 
     h4 {
-      width: 100%;
       font-size: 1.25em;
       margin: 1em 0 0.5em;
     }
 
-    label + label:not(.address label) {
+    label+label:not(.address label) {
       margin-top: 1em;
     }
 
-    & > div:not(.address-form) {
+    &>div:not(.address-form) {
       margin-top: 1em;
       display: flex;
       gap: 1em;
@@ -36,8 +35,12 @@
       }
     }
 
+    input {
+      width: 100%;
+    }
+
     .address-form {
-        margin-top: 1em;
+      margin-top: 1em;
     }
 
     button:not([type="button"]) {

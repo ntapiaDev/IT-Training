@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
@@ -12,6 +12,9 @@ export class AddTrainingComponent {
 
   form: FormGroup;
 
+  isAreaOpen = false;
+  isThemeOpen = false;
+
   constructor(private formBuilder: FormBuilder, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
       nom: ['', Validators.required],
@@ -21,6 +24,16 @@ export class AddTrainingComponent {
       prerequis: ['', Validators.required],
       theme_id: [0, Validators.required]
     });
+  }
+
+  closeArea(themeIsOpen: boolean) {
+    this.isAreaOpen = false;
+    this.isThemeOpen = !themeIsOpen;
+  }
+
+  closeTheme(isAreaOpen: boolean) {
+    this.isThemeOpen = false;
+    this.isAreaOpen = !isAreaOpen;
   }
 
   submit() {

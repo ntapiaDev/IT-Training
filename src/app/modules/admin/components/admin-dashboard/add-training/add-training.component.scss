@@ -1,25 +1,26 @@
 @import "variables";
 
-#container {
-  max-height: 100vh;
+.container {
   min-width: 983px;
   margin-top: 1em;
-  overflow: auto;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
 
-  h3 {
-    padding: 0.5em;
-    background-color: $secondary-color;
-    color: $white;
-    cursor: pointer;
-  }
+  div:nth-child(2) {
+    flex-grow: 1;
 
-  .container {
-    margin: 1em 0;
-    background-color: $white;
-    overflow: hidden;
-    transition: height 0.3s ease-in-out;
+    h3 {
+      padding: 0.5em;
+      background-color: $secondary-color;
+      color: $white;
+      cursor: pointer;
+    }
 
     form {
+      margin: 1em 0;
+      background-color: $white;
+      width: 100%;
       padding: 0 1em 1em 1em;
       display: flex;
       flex-direction: column;
@@ -32,6 +33,10 @@
 
       label+label {
         margin-top: 1em;
+      }
+
+      input {
+        width: 100%;
       }
 
       button {

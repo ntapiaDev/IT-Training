@@ -12,16 +12,13 @@
 
   form {
     padding: 0 1em 1em 1em;
-    display: flex;
-    flex-direction: column;
 
     h4 {
-      width: 100%;
       font-size: 1.25em;
       margin: 1em 0 0.5em;
     }
 
-    & > div {
+    &>div {
       margin-top: 1em;
       display: flex;
       gap: 1em;
@@ -30,6 +27,10 @@
         display: flex;
         gap: 1em;
       }
+    }
+
+    input {
+      width: 100%;
     }
 
     button:not([type="button"]) {

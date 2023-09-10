@@ -1,4 +1,4 @@
-<h3 (click)="isOpen = !isOpen">+ Ajouter un domaine</h3>
+<h3 (click)="toggle()">+ Ajouter un thème</h3>
 <div class="container" [style.height.px]="isOpen ? maxHeight : height">
   <div #container>
     <form [formGroup]="form" (ngSubmit)="submit()">

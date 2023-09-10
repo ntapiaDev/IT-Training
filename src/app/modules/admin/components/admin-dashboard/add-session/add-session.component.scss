@@ -27,6 +27,10 @@
       gap: 0 0.5em;
     }
 
+    input:not([type="radio"]) {
+      width: 100%;
+    }
+
     button:not([type="button"]) {
       width: 100px;
       margin-top: 1.5em;

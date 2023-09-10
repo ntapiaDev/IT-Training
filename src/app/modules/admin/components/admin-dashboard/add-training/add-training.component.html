@@ -1,10 +1,12 @@
-<div id="container">
+<div class="container">
 
-  <app-add-area></app-add-area>
-  <app-add-theme></app-add-theme>
+  <div>
+    <app-add-area (closeEvent)="closeTheme($event)" [isOpen]="isAreaOpen"></app-add-area>
+    <app-add-theme (closeEvent)="closeArea($event)" [isOpen]="isThemeOpen"></app-add-theme>
+  </div>
 
-  <h3>Ajouter une formation</h3>
-  <div class="container">
+  <div>
+    <h3>Ajouter une formation</h3>
     <form [formGroup]="form" (ngSubmit)="submit()">
       <h4>Nom de la formation</h4>
       <label>Nom :
