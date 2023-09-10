@@ -1,0 +1,20 @@
+<div class="container">
+  <h3>Ajouter un thème</h3>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <h4>Nom du thème</h4>
+    <label>Nom :
+      <input type="text" formControlName="nom">
+    </label>
+    <h4>Description du thème</h4>
+    <label>Description :
+      <input type="text" formControlName="description">
+    </label>
+    <label>Domaine :
+      <select formControlName="domaine_id">
+        <option value="1">Information</option>
+        <option value="2">Management</option>
+      </select>
+    </label>
+    <button>Envoyer</button>
+  </form>
+</div>

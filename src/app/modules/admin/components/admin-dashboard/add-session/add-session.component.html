@@ -7,6 +7,7 @@
         <option value="1">Java</option>
         <option value="2">PHP</option>
       </select>
+      <button type="button" (click)="toggleModale('training')">+</button>
     </label>
     <div>
       <h4>Type de session</h4>
@@ -72,6 +73,7 @@
 <div class="modale" *ngIf="modaleIsOpen">
   <div class="container">
     <button type="button" (click)="toggleModale('')">X</button>
+    <app-add-training *ngIf="modaleAction === 'training'" (centerAdded)="toggleModale('')"></app-add-training>
     <app-add-center *ngIf="modaleAction === 'center'" (centerAdded)="toggleModale('')"></app-add-center>
     <app-add-former *ngIf="modaleAction === 'former'" (formerAdded)="toggleModale('')"></app-add-former>
   </div>
