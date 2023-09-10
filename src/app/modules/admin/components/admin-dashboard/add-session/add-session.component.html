@@ -8,7 +8,7 @@
         <option value="2">PHP</option>
       </select>
     </label>
-    <div class="type">
+    <div>
       <h4>Type de session</h4>
       <label>Inter :
         <input type="radio" formControlName="type" value="Inter">
@@ -20,7 +20,7 @@
         <input type="radio" formControlName="type" value="Sur mesure">
       </label>
     </div>
-    <div class="dates">
+    <div>
       <h4>Dates de la session</h4>
       <label>Date de début :
         <input type="date" formControlName="date_début" [(ngModel)]="startDate" (input)="formatEndDate()">
@@ -38,6 +38,7 @@
         <option value="1">Centre de Rouen</option>
         <option value="2">Centre de Dieppe</option>
       </select>
+      <button type="button" (click)="toggleModale('center')">+</button>
     </label>
     <h4>Responsable de la session</h4>
     <label>Formateur référent :
@@ -45,12 +46,13 @@
         <option value="1">Julien</option>
         <option value="2">Jimmylan</option>
       </select>
+      <button type="button" (click)="toggleModale('former')">+</button>
     </label>
     <h4>Nombre de participants</h4>
     <label>Participants
       <input type="number" formControlName="nb_participants">
     </label>
-    <div class="remote">
+    <div>
       <h4>Formation à distance</h4>
       <label>Présentiel :
         <input type="radio" formControlName="type" value="false">
@@ -63,6 +65,14 @@
     <label>Prix :
       <input type="number" formControlName="prix">
     </label>
-    <button>Envoyer</button>
+    <button>Ajouter</button>
   </form>
+</div>
+
+<div class="modale" *ngIf="modaleIsOpen">
+  <div class="container">
+    <button type="button" (click)="toggleModale('')">X</button>
+    <app-add-center *ngIf="modaleAction === 'center'" (centerAdded)="toggleModale('')"></app-add-center>
+    <app-add-former *ngIf="modaleAction === 'former'" (formerAdded)="toggleModale('')"></app-add-former>
+  </div>
 </div>

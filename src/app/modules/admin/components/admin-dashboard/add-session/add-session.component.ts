@@ -7,6 +7,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-session.component.scss'],
 })
 export class AddSessionComponent {
+  modaleAction= '';
+  modaleIsOpen = false;
+
   form: FormGroup;
   startDate?: Date;
   duration?: number;
@@ -49,5 +52,10 @@ export class AddSessionComponent {
 
   submit = () => {
     console.log(this.form.value);
+  }
+
+  toggleModale(action: string) {
+    this.modaleAction = action;
+    this.modaleIsOpen = !this.modaleIsOpen;
   }
 }

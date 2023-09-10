@@ -1,0 +1,41 @@
+@import "variables";
+
+.container {
+  margin-top: 1em;
+  background-color: $white;
+
+  h3 {
+    padding: 0.5em;
+    background-color: $secondary-color;
+    color: $white;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    h4 {
+      width: 100%;
+      font-size: 1.25em;
+      margin: 1em 0 0.5em;
+    }
+
+    & > div {
+      margin-top: 1em;
+      display: flex;
+      gap: 1em;
+
+      div {
+        display: flex;
+        gap: 1em;
+      }
+    }
+
+    button:not([type="button"]) {
+      width: 100px;
+      margin-top: 1.5em;
+      padding: 0.5em;
+      cursor: pointer;
+    }
+  }
+}

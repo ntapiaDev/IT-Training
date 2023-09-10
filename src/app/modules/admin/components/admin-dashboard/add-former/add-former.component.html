@@ -21,8 +21,10 @@
     <label>Téléphone :
       <input type="text" formControlName="telephone">
     </label>
-    <app-address-form (addressEvent)="loadAddress($event)"></app-address-form>
-    <div formGroupName="adresse">
+    <div class="address-form">
+      <app-address-form (addressEvent)="loadAddress($event)"></app-address-form>
+    </div>
+    <div class="address" formGroupName="adresse">
       <label>Numéro :
         <input type="text" formControlName="numero">
       </label>

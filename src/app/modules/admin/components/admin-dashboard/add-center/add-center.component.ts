@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FullAddress } from 'src/app/core/models/Address';
 
@@ -8,6 +8,8 @@ import { FullAddress } from 'src/app/core/models/Address';
   styleUrls: ['./add-center.component.scss']
 })
 export class AddCenterComponent {
+  @Output() centerAdded = new EventEmitter<void>();
+
   form: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
@@ -43,5 +45,6 @@ export class AddCenterComponent {
 
   submit() {
     console.log(this.form.value);
+    this.centerAdded.emit();
   }
 }
