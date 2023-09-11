@@ -1,25 +1,26 @@
 <aside>
   <div class="buttons">
-    <div (click)="changeTab(1)" [ngClass]="{'active': currentTab === 1}">Inter</div>
-    <div (click)="changeTab(2)" [ngClass]="{'active': currentTab === 2}">Intra</div>
-    <div (click)="changeTab(3)" [ngClass]="{'active': currentTab === 3}">Sur mesure</div>
+    <div (click)="changeTab(1)" [ngClass]="{'active': currentTab === 1}">Dates et villes disponibles</div>
+    <div (click)="changeTab(2)" [ngClass]="{'active': currentTab === 2}">Inter</div>
+    <div (click)="changeTab(3)" [ngClass]="{'active': currentTab === 3}">Intra</div>
+    <div (click)="changeTab(4)" [ngClass]="{'active': currentTab === 4}">Sur mesure</div>
   </div>
-  <div class="container" [@fadeIn]="currentTab === 1">
+  <app-map variant="training" [@fadeIn]="currentTab === 1"></app-map>
+  <div class="container" [@fadeIn]="currentTab === 2">
     <p>Formation {{ remote ? "à distance" : "en présentiel"}}.</p>
     <p>Référence : <b>{{ reference }}</b></p>
     <p>Durée : <b>{{ days }} jours ({{ days * 7 }} heures)</b></p>
     <p>Prix : <b>{{ price }}€ TTC</b></p>
-    <a routerLink="" class="dates">Dates et villes disponibles</a>
     <div class="options">
       <a routerLink="/formations/inscription" class="signup" (click)="register(id)">S'inscrire</a>
       <span>Email</span>
       <span>Appeler</span>
     </div>
   </div>
-  <div class="container" [@fadeIn]="currentTab === 2">
+  <div class="container" [@fadeIn]="currentTab === 3">
     <p>Intra</p>
   </div>
-  <div class="container" [@fadeIn]="currentTab === 3">
+  <div class="container" [@fadeIn]="currentTab === 4">
     <p>Sur mesure</p>
   </div>
 </aside>
