@@ -1,0 +1,157 @@
+@import "variables";
+
+h3 {
+  color: $primary-color;
+  text-transform: capitalize;
+}
+
+svg {
+  fill: $icon;
+  transition: 0.3s;
+}
+
+.actions {
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .search-container {
+    position: relative;
+
+    input {
+      padding: 4px 26px;
+      border: 1px solid $dark-grey;
+      border-radius: 0.5em;
+    }
+
+    svg {
+      position: absolute;
+      top: 3px;
+      left: 4px;
+    }
+  }
+
+  .add {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+
+    svg {
+      cursor: pointer;
+
+      &:hover {
+        fill: $primary-color;
+      }
+    }
+
+    button {
+      padding: 4px 14px;
+      color: $white;
+      background-color: $primary-color;
+      border: 1px solid $primary-color;
+      border-radius: 0.5em;
+      cursor: pointer;
+    }
+  }
+}
+
+table {
+  width: 100%;
+  margin-top: 1em;
+  border-collapse: collapse;
+
+  tr {
+    &:nth-child(even) {
+      background-color: $white;
+    }
+
+    &:nth-child(odd) {
+      background-color: $medium-grey;
+    }
+
+    &:nth-child(1) {
+      color: $white;
+      background-color: $secondary-color;
+    }
+  }
+
+  th {
+    text-transform: capitalize;
+
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25em;
+      cursor: pointer;
+
+      svg.selected {
+        fill: $primary-color;
+      }
+    }
+  }
+
+  th,
+  td {
+    padding: 0.5em;
+    text-align: center;
+    border-top: 1px solid $dark-grey;
+    border-bottom: 1px solid $dark-grey;
+
+    &.actions-container {
+      width: 40px;
+
+      .actions-list {
+        display: flex;
+        justify-content: space-between;
+        
+        svg {
+          cursor: pointer;
+
+          &:hover {
+            fill: $primary-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+.modale {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgb(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .container {
+    padding: 1em;
+    display: inline-block;
+    background-color: $white;
+    border: 3px double $secondary-color;
+    border-radius: 0.5em;
+
+    div {
+      margin-top: 1em;
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+
+      button {
+        padding: 0.5em;
+        padding: 0.5em;
+        background-color: $light-grey;
+        color: $secondary-color;
+        font-weight: bold;
+        border: 1px solid $dark-grey;
+        border-radius: 0.5em;
+        cursor: pointer;
+      }
+    }
+  }
+}

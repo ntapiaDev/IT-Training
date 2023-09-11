@@ -13,8 +13,8 @@
     <input type="text" (input)="filter($event)" placeholder="Rechercher une formation..."/>
     <ul>
       <ng-container *ngFor="let training of trainings">
-        <li *ngIf="training.name.toLowerCase().includes(filterValue.toLowerCase())">
-          <a [routerLink]="['/formations', training.name]">> {{ training.name }}</a>
+        <li *ngIf="training.nom.toLowerCase().includes(filterValue.toLowerCase())">
+          <a [routerLink]="['/formations', training.nom]">> {{ training.nom }}</a>
         </li>
       </ng-container>
     </ul>

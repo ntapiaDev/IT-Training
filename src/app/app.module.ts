@@ -14,11 +14,14 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { HomeModule } from './modules/home/home.module';
 import { TrainingsModule } from './modules/trainings/trainings.module';
 import { FooterComponent } from './shared/footer/footer.component';
+import { AppEffects } from './core/effects/app.effects';
 import { SessionEffects } from './core/effects/session.effects';
 import { AuthInterceptor } from "./core/interceptors/auth.interceptor";
 import { areasReducer } from './core/stores/areas/areas.reducer';
 import { sessionReducer } from './core/stores/session/session.reducer';
+import { themesReducer } from './core/stores/themes/themes.reducer';
 import { trainingsReducer } from './core/stores/trainings/trainings.reducer';
+import { trainingSessionsReducer } from './core/stores/trainingSession/trainingSessions.reducer'; 
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
@@ -35,11 +38,13 @@ import { SharedModule } from './shared/shared.module';
     TrainingsModule,
     DashboardModule,
     AdminModule,
-    EffectsModule.forRoot([SessionEffects]),
+    EffectsModule.forRoot([AppEffects, SessionEffects]),
     StoreModule.forRoot({
       areas: areasReducer,
       session: sessionReducer,
-      trainings: trainingsReducer
+      themes: themesReducer,
+      trainings: trainingsReducer,
+      trainingSessions: trainingSessionsReducer
     }),
     SharedModule
   ],

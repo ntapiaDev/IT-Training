@@ -1,16 +1,27 @@
 export interface Address {
   id: number,
-  number: string;
-  street: string;
-  zip: string;
-  city: City;
-  [key: string]: any;
+  numero: string,
+  adresse: string,
+  ville_id: number,
+  [key: string]: any
 }
 
-interface City {
+export interface City {
   id: number,
-  name: string,
+  nom: string,
+  code_postal: string,
   long: number,
   lat: number,
-  [key: string]: any;
+  [key: string]: any
+}
+
+export interface FullAddress {
+  numero: string,
+  adresse: string,
+  ville: {
+    nom: string,
+    code_postal: string,
+    long: number,
+    lat: number
+  }
 }

@@ -2,41 +2,15 @@ import { createReducer, on } from '@ngrx/store';
 import { addArea, deleteArea, editArea, getAreas } from './areas.actions';
 import { Area } from '../../models/Area';
 
-export const initialState: Area[] = [
-  {
-    id: 1,
-    name: "Informatique",
-    icon: "informatique"
-  },
-  {
-    id: 2,
-    name: "Management",
-    icon: "management"
-  },
-  {
-    id: 3,
-    name: "Ressources Humaines",
-    icon: "rh"
-  },
-  {
-    id: 4,
-    name: "Finance",
-    icon: "finance"
-  },
-  {
-    id: 5,
-    name: "Marketing",
-    icon: "marketing"
-  }
-];
+export const initialState: Area[] = [];
 
 export const areasReducer = createReducer(
   initialState,
   on(getAreas, (state, { areas }) => areas),
-  on(addArea, (state, { area }) => [...state, area]),
-  on(editArea, (state, { area }) =>
+  on(addArea, (state, { data }) => [...state, data]),
+  on(editArea, (state, { data }) =>
     state.map((existingArea) =>
-    existingArea.id === area.id ? area : existingArea
+    existingArea.id === data.id ? data : existingArea
     )
   ),
   on(deleteArea, (state, { id }) => state.filter((area) => area.id !== id)),

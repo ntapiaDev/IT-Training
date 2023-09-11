@@ -7,13 +7,17 @@ main {
 
   .admin-panel {
     padding: 0.5em;
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 4em;
     background-color: $medium-grey;
     color: $primary-color;
     border-radius: 0 0 1em 1em;
     border: 1px solid $secondary-color;
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
   }
 
   .current-page {

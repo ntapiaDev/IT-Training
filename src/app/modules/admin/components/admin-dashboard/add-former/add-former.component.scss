@@ -1,0 +1,53 @@
+@import "variables";
+
+.container {
+  margin-top: 1em;
+  background-color: $white;
+
+  h3 {
+    padding: 0.5em;
+    background-color: $secondary-color;
+    color: $white;
+  }
+
+  form {
+    padding: 0 1em 1em 1em;
+    display: flex;
+    flex-direction: column;
+
+    h4 {
+      font-size: 1.25em;
+      margin: 1em 0 0.5em;
+    }
+
+    label+label:not(.address label) {
+      margin-top: 1em;
+    }
+
+    &>div:not(.address-form) {
+      margin-top: 1em;
+      display: flex;
+      gap: 1em;
+
+      div {
+        display: flex;
+        gap: 1em;
+      }
+    }
+
+    input {
+      width: 100%;
+    }
+
+    .address-form {
+      margin-top: 1em;
+    }
+
+    button:not([type="button"]) {
+      width: 100px;
+      margin-top: 1.5em;
+      padding: 0.5em;
+      cursor: pointer;
+    }
+  }
+}

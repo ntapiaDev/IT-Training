@@ -1,0 +1,16 @@
+<h3 (click)="toggle()">+ Ajouter un domaine</h3>
+<div class="container" [style.height.px]="isOpen ? maxHeight : height">
+  <div #container>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <h4>Nom du domaine</h4>
+      <label>Nom :
+        <input type="text" formControlName="nom">
+      </label>
+      <h4>Description du domaine</h4>
+      <label>Description :
+        <input type="text" formControlName="description">
+      </label>
+      <button>Envoyer</button>
+    </form>
+  </div>
+</div>

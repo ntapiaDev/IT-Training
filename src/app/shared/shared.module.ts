@@ -12,6 +12,6 @@ import { HeaderComponent } from './header/header.component';
     SharedRoutingModule,
     FormsModule
   ],
-  exports: [HeaderComponent],
+  exports: [HeaderComponent, AddressFormComponent],
 })
 export class SharedModule { }

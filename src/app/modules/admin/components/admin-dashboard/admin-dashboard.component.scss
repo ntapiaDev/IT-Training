@@ -56,23 +56,37 @@ svg {
   }
 }
 
+.select {
+  margin-top: 1em;
+  display: flex;
+
+  div {
+    padding: 0.5em 2em;
+    background-color: $primary-color;
+    color: $white;
+    border-right: 1px solid $light-color;
+    cursor: pointer;
+
+    &.selected {
+      background-color: $secondary-color;
+    }
+  }
+}
+
 table {
   width: 100%;
-  margin-top: 1em;
   border-collapse: collapse;
 
   tr {
-    &:nth-child(even) {
-      background-color: $white;
-    }
-
-    &:nth-child(odd) {
-      background-color: $medium-grey;
-    }
+    background-color: $white;
 
     &:nth-child(1) {
       color: $white;
       background-color: $secondary-color;
+    }
+
+    &:nth-child(4n) {
+      background-color: $medium-grey;
     }
   }
 
@@ -99,17 +113,27 @@ table {
     border-top: 1px solid $dark-grey;
     border-bottom: 1px solid $dark-grey;
 
-    &.action {
-      width: 20px;
-      padding: 0.5em 0;
+    &.actions-container {
+      width: 105px;
 
-      svg {
-        cursor: pointer;
+      .actions-list {
+        display: flex;
+        justify-content: space-between;
+        
+        svg {
+          cursor: pointer;
 
-        &:hover {
-          fill: $primary-color;
+          &:hover,
+          &.open {
+            fill: $primary-color;
+          }
         }
       }
+    }
+
+    &.details {
+      padding: 0;
+      border: none;
     }
   }
 }
@@ -117,7 +141,7 @@ table {
 .modale {
   width: 100%;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: rgb(0, 0, 0, 0.25);

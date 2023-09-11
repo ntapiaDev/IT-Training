@@ -1,0 +1,74 @@
+@import "variables";
+
+.details {
+  overflow: hidden;
+  transition: height 0.3s ease-in-out;
+
+  .container {
+    text-align: start;
+
+    .title {
+      padding: 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h3 {
+        font-size: 2em;
+        text-transform: uppercase;
+      }
+
+      .button {
+        padding: 0.5em;
+        background-color: $primary-color;
+        color: $white;
+        border-radius: 0.25em;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+
+    .legend {
+        padding: 1em;
+        font-style: italic;
+    }
+
+    .infos {
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+
+        h4 {
+            font-size: 1.5em;
+            text-transform: uppercase;
+        }
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            list-style: circle;
+            margin-left: 2em;
+        }
+
+        div {
+            display: flex;
+            gap: 1em;
+
+            &.split {
+                margin-top: 1em;
+                justify-content: space-between;
+            }
+
+            &.col {
+                flex-direction: column;
+            }
+        }
+
+        .programme {
+            margin-top: 1em;
+        }
+    }
+  }
+}
