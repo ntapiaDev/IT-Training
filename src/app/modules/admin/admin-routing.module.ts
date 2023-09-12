@@ -7,20 +7,31 @@ import { AddTrainingComponent } from './components/admin-dashboard/add-training/
 import { BackOfficeComponent } from './components/back-office/back-office.component';
 import { CrudTableComponent } from './components/crud-table/crud-table.component';
 
+const crudRoutes = [
+  'domaines',
+  'themes',
+  'formations',
+  'sessions',
+  'evaluations',
+  'formateurs',
+  'candidats',
+  'entreprises',
+  'adresses',
+  'villes',
+].map((route) => ({ path: route, component: CrudTableComponent }));
+
 const routes: Routes = [
   {
-    path: '', component: BackOfficeComponent,
+    path: '',
+    component: BackOfficeComponent,
     children: [
       { path: '', component: AdminDashboardComponent },
       { path: 'ajouter-une-formation', component: AddTrainingComponent },
       { path: 'ajouter-un-centre', component: AddCenterComponent },
       { path: 'ajouter-un-formateur', component: AddFormerComponent },
-      { path: 'formations', component: CrudTableComponent },
-      { path: 'domaines', component: CrudTableComponent },
-      { path: 'themes', component: CrudTableComponent },
-      { path: 'sessions', component: CrudTableComponent }
-    ]
-  }
+      ...crudRoutes,
+    ],
+  },
 ];
 
 @NgModule({

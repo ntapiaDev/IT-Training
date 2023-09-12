@@ -1,4 +1,4 @@
-<div class="card" [ngStyle]="{'background-image': 'url(assets/' + area.icon + '.jpg)'}">
+<div class="card" [ngStyle]="{'background-image': 'url(assets/' + formatImageName(area.nom) + '.jpg)'}">
   <p>{{ area.nom }}</p>
   <div>
     <a routerLink="">Nos formations {{ area.nom }}</a>

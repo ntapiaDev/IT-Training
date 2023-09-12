@@ -8,4 +8,8 @@ import { Area } from 'src/app/core/models/Area';
 })
 export class AreaComponent {
   @Input() area!: Area;
+
+  formatImageName(name: string) {
+    return name.toLowerCase().replace(' ', '_');
+  }
 }

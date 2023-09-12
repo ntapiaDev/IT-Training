@@ -1,6 +1,8 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
+import { AreaService } from 'src/app/core/services/area.service';
 
 @Component({
   selector: 'app-add-area',
@@ -17,7 +19,7 @@ export class AddAreaComponent {
   height = 0;
   maxHeight = 0;
 
-  constructor(private formBuilder: FormBuilder, private toastr: ToastrService) {
+  constructor(private areaService: AreaService, private formBuilder: FormBuilder, private store: Store, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
       nom: ['', Validators.required],
       description: ['', Validators.required]
@@ -33,7 +35,19 @@ export class AddAreaComponent {
   }
 
   submit() {
-    console.log(this.form.value);
-    this.toastr.success('Domaine ajouté avec succès!');
+    if (this.form.invalid) {
+      this.toastr.error('Merci de remplir tous les champs!');
+      return;
+    }
+    this.areaService.add(this.form.value).subscribe({
+      next: (data) => {
+        this.store.dispatch({ type: '[domaines] Ajouter domaines', data });
+        this.toastr.success('Domaine ajouté avec succès!');
+        this.form.reset();
+      },
+      error: () => {
+        this.toastr.success("Erreur lors de l'ajout d'un domaine!");    
+      }
+    });
   }
 }

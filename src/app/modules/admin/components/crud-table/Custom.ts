@@ -60,7 +60,7 @@ export const getData = (form: FormGroup, tab: string) => {
       data = {
         id: form.value.id,
         nom: form.value.nom,
-        icon: form.value.icon
+        description: form.value.description
       };
       break;
     case 'themes':

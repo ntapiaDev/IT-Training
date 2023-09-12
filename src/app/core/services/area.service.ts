@@ -6,7 +6,7 @@ import { Area } from '../models/Area';
   providedIn: 'root'
 })
 export class AreaService {
-  private readonly serverUrl = 'http://localhost:8080/themes';
+  private readonly serverUrl = 'http://localhost:8080/domaines';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

@@ -6,7 +6,7 @@ import { Theme } from '../models/Theme';
   providedIn: 'root'
 })
 export class ThemeService {
-  private readonly serverUrl = 'http://localhost:8080/sousthemes';
+  private readonly serverUrl = 'http://localhost:8080/themes';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
