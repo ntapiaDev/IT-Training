@@ -85,9 +85,14 @@ export const getData = (form: FormGroup, tab: string) => {
     case 'sessions':
       data = {
         id: form.value.id,
-        nom: form.value.name,
+        type: form.value.type,
         formation_id: parseInt(form.value.formation_id),
-        date: parseInt(form.value.date)
+        dateDebut: form.value.dateDebut,
+        dateFin: form.value.dateFin,
+        centre_id: parseInt(form.value.centre_id),
+        formateur_id: parseInt(form.value.formateur_id),
+        nombreParticipants: form.value.nombreParticipants,
+        remote: ['true', true].includes(form.value.remote)
       };
       break;
   }

@@ -3,9 +3,8 @@
   <form [formGroup]="form" (ngSubmit)="submit()">
     <h4>Nom de la formation</h4>
     <label>Formation :
-      <select formControlName="formation_id">
-        <option value="1">Java</option>
-        <option value="2">PHP</option>
+      <select formControlName="formation_id" (change)="setDuration()">
+        <option *ngFor="let training of trainings$ | async" [value]="training.id">{{ training.nom }}</option>
       </select>
       <button type="button" (click)="toggleModale('training')">+</button>
     </label>
@@ -24,18 +23,18 @@
     <div>
       <h4>Dates de la session</h4>
       <label>Date de début :
-        <input type="date" formControlName="date_début" [(ngModel)]="startDate" (input)="formatEndDate()">
+        <input type="date" formControlName="dateDebut" [(ngModel)]="startDate" (input)="formatEndDate()">
       </label>
-      <label>Durée :
-        <input type="number" formControlName="durée" [(ngModel)]="duration" (input)="formatEndDate()">
+      <label>Durée (jours) :
+        <input type="number" formControlName="duree" [(ngModel)]="duration" (input)="formatEndDate()">
       </label>
       <label>Date de début :
-        <input type="date" formControlName="date_fin" [(ngModel)]="endDate">
+        <input type="date" formControlName="dateFin" [(ngModel)]="endDate">
       </label>
     </div>
     <h4>Adresse de la session</h4>
     <label>Structure :
-      <select formControlName="structure">
+      <select formControlName="centre_id">
         <option value="1">Centre de Rouen</option>
         <option value="2">Centre de Dieppe</option>
       </select>
@@ -43,7 +42,7 @@
     </label>
     <h4>Responsable de la session</h4>
     <label>Formateur référent :
-      <select formControlName="referent">
+      <select formControlName="referent_id">
         <option value="1">Julien</option>
         <option value="2">Jimmylan</option>
       </select>
@@ -51,7 +50,7 @@
     </label>
     <h4>Nombre de participants</h4>
     <label>Participants
-      <input type="number" formControlName="nb_participants">
+      <input type="number" formControlName="nombreParticipants">
     </label>
     <div>
       <h4>Formation à distance</h4>

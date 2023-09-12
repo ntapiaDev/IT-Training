@@ -1,7 +1,12 @@
 export interface TrainingSession {
   id: number,
-  nom: string,
+  type: string,
   formation_id: number,
-  date: number,
+  dateDebut: Date,
+  dateFin: Date,
+  centre_id: number,
+  formateur_id: number,
+  nombreParticipants: number,
+  remote: boolean
   [key: string]: any
 }

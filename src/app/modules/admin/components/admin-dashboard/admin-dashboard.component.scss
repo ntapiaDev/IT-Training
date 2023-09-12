@@ -79,6 +79,7 @@ table {
 
   tr {
     background-color: $white;
+    cursor: pointer;
 
     &:nth-child(1) {
       color: $white;

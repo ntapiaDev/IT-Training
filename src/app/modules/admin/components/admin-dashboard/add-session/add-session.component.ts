@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
+import { Training } from 'src/app/core/models/Training';
+import { TrainingSessionService } from 'src/app/core/services/trainingSession.service';
 
 @Component({
   selector: 'app-add-session',
@@ -7,27 +11,39 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-session.component.scss'],
 })
 export class AddSessionComponent {
+  @Output() sessionAdded = new EventEmitter<void>();
+
   modaleAction= '';
   modaleIsOpen = false;
 
   form: FormGroup;
+  trainings$ = this.store.select('trainings');
+  
   startDate?: Date;
   duration?: number;
   endDate?: any;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private store: Store<{ trainings: Training[] }>, private sessionService: TrainingSessionService, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
       formation_id: [0, Validators.required],
       type: ['', Validators.required],
-      date_début: [new Date(), Validators.required],
-      durée: [0, Validators.required],
-      date_fin: [new Date(), Validators.required],
-      structure: [0, Validators.required],
-      referent: [0, Validators.required],
-      nb_participants: [0, Validators.required],
+      dateDebut: [new Date(), Validators.required],
+      duree: [0, Validators.required],
+      dateFin: [new Date(), Validators.required],
+      centre_id: [0, Validators.required],
+      referent_id: [0, Validators.required],
+      nombreParticipants: [0, Validators.required],
       remote: [false, Validators.required],
       prix: [0, Validators.required]
     });
+  }
+
+  setDuration() {
+    const id = parseInt(this.form.value.formation_id);
+    this.store.select('trainings').subscribe(trainings => {
+      const training = trainings.find(t => t.id === id);
+      this.form.patchValue({ duree: training!.duree })
+    })    
   }
 
   getEndDate = (start: Date, duration: number) => {
@@ -50,8 +66,22 @@ export class AddSessionComponent {
     }
   }
 
-  submit = () => {
-    console.log(this.form.value);
+  submit() {
+    if (this.form.invalid) {
+      this.toastr.error('Merci de remplir tous les champs!');
+      return;
+    }
+    this.sessionService.add(this.form.value).subscribe({
+      next: (data) => {
+        this.store.dispatch({ type: '[sessions] Ajouter sessions', data });
+        this.toastr.success('Session ajouté avec succès!');
+        this.form.reset();
+        this.sessionAdded.emit();
+      },
+      error: () => {
+        this.toastr.success("Erreur lors de l'ajout d'une session!");    
+      }
+    });
   }
 
   toggleModale(action: string) {
