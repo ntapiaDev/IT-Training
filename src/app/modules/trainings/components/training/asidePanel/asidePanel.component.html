@@ -7,10 +7,9 @@
   </div>
   <app-map variant="training" [@fadeIn]="currentTab === 1"></app-map>
   <div class="container" [@fadeIn]="currentTab === 2">
-    <p>Formation {{ remote ? "à distance" : "en présentiel"}}.</p>
-    <p>Référence : <b>{{ reference }}</b></p>
-    <p>Durée : <b>{{ days }} jours ({{ days * 7 }} heures)</b></p>
-    <p>Prix : <b>{{ price }}€ TTC</b></p>
+    <p>Prérequis : <b>{{ prerequis }}</b></p>
+    <p>Durée : <b>{{ duree }} jours ({{ duree * 7 }} heures)</b></p>
+    <p>Prix : <b>{{ prix }}€ TTC</b></p>
     <div class="options">
       <a routerLink="/formations/inscription" class="signup" (click)="register(id)">S'inscrire</a>
       <span>Email</span>

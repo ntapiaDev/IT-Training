@@ -20,10 +20,9 @@ import { TrainingService } from 'src/app/core/services/training.service';
 })
 export class AsidePanelComponent {
   @Input() id!: number;
-  @Input() reference!: string;
-  @Input() days!: number;
-  @Input() price!: number;
-  @Input() remote!: boolean;
+  @Input() duree!: number;
+  @Input() prix!: number;
+  @Input() prerequis!: boolean;
 
   currentTab = 1;
 

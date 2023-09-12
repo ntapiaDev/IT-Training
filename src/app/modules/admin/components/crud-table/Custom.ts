@@ -75,13 +75,11 @@ export const getData = (form: FormGroup, tab: string) => {
       data = {
         id: form.value.id,
         nom: form.value.name,
-        reference: form.value.reference,
         description: form.value.description,
-        icon: form.value.icon,
-        theme_id: parseInt(form.value.theme_id),
-        days: parseInt(form.value.days),
-        price: parseInt(form.value.price),
-        remote: ['true', true].includes(form.value.remote)
+        duree: parseInt(form.value.duree),
+        prix: parseInt(form.value.prix),
+        prerequis: parseInt(form.value.prerequis),
+        theme_id: parseInt(form.value.theme_id)
       };
       break;
     case 'sessions':

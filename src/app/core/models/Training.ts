@@ -1,12 +1,10 @@
 export interface Training {
   id: number,
   nom: string,
-  reference: string,
   description: string,
-  icon: string,
+  duree: number,
+  prix: number,
+  prerequis: boolean,
   theme_id: number,
-  days: number,
-  price: number,
-  remote: boolean,
-  [key: string]: any;
+  [key: string]: any
 }

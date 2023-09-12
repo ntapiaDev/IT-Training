@@ -45,7 +45,7 @@ export class AddThemeComponent {
     this.themeService.add(this.form.value).subscribe({
       next: (data) => {
         this.store.dispatch({ type: '[themes] Ajouter themes', data });
-        this.toastr.success('Thèmes ajouté avec succès!');
+        this.toastr.success('Thème ajouté avec succès!');
         this.form.reset();
       },
       error: () => {
