@@ -67,7 +67,8 @@ export const getData = (form: FormGroup, tab: string) => {
       data = {
         id: form.value.id,
         nom: form.value.name,
-        icon: form.value.icon
+        description: form.value.icon,
+        domaine_id: form.value.domaine_id
       };
       break;
     case 'formations':
