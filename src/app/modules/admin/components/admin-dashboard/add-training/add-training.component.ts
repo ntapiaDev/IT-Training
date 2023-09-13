@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { Theme } from 'src/app/core/models/Theme';
+import { Training } from 'src/app/core/models/Training';
 import { TrainingService } from 'src/app/core/services/training.service';
 
 @Component({
@@ -45,7 +46,9 @@ export class AddTrainingComponent {
       this.toastr.error('Merci de remplir tous les champs!');
       return;
     }
-    this.trainingService.add(this.form.value).subscribe({
+    const newTraining: Training = this.form.value;
+    this.themes$.subscribe(themes => newTraining.theme = themes.find(t => t.id == this.form.value.theme_id)!)
+    this.trainingService.add(newTraining).subscribe({
       next: (data) => {
         this.store.dispatch({ type: '[formations] Ajouter formations', data });
         this.toastr.success('Formation ajouté avec succès!');

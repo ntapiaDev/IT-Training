@@ -1,3 +1,5 @@
+import { Theme } from "./Theme";
+
 export interface Training {
   id: number,
   nom: string,
@@ -5,6 +7,6 @@ export interface Training {
   duree: number,
   prix: number,
   prerequis: boolean,
-  theme_id: number,
+  theme: Theme,
   [key: string]: any
 }

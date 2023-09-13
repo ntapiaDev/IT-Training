@@ -1,8 +1,10 @@
+import { Area } from "./Area";
+
 export interface Theme {
     id: number,
     nom: string,
     description: string,
-    domaine_id: number,
+    domaine: Area,
     [key: string]: any;
   }
   

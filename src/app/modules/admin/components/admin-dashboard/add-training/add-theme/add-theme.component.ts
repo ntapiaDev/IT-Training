@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { Area } from 'src/app/core/models/Area';
+import { Theme } from 'src/app/core/models/Theme';
 import { ThemeService } from 'src/app/core/services/theme.service';
 
 @Component({
@@ -42,7 +43,9 @@ export class AddThemeComponent {
       this.toastr.error('Merci de remplir tous les champs!');
       return;
     }
-    this.themeService.add(this.form.value).subscribe({
+    const newTheme: Theme = this.form.value;
+    this.areas$.subscribe(areas => newTheme.domaine = areas.find(a => a.id == this.form.value.domaine_id)!)
+    this.themeService.add(newTheme).subscribe({
       next: (data) => {
         this.store.dispatch({ type: '[themes] Ajouter themes', data });
         this.toastr.success('Thème ajouté avec succès!');
