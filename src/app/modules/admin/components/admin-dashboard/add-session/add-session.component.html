@@ -3,7 +3,7 @@
   <form [formGroup]="form" (ngSubmit)="submit()">
     <h4>Nom de la formation</h4>
     <label>Formation :
-      <select formControlName="formation_id" (change)="setDuration()">
+      <select #trainingSelect formControlName="formation_id" (change)="setDurationAndPrice()">
         <option *ngFor="let training of trainings$ | async" [value]="training.id">{{ training.nom }}</option>
       </select>
       <button type="button" (click)="toggleModale('training')">+</button>
@@ -34,15 +34,14 @@
     </div>
     <h4>Adresse de la session</h4>
     <label>Structure :
-      <select formControlName="centre_id">
-        <option value="1">Centre de Rouen</option>
-        <option value="2">Centre de Dieppe</option>
+      <select #centerSelect formControlName="centre_id">
+        <option *ngFor="let center of centers$ | async" [value]="center.id">{{ center.nom }}</option>
       </select>
       <button type="button" (click)="toggleModale('center')">+</button>
     </label>
     <h4>Responsable de la session</h4>
     <label>Formateur référent :
-      <select formControlName="referent_id">
+      <select #formerSelect formControlName="referent_id">
         <option value="1">Julien</option>
         <option value="2">Jimmylan</option>
       </select>
@@ -55,10 +54,10 @@
     <div>
       <h4>Formation à distance</h4>
       <label>Présentiel :
-        <input type="radio" formControlName="type" value="false">
+        <input type="radio" formControlName="remote" value="false">
       </label>
       <label>Distanciel :
-        <input type="radio" formControlName="type" value="true">
+        <input type="radio" formControlName="remote" value="true">
       </label>
     </div>
     <h4>Prix de la session</h4>

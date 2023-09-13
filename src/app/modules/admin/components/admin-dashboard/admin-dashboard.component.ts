@@ -73,7 +73,10 @@ export class AdminDashboardComponent {
       this.selected = key;
       this.reversed = false;
     }
-    const newData = [...this.data].sort((a, b) => a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0);
+    const newData = [...this.data].sort((a, b) => {
+      return a[key] < b[key] ? -1 : a[key] > b[key] ? 1 :
+      a[key].nom < b[key].nom ? -1 : a[key].nom > b[key].nom ? 1 : 0
+    });
     if (doReverse && !this.reversed) {
       newData.reverse();
       this.reversed = true;

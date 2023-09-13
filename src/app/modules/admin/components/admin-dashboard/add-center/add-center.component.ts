@@ -1,19 +1,24 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
-import { FullAddress } from 'src/app/core/models/Address';
+import { Address, City } from 'src/app/core/models/Address';
+import { Center } from 'src/app/core/models/Center';
+import { AddressService } from 'src/app/core/services/address.service';
+import { CenterService } from 'src/app/core/services/center.service';
+import { CityService } from 'src/app/core/services/city.service';
 
 @Component({
   selector: 'app-add-center',
   templateUrl: './add-center.component.html',
-  styleUrls: ['./add-center.component.scss']
+  styleUrls: ['./add-center.component.scss'],
 })
 export class AddCenterComponent {
   @Output() centerAdded = new EventEmitter<void>();
 
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private toastr: ToastrService) {
+  constructor(private addressService: AddressService, private centerService: CenterService, private cityService: CityService, private formBuilder: FormBuilder, private store: Store, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
       nom: ['', Validators.required],
       adresse: this.formBuilder.group({
@@ -22,14 +27,14 @@ export class AddCenterComponent {
         ville: this.formBuilder.group({
           nom: ['', Validators.required],
           code_postal: ['', Validators.required],
-          long: [0, Validators.required],
-          lat: [0, Validators.required]
-        })
-      })
+          lon: [0, Validators.required],
+          lat: [0, Validators.required],
+        }),
+      }),
     });
   }
 
-  loadAddress(loadedAddress: FullAddress) {
+  loadAddress(loadedAddress: Address) {
     this.form.patchValue({
       adresse: {
         numero: loadedAddress.numero,
@@ -37,16 +42,54 @@ export class AddCenterComponent {
         ville: {
           nom: loadedAddress.ville.nom,
           code_postal: loadedAddress.ville.code_postal,
-          long: loadedAddress.ville.long,
-          lat: loadedAddress.ville.lat
-        }
-      }
+          lon: loadedAddress.ville.lon,
+          lat: loadedAddress.ville.lat,
+        },
+      },
     });
   }
 
   submit() {
-    console.log(this.form.value);
-    this.toastr.success('Centre ajouté avec succès!')
+    if (this.form.invalid) {
+      this.toastr.error('Merci de remplir tous les champs!');
+      return;
+    }
+    const newCity: City = this.form.value.adresse.ville;
+    this.cityService.add(newCity).subscribe({
+      next: (data: any) => {
+        const newAddress: Address = {
+          id: -1,
+          numero: this.form.value.adresse.numero,
+          adresse: this.form.value.adresse.adresse,
+          ville: data,
+        };
+        this.addressService.add(newAddress).subscribe({
+          next: (data: any) => {
+            const newCenter: Center = {
+              id: -1,
+              nom: this.form.value.nom,
+              adresse: data
+            }
+            this.centerService.add(newCenter).subscribe({
+              next: (data) => {
+                this.store.dispatch({ type: '[centres] Ajouter centres', data });
+                this.toastr.success('Centre ajouté avec succès!');
+                this.form.reset();
+              },
+              error: (error) => {
+                this.toastr.error("Erreur lors de l'ajout d'une adresse!");
+              },
+            });
+          },
+          error: (error) => {
+            this.toastr.error("Erreur lors de l'ajout d'une adresse!");
+          },
+        });
+      },
+      error: () => {
+        this.toastr.error("Erreur lors de l'ajout d'une ville!");
+      },
+    });
     this.centerAdded.emit();
   }
 }

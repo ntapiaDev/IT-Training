@@ -11,7 +11,7 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 import { TrainingService } from 'src/app/core/services/training.service';
 import { TrainingSessionService } from 'src/app/core/services/trainingSession.service';
 
-export type CustomType = Area | Theme | Training | TrainingSession;
+export type CustomType = Area | Theme | Training | TrainingSession | any;
 
 export type CustomService = AreaService | ThemeService | TrainingService | TrainingSessionService;
 
@@ -86,11 +86,11 @@ export const getData = (form: FormGroup, tab: string) => {
       data = {
         id: form.value.id,
         type: form.value.type,
-        formation_id: parseInt(form.value.formation_id),
+        formation: parseInt(form.value.formation_id),
         dateDebut: form.value.dateDebut,
         dateFin: form.value.dateFin,
-        centre_id: parseInt(form.value.centre_id),
-        formateur_id: parseInt(form.value.formateur_id),
+        centre: parseInt(form.value.centre_id),
+        formateur: parseInt(form.value.formateur_id),
         nombreParticipants: form.value.nombreParticipants,
         remote: ['true', true].includes(form.value.remote)
       };

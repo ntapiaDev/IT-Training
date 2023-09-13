@@ -2,7 +2,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
+import { Center } from 'src/app/core/models/Center';
 import { Training } from 'src/app/core/models/Training';
+import { TrainingSession } from 'src/app/core/models/TrainingSession';
+import { Former } from 'src/app/core/models/User';
 import { TrainingSessionService } from 'src/app/core/services/trainingSession.service';
 
 @Component({
@@ -17,13 +20,14 @@ export class AddSessionComponent {
   modaleIsOpen = false;
 
   form: FormGroup;
+  centers$ = this.store.select('centers');
   trainings$ = this.store.select('trainings');
   
   startDate?: Date;
   duration?: number;
   endDate?: any;
 
-  constructor(private formBuilder: FormBuilder, private store: Store<{ trainings: Training[] }>, private sessionService: TrainingSessionService, private toastr: ToastrService) {
+  constructor(private formBuilder: FormBuilder, private store: Store<{ centers: Center[], trainings: Training[] }>, private sessionService: TrainingSessionService, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
       formation_id: [0, Validators.required],
       type: ['', Validators.required],
@@ -38,11 +42,12 @@ export class AddSessionComponent {
     });
   }
 
-  setDuration() {
+  setDurationAndPrice() {
     const id = parseInt(this.form.value.formation_id);
     this.store.select('trainings').subscribe(trainings => {
       const training = trainings.find(t => t.id === id);
       this.form.patchValue({ duree: training!.duree })
+      this.form.patchValue({ prix: training!.prix })
     })    
   }
 
@@ -71,6 +76,16 @@ export class AddSessionComponent {
       this.toastr.error('Merci de remplir tous les champs!');
       return;
     }
+    let training!: Training;
+    this.store.select('trainings').subscribe(trainings => training = trainings.find(t => t.id == this.form.value.formation_id)!);
+    let center!: Center;
+    this.store.select('centers').subscribe(centers => center = centers.find(c => c.id == this.form.value.centre_id)!);
+    let former: Former;
+
+    const newSession: TrainingSession = this.form.value;
+    newSession.formation = training;
+    newSession.centre = center;
+
     this.sessionService.add(this.form.value).subscribe({
       next: (data) => {
         this.store.dispatch({ type: '[sessions] Ajouter sessions', data });
