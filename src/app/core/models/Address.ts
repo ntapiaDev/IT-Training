@@ -8,7 +8,7 @@ export interface Address {
 export interface City {
   id: number,
   nom: string,
-  code_postal: string,
+  codePostal: string,
   lon: number,
   lat: number,
   [key: string]: any

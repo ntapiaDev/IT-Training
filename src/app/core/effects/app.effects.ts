@@ -6,6 +6,7 @@ import { map, switchMap } from 'rxjs/operators';
 import * as appActions from './../stores/app.actions';
 import * as areasActions from './../stores/areas/areas.actions';
 import * as centersActions from './../stores/centers/centers.actions';
+import * as citiesActions from './../stores/cities/cities.actions';
 import * as themesActions from './../stores/themes/themes.actions';
 import * as trainingsActions from './../stores/trainings/trainings.actions';
 import * as trainingSessionsActions from './../stores/trainingSession/trainingSessions.actions';
@@ -14,6 +15,7 @@ import { CenterService } from './../services/center.service';
 import { ThemeService } from './../services/theme.service';
 import { TrainingService } from './../services/training.service';
 import { TrainingSessionService } from './../services/trainingSession.service';
+import { CityService } from '../services/city.service';
 
 @Injectable()
 export class AppEffects {
@@ -24,14 +26,16 @@ export class AppEffects {
         return forkJoin([
           this.areaService.getAll(),
           this.centerService.getAll(),
+          this.cityService.getAll(),
           this.themeService.getAll(),
           this.trainingService.getAll(),
           this.trainingSessionService.getAll()          
         ]).pipe(
-          map(([areas, centers, themes, trainings, trainingSessions]) => {
+          map(([areas, centers, cities, themes, trainings, trainingSessions]) => {
             return {    
                 areasActions: areasActions.getAreas({ areas }),
                 centersActions: centersActions.getCenters({ centers }),
+                citiesActions: citiesActions.getCities({ cities }),
                 themesActions: themesActions.getThemes({ themes }),
                 trainingsActions: trainingsActions.getTrainings({ trainings }),
                 trainingSessionsActions: trainingSessionsActions.getTrainingSessions({ trainingSessions })
@@ -43,6 +47,7 @@ export class AppEffects {
         return [
           actions.areasActions,
           actions.centersActions,
+          actions.citiesActions,
           actions.themesActions,
           actions.trainingsActions,
           actions.trainingSessionsActions
@@ -51,5 +56,5 @@ export class AppEffects {
     )
   );
 
-  constructor(private actions$: Actions, private areaService: AreaService, private centerService: CenterService, private themeService: ThemeService, private trainingService: TrainingService, private trainingSessionService: TrainingSessionService) {}
+  constructor(private actions$: Actions, private areaService: AreaService, private centerService: CenterService, private cityService: CityService, private themeService: ThemeService, private trainingService: TrainingService, private trainingSessionService: TrainingSessionService) {}
 }

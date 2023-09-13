@@ -19,6 +19,7 @@ import { SessionEffects } from './core/effects/session.effects';
 import { AuthInterceptor } from "./core/interceptors/auth.interceptor";
 import { areasReducer } from './core/stores/areas/areas.reducer';
 import { centersReducer } from './core/stores/centers/centers.reducer';
+import { citiesReducer } from './core/stores/cities/cities.reducer';
 import { sessionReducer } from './core/stores/session/session.reducer';
 import { themesReducer } from './core/stores/themes/themes.reducer';
 import { trainingsReducer } from './core/stores/trainings/trainings.reducer';
@@ -43,6 +44,7 @@ import { SharedModule } from './shared/shared.module';
     StoreModule.forRoot({
       areas: areasReducer,
       centers: centersReducer,
+      cities: citiesReducer,
       session: sessionReducer,
       themes: themesReducer,
       trainings: trainingsReducer,

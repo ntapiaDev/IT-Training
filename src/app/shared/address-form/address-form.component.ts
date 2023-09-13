@@ -32,7 +32,7 @@ export class AddressFormComponent {
       ville: {
         id: -1,
         nom: address.properties.city,
-        code_postal: address.properties.postcode,
+        codePostal: address.properties.postcode,
         lon: address.geometry.coordinates[0],
         lat: address.geometry.coordinates[1]
       }

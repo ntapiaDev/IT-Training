@@ -18,7 +18,7 @@ export class AddCenterComponent {
 
   form: FormGroup;
 
-  constructor(private addressService: AddressService, private centerService: CenterService, private cityService: CityService, private formBuilder: FormBuilder, private store: Store, private toastr: ToastrService) {
+  constructor(private addressService: AddressService, private centerService: CenterService, private cityService: CityService, private formBuilder: FormBuilder, private store: Store<{ cities: City[] }>, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
       nom: ['', Validators.required],
       adresse: this.formBuilder.group({
@@ -26,7 +26,7 @@ export class AddCenterComponent {
         adresse: ['', Validators.required],
         ville: this.formBuilder.group({
           nom: ['', Validators.required],
-          code_postal: ['', Validators.required],
+          codePostal: ['', Validators.required],
           lon: [0, Validators.required],
           lat: [0, Validators.required],
         }),
@@ -41,7 +41,7 @@ export class AddCenterComponent {
         adresse: loadedAddress.adresse,
         ville: {
           nom: loadedAddress.ville.nom,
-          code_postal: loadedAddress.ville.code_postal,
+          codePostal: loadedAddress.ville.codePostal,
           lon: loadedAddress.ville.lon,
           lat: loadedAddress.ville.lat,
         },
@@ -55,8 +55,11 @@ export class AddCenterComponent {
       return;
     }
     const newCity: City = this.form.value.adresse.ville;
+    let existingCity = false;
+    this.store.select('cities').subscribe(cities => existingCity = cities.some(c => (c.nom === newCity.nom) && (c.codePostal === newCity.codePostal)));
     this.cityService.add(newCity).subscribe({
       next: (data: any) => {
+        if (!existingCity) this.store.dispatch({ type: '[villes] Ajouter villes', data });
         const newAddress: Address = {
           id: -1,
           numero: this.form.value.adresse.numero,

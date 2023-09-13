@@ -30,7 +30,7 @@ export class AddFormerComponent {
         adresse: ['', Validators.required],
         ville: this.formBuilder.group({
           nom: ['', Validators.required],
-          code_postal: ['', Validators.required],
+          codePostal: ['', Validators.required],
           lon: [0, Validators.required],
           lat: [0, Validators.required]
         })
@@ -45,7 +45,7 @@ export class AddFormerComponent {
         adresse: loadedAddress.adresse,
         ville: {
           nom: loadedAddress.ville.nom,
-          code_postal: loadedAddress.ville.code_postal,
+          codePostal: loadedAddress.ville.codePostal,
           lon: loadedAddress.ville.lon,
           lat: loadedAddress.ville.lat
         }
