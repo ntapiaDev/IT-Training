@@ -16,7 +16,7 @@ export class FormerService {
   constructor(private http: HttpClient) { }
 
   getAll() {
-    return this.http.get<Former[]>(this.serverUrl);
+    return this.http.get<Former[]>(`${this.serverUrl}/list`);
   }
 
   add(former: Former) {

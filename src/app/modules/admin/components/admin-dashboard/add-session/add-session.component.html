@@ -42,8 +42,7 @@
     <h4>Responsable de la session</h4>
     <label>Formateur référent :
       <select #formerSelect formControlName="referent_id">
-        <option value="1">Julien</option>
-        <option value="2">Jimmylan</option>
+        <option *ngFor="let former of formers$ | async" [value]="former.id">{{ former.nom + ' ' + former.prenom }}</option>
       </select>
       <button type="button" (click)="toggleModale('former')">+</button>
     </label>

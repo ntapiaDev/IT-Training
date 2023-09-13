@@ -21,13 +21,14 @@ export class AddSessionComponent {
 
   form: FormGroup;
   centers$ = this.store.select('centers');
+  formers$ = this.store.select('formers');
   trainings$ = this.store.select('trainings');
   
   startDate?: Date;
   duration?: number;
   endDate?: any;
 
-  constructor(private formBuilder: FormBuilder, private store: Store<{ centers: Center[], trainings: Training[] }>, private sessionService: TrainingSessionService, private toastr: ToastrService) {
+  constructor(private formBuilder: FormBuilder, private store: Store<{ centers: Center[], formers: Former[], trainings: Training[] }>, private sessionService: TrainingSessionService, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
       formation_id: [0, Validators.required],
       type: ['', Validators.required],
@@ -80,11 +81,13 @@ export class AddSessionComponent {
     this.store.select('trainings').subscribe(trainings => training = trainings.find(t => t.id == this.form.value.formation_id)!);
     let center!: Center;
     this.store.select('centers').subscribe(centers => center = centers.find(c => c.id == this.form.value.centre_id)!);
-    let former: Former;
+    let former!: Former;
+    this.store.select('formers').subscribe(formers => former = formers.find(f => f.id == this.form.value.formateur_id)!);
 
     const newSession: TrainingSession = this.form.value;
     newSession.formation = training;
     newSession.centre = center;
+    newSession.formateur = former;
 
     this.sessionService.add(this.form.value).subscribe({
       next: (data) => {

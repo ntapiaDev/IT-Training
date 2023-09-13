@@ -32,19 +32,18 @@ export class AppEffects {
           this.areaService.getAll(),
           this.centerService.getAll(),
           this.cityService.getAll(),
-          // this.formerService.getAll(),
+          this.formerService.getAll(),
           this.themeService.getAll(),
           this.trainingService.getAll(),
           this.trainingSessionService.getAll()          
         ]).pipe(
-          // map(([addresses, areas, centers, cities, formers, themes, trainings, trainingSessions]) => {
-          map(([addresses, areas, centers, cities, themes, trainings, trainingSessions]) => {
+          map(([addresses, areas, centers, cities, formers, themes, trainings, trainingSessions]) => {
             return {
                 addressesActions: addressesActions.getAddresses({ addresses }),
                 areasActions: areasActions.getAreas({ areas }),
                 centersActions: centersActions.getCenters({ centers }),
                 citiesActions: citiesActions.getCities({ cities }),
-                // formersActions: formersActions.getFormers({ formers }),
+                formersActions: formersActions.getFormers({ formers }),
                 themesActions: themesActions.getThemes({ themes }),
                 trainingsActions: trainingsActions.getTrainings({ trainings }),
                 trainingSessionsActions: trainingSessionsActions.getTrainingSessions({ trainingSessions })
@@ -58,7 +57,7 @@ export class AppEffects {
           actions.areasActions,
           actions.centersActions,
           actions.citiesActions,
-          // actions.formersActions,
+          actions.formersActions,
           actions.themesActions,
           actions.trainingsActions,
           actions.trainingSessionsActions
