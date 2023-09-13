@@ -17,6 +17,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { AppEffects } from './core/effects/app.effects';
 import { SessionEffects } from './core/effects/session.effects';
 import { AuthInterceptor } from "./core/interceptors/auth.interceptor";
+import { addressesReducer } from './core/stores/addresses/addresses.reducer';
 import { areasReducer } from './core/stores/areas/areas.reducer';
 import { centersReducer } from './core/stores/centers/centers.reducer';
 import { citiesReducer } from './core/stores/cities/cities.reducer';
@@ -42,6 +43,7 @@ import { SharedModule } from './shared/shared.module';
     AdminModule,
     EffectsModule.forRoot([AppEffects, SessionEffects]),
     StoreModule.forRoot({
+      address: addressesReducer,
       areas: areasReducer,
       centers: centersReducer,
       cities: citiesReducer,

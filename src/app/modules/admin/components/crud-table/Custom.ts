@@ -2,23 +2,28 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { City } from 'src/app/core/models/Address';
+import { Address, City } from 'src/app/core/models/Address';
 import { Area } from 'src/app/core/models/Area';
+import { Center } from 'src/app/core/models/Center';
 import { Theme } from 'src/app/core/models/Theme';
 import { Training } from 'src/app/core/models/Training';
 import { TrainingSession } from 'src/app/core/models/TrainingSession';
+import { AddressService } from 'src/app/core/services/address.service';
 import { AreaService } from 'src/app/core/services/area.service';
+import { CenterService } from 'src/app/core/services/center.service';
 import { CityService } from 'src/app/core/services/city.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { TrainingService } from 'src/app/core/services/training.service';
 import { TrainingSessionService } from 'src/app/core/services/trainingSession.service';
 
-export type CustomType = Area | City | Theme | Training | TrainingSession | any;
+export type CustomType = Address | Area | Center | City | Theme | Training | TrainingSession | any;
 
-export type CustomService = AreaService | CityService | ThemeService | TrainingService | TrainingSessionService;
+export type CustomService = AddressService | AreaService | CenterService | CityService | ThemeService | TrainingService | TrainingSessionService;
 
 export interface CustomStore {
+  address: Address[];
   areas: Area[];
+  centers: Center[];
   cities: City[];
   themes: Theme[];
   trainings: Training[];
@@ -28,7 +33,9 @@ export interface CustomStore {
 @Injectable()
 export class CustomServices {
   constructor(
+    public addressService: AddressService,
     public areaService: AreaService,
+    public centerService: CenterService,
     public cityService: CityService,
     public themeService: ThemeService,
     public trainingService: TrainingService,
@@ -52,6 +59,12 @@ export const init = (currentTab: string, customServices: CustomServices, store: 
   } else if (currentTab === 'sessions') {
     currentService = customServices.trainingSessionService;
     selectedStore = store.select('trainingSessions');
+  } else if (currentTab === 'centres') {
+    currentService = customServices.centerService;
+    selectedStore = store.select('centers');
+  } else if (currentTab === 'adresses') {
+    currentService = customServices.addressService;
+    selectedStore = store.select('address');
   } else if (currentTab === 'villes') {
     currentService = customServices.cityService;
     selectedStore = store.select('cities');

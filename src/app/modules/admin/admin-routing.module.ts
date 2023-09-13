@@ -16,6 +16,7 @@ const crudRoutes = [
   'formateurs',
   'candidats',
   'entreprises',
+  'centres',
   'adresses',
   'villes',
 ].map((route) => ({ path: route, component: CrudTableComponent }));
