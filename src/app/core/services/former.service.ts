@@ -20,7 +20,7 @@ export class FormerService {
   }
 
   add(former: Former) {
-    return this.http.post(this.serverUrl, former, this.httpOptions);
+    return this.http.post(`${this.serverUrl}/create`, former, this.httpOptions);
   }
 
   update(former: Former) {

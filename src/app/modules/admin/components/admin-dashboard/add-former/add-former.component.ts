@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { Address, City } from 'src/app/core/models/Address';
 import { Former } from 'src/app/core/models/User';
@@ -17,7 +18,7 @@ export class AddFormerComponent {
 
   form: FormGroup;
 
-  constructor(private addressService: AddressService, private cityService: CityService, private formBuilder: FormBuilder, private formerService: FormerService, private toastr: ToastrService) {
+  constructor(private addressService: AddressService, private cityService: CityService, private formBuilder: FormBuilder, private formerService: FormerService, private store: Store<{ cities: City[] }>, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
@@ -59,9 +60,11 @@ export class AddFormerComponent {
       return;
     }
     const newCity: City = this.form.value.adresse.ville;
+    let existingCity = false;
+    this.store.select('cities').subscribe(cities => existingCity = cities.some(c => (c.nom === newCity.nom) && (c.codePostal === newCity.codePostal)));
     this.cityService.add(newCity).subscribe({
       next: (data: any) => {
-        // this.store.dispatch({ type: '[formations] Ajouter formations', data });
+        if (!existingCity) this.store.dispatch({ type: '[villes] Ajouter villes', data });
         const newAddress: Address = {
           id: -1,
           numero: this.form.value.adresse.numero,
@@ -70,20 +73,21 @@ export class AddFormerComponent {
         };
         this.addressService.add(newAddress).subscribe({
           next: (data: any) => {
+            this.store.dispatch({ type: '[adresses] Ajouter adresses', data });
             const newFormer: Former = {
               id: -1,
+              username: this.form.value.email,
+              password: "123",
               nom: this.form.value.nom,
               prenom: this.form.value.prenom,
               securiteSociale: this.form.value.securiteSociale,
               siret: this.form.value.siret,
-              email: this.form.value.email,
               telephone: this.form.value.telephone,
               adresse: data
             }
-            console.log(newFormer);
             this.formerService.add(newFormer).subscribe({
-              next: () => {
-                // this.store.dispatch({ type: '[formations] Ajouter formations', data });
+              next: (data) => {
+                this.store.dispatch({ type: '[formateurs] Ajouter formateurs', data });
                 this.toastr.success('Formateur ajouté avec succès!');
                 this.form.reset();
               },
@@ -92,11 +96,8 @@ export class AddFormerComponent {
                 this.toastr.error("Erreur lors de l'ajout d'un formateur!");
               },
             });
-            
-            // this.store.dispatch({ type: '[formations] Ajouter formations', data });
-            this.toastr.success('Adresse ajouté avec succès!');
           },
-          error: (error) => {
+          error: () => {
             this.toastr.error("Erreur lors de l'ajout d'une adresse!");
           },
         });

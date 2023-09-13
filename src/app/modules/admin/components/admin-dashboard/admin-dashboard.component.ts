@@ -26,7 +26,7 @@ export class AdminDashboardComponent {
   constructor(private store: Store<{ trainingSessions: TrainingSession[]} >, private sessionService: TrainingSessionService, private toastr: ToastrService) { }
 
   ngOnInit() {
-    this.sessions$.subscribe(data => this.data = data);
+    this.selectData(this.currentTab);
   }
 
   formatDate(d: Date) {

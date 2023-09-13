@@ -68,6 +68,7 @@ export class AddCenterComponent {
         };
         this.addressService.add(newAddress).subscribe({
           next: (data: any) => {
+            this.store.dispatch({ type: '[adresses] Ajouter adresses', data });
             const newCenter: Center = {
               id: -1,
               nom: this.form.value.nom,

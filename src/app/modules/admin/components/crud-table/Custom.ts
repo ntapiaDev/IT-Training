@@ -8,23 +8,26 @@ import { Center } from 'src/app/core/models/Center';
 import { Theme } from 'src/app/core/models/Theme';
 import { Training } from 'src/app/core/models/Training';
 import { TrainingSession } from 'src/app/core/models/TrainingSession';
+import { Former } from 'src/app/core/models/User';
 import { AddressService } from 'src/app/core/services/address.service';
 import { AreaService } from 'src/app/core/services/area.service';
 import { CenterService } from 'src/app/core/services/center.service';
 import { CityService } from 'src/app/core/services/city.service';
+import { FormerService } from 'src/app/core/services/former.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { TrainingService } from 'src/app/core/services/training.service';
 import { TrainingSessionService } from 'src/app/core/services/trainingSession.service';
 
-export type CustomType = Address | Area | Center | City | Theme | Training | TrainingSession | any;
+export type CustomType = Address | Area | Center | City | Former | Theme | Training | TrainingSession | any;
 
-export type CustomService = AddressService | AreaService | CenterService | CityService | ThemeService | TrainingService | TrainingSessionService;
+export type CustomService = AddressService | AreaService | CenterService | CityService | FormerService | ThemeService | TrainingService | TrainingSessionService;
 
 export interface CustomStore {
   address: Address[];
   areas: Area[];
   centers: Center[];
   cities: City[];
+  formers: Former[];
   themes: Theme[];
   trainings: Training[];
   trainingSessions: TrainingSession[];
@@ -37,6 +40,7 @@ export class CustomServices {
     public areaService: AreaService,
     public centerService: CenterService,
     public cityService: CityService,
+    public formerService: FormerService,
     public themeService: ThemeService,
     public trainingService: TrainingService,
     public trainingSessionService: TrainingSessionService
@@ -59,6 +63,9 @@ export const init = (currentTab: string, customServices: CustomServices, store: 
   } else if (currentTab === 'sessions') {
     currentService = customServices.trainingSessionService;
     selectedStore = store.select('trainingSessions');
+  } else if (currentTab === 'formateurs') {
+    currentService = customServices.formerService;
+    selectedStore = store.select('formers');
   } else if (currentTab === 'centres') {
     currentService = customServices.centerService;
     selectedStore = store.select('centers');

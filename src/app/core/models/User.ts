@@ -4,8 +4,8 @@ import { UserRole } from "./Session"
 
 export interface AppUser {
     id: number,
-    email: string,
-    password?: string,
+    username: string,
+    password: string,
     role?: UserRole[]
 }
 
