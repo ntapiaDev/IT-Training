@@ -49,7 +49,8 @@ export class AddSessionComponent {
       const training = trainings.find(t => t.id === id);
       this.form.patchValue({ duree: training!.duree })
       this.form.patchValue({ prix: training!.prix })
-    })    
+    })
+    this.formatEndDate();
   }
 
   getEndDate = (start: Date, duration: number) => {
@@ -77,12 +78,13 @@ export class AddSessionComponent {
       this.toastr.error('Merci de remplir tous les champs!');
       return;
     }
+    
     let training!: Training;
-    this.store.select('trainings').subscribe(trainings => training = trainings.find(t => t.id == this.form.value.formation_id)!);
+    this.store.select('trainings').forEach(trainings => training = trainings.find(t => t.id == this.form.value.formation_id)!);
     let center!: Center;
-    this.store.select('centers').subscribe(centers => center = centers.find(c => c.id == this.form.value.centre_id)!);
+    this.store.select('centers').forEach(centers => center = centers.find(c => c.id == this.form.value.centre_id)!);
     let former!: Former;
-    this.store.select('formers').subscribe(formers => former = formers.find(f => f.id == this.form.value.formateur_id)!);
+    this.store.select('formers').forEach(formers => former = formers.find(f => f.id == this.form.value.referent_id)!);
 
     const newSession: TrainingSession = this.form.value;
     newSession.formation = training;

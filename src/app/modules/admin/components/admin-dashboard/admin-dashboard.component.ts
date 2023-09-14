@@ -58,8 +58,7 @@ export class AdminDashboardComponent {
   }
 
   filterData(sessions: TrainingSession[]) {
-    // return sessions.filter(session => session['nom']?.toLowerCase().includes(this.filter.toLowerCase()));
-    return sessions;
+    return sessions.filter(session => session['formation'].nom.toLowerCase().includes(this.filter.toLowerCase()));
   }
 
   selectData(tab: string) {

@@ -1,20 +1,20 @@
 <div class="details" [style.height.px]="isOpen ? maxHeight : height">
   <div #container class="container">
     <div class="title">
-      <h3>Formation Java - <span [style.color]="true ? '#409E1E' : '#FF0008'">{{true ? 'OK' : 'En attente'}}</span></h3>
+      <h3>Formation {{ session?.formation?.nom }} - <span [style.color]="true ? '#409E1E' : '#FF0008'">{{true ? 'OK' : 'En attente'}}</span></h3>
       <span class="button" (click)="handleClose()">X</span>
     </div>
-    <div class="legend">Informatique - Langages de programmation</div>
+    <div class="legend">{{ session?.formation?.theme?.domaine?.nom + ' - ' + session?.formation?.theme?.nom }}</div>
     <div class="infos">
-        <div><span><b>Nom du référent :</b> Référent</span></div>
+        <div><span><b>Nom du référent :</b> {{ session?.formateur?.prenom + ' ' + session?.formateur?.nom }}</span></div>
         <div>
-            <span><b>Durée</b> : 3 jours</span>
-            <span><b>Date de début</b> : 08/09/2023</span>
-            <span><b>Date de fin</b> : 11/09/2023</span>
-            <span><b>Prix</b> : 999€</span>
+            <span><b>Durée</b> : {{ session?.formation?.duree }} jours</span>
+            <span><b>Date de début</b> : {{ formatDate(session?.dateDebut!) }}</span>
+            <span><b>Date de fin</b> : {{ formatDate(session?.dateFin!) }}</span>
+            <span><b>Prix</b> : {{ session?.formation?.prix }}€</span>
         </div>
-        <div><span><b>Nombre de participants :</b> 8/12</span></div>
-        <div><span><b>Formation à distance :</b> Non</span></div>
+        <div><span><b>Nombre de participants :</b> ??/{{ session?.nombreParticipants }}</span></div>
+        <div><span><b>Formation à distance :</b> {{ session?.remote ? 'Oui' : 'Non'}}</span></div>
         <div class="split">
             <div class="col">
                 <h4>Liste des candidats :</h4>
@@ -31,9 +31,8 @@
             </div>
             <div class="col">
                 <h4>Centre de formation :</h4>
-                <span><b>Nom de l'entreprise :</b> IT-Training Rouen</span>
-                <span><b>Responsable :</b> Jean Francis NDJUIKO</span>
-                <span><b>Adresse :</b> 21 rue des chats, 75101 PARIS</span>
+                <span><b>Nom du centre :</b> {{ session?.centre?.nom }}</span>
+                <span><b>Adresse :</b> {{ session?.centre?.adresse?.numero + ' ' + session?.centre?.adresse?.adresse + ', ' + session?.centre?.adresse?.ville?.codePostal + ' ' + session?.centre?.adresse?.ville?.nom }}</span>
             </div>
         </div>
         <div class="col programme">
