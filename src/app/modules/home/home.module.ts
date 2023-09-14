@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterFormComponent } from './components/register/register-form.component';
 import { WhatComponent } from './components/what/what.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     RegisterFormComponent,
     ContactFormComponent,
     WhatComponent,
-    CarouselComponent
+    CarouselComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,
