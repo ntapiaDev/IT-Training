@@ -36,6 +36,26 @@
   .list {
     flex-grow: 1;
 
+    .reset {
+      margin: 0 0 1em 0.5em;
+      color: $white;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 1em;
+
+      h3 {
+        font-size: 1.5em;
+      }
+
+      div {
+        position: relative;
+        top: 1px;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+
     .input {
       width: 100%;
       position: relative;
@@ -52,7 +72,7 @@
         top: 7px;
         right: 7px;
         fill: $secondary-color;
-    }
+      }
     }
 
     ul {

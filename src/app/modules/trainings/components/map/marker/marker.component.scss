@@ -12,4 +12,10 @@ span {
     align-items: center;
     position: absolute;
     cursor: pointer;
+
+    &.active {
+        background-color: $secondary-color;
+        border-color: $primary-color;
+        color: $white;
+    }
 }
