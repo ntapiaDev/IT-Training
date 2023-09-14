@@ -11,6 +11,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterFormComponent } from './components/register/register-form.component';
 import { WhatComponent } from './components/what/what.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { WhatComponent } from './components/what/what.component';
     LoginComponent,
     RegisterFormComponent,
     ContactFormComponent,
-    WhatComponent
+    WhatComponent,
+    CarouselComponent
   ],
   imports: [
     CommonModule,

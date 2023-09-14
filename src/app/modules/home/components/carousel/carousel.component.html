@@ -1,0 +1,35 @@
+<div class="container">
+  <h2>Financement</h2>
+  <section>
+    <ul>
+      <li
+        *ngFor="let slide of slides"
+        (click)="goToImg(slide.id)"
+        [ngClass]="{ clicked: slide.id === currentIndex }"
+      >
+        {{ slide.title }}
+      </li>
+    </ul>
+
+    <div class="slider" [@slideAnimation]="currentIndex">
+      <div
+        class="slide"
+        [ngStyle]="{ 'background-image': getCurrentSliderUrl() }"
+      >
+        <div class="name" *ngIf="getCurrentSliderTitle()">
+          {{ getCurrentSliderTitle() }}
+        </div>
+      </div>
+    </div>
+
+    <!-- </div> -->
+
+    <ng-container *ngFor="let slide of slides">
+      <div class="finance" *ngIf="currentIndex === slide.id">
+        <h3>{{ slide.title }}</h3>
+        <h4>{{ slide.subtitle }}</h4>
+        <p>{{ slide.description }}</p>
+      </div>
+    </ng-container>
+  </section>
+</div>
