@@ -1,19 +1,28 @@
 <aside>
   <div class="buttons">
-    <div (click)="changeTab(1)" [ngClass]="{'active': currentTab === 1}">Dates et villes disponibles</div>
+    <div (click)="changeTab(1)" [ngClass]="{'active': currentTab === 1}">Villes disponibles</div>
     <div (click)="changeTab(2)" [ngClass]="{'active': currentTab === 2}">Inter</div>
     <div (click)="changeTab(3)" [ngClass]="{'active': currentTab === 3}">Intra</div>
     <div (click)="changeTab(4)" [ngClass]="{'active': currentTab === 4}">Sur mesure</div>
   </div>
-  <app-map variant="training" [@fadeIn]="currentTab === 1"></app-map>
+  <app-map [activeCity]="city" [training]="name" [@fadeIn]="currentTab === 1" (clicked)="dispatchClick($event)"></app-map>
   <div class="container" [@fadeIn]="currentTab === 2">
     <p>Prérequis : <b>{{ prerequis }}</b></p>
     <p>Durée : <b>{{ duree }} jours ({{ duree * 7 }} heures)</b></p>
     <p>Prix : <b>{{ prix }}€ TTC</b></p>
     <div class="options">
-      <a routerLink="/formations/inscription" class="signup" (click)="register(id)">S'inscrire</a>
-      <span>Email</span>
-      <span>Appeler</span>
+      <div class="title"><span>Sessions {{ city ? 'à ' + city : 'France entière' }} :</span>
+        <span (click)="city = ''"> {{ city ? '(voir France entière)' : '' }}</span>
+      </div>
+      <div class="session" *ngFor="let session of filterSessions(sessions)">
+        <div>
+          <div>{{ formatDate(session.dateDebut, session.dateFin) }}</div>
+          <div>{{ session.centre.nom }}</div>
+        </div>
+        <svg width="30" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1600 736v192q0 40-28 68t-68 28h-416v416q0 40-28 68t-68 28h-192q-40 0-68-28t-28-68v-416h-416q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h416v-416q0-40 28-68t68-28h192q40 0 68 28t28 68v416h416q40 0 68 28t28 68z"/>
+        </svg>
+      </div>
     </div>
   </div>
   <div class="container" [@fadeIn]="currentTab === 3">

@@ -17,9 +17,6 @@ export class TrainingComponent {
   }
 
   ngOnInit() {
-    // this.store.select('trainings').subscribe(trainings =>
-    //   trainings.length === 0 ? this.store.dispatch({ type: '[Trainings] Load Trainings' }) : null
-    // );
     this.store.select('trainings').subscribe(trainings => {
       this.training = trainings.find(training => training.nom === this.name);
       if (!this.training) {
