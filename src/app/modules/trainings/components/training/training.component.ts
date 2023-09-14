@@ -9,11 +9,13 @@ import { Training } from 'src/app/core/models/Training';
   styleUrls: ['./training.component.scss']
 })
 export class TrainingComponent {
+  city: string = '';
   name: string = '';
   training?: Training;
 
   constructor(private route: ActivatedRoute, private router: Router, private store: Store<{ trainings: Training[] }>) {
     this.name = this.route.snapshot.params['name'];
+    this.city = this.route.snapshot.queryParams['ville'];
   }
 
   ngOnInit() {

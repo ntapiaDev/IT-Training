@@ -26,8 +26,8 @@ export class AsidePanelComponent {
   @Input() duree!: number;
   @Input() prix!: number;
   @Input() prerequis!: boolean;
-
-  city: string = '';
+  @Input() city: string = '';
+  
   currentTab = 1;
   sessions: TrainingSession[] = [];
 
@@ -39,6 +39,7 @@ export class AsidePanelComponent {
         .filter(session => session.formation.nom === this.name)
         .sort((a, b) => a['dateDebut'] < b['dateDebut'] ? -1 : a['dateDebut'] > b['dateDebut'] ? 1 : 0)
       );
+    if (this.city) this.currentTab = 2;
   }
 
   changeTab(index: number) {
@@ -57,8 +58,13 @@ export class AsidePanelComponent {
   }
 
   filterSessions(sessions: TrainingSession[]) {
-    if (this.city === '') return sessions;
+    if (!this.city) return sessions;
     return sessions.filter(session => session.centre.adresse.ville.nom === this.city);
+  }
+
+  resetCity() {
+    this.city = '';
+    this.currentTab = 1;
   }
 
   register(id: number) {

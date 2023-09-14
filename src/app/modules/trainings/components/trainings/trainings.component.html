@@ -24,7 +24,7 @@
       <ul>
         <ng-container *ngFor="let training of filterFromMap(trainings)">
           <li *ngIf="training.nom.toLowerCase().includes(filterValue.toLowerCase())">
-            <a [routerLink]="['/formations', training.nom]">> {{ training.nom }}</a>
+            <a [routerLink]="['/formations', training.nom]" [queryParams]="city ? { ville: city } : null"> {{ training.nom }}</a>
           </li>
         </ng-container>
       </ul>

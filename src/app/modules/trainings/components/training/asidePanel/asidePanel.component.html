@@ -12,7 +12,7 @@
     <p>Prix : <b>{{ prix }}€ TTC</b></p>
     <div class="options">
       <div class="title"><span>Sessions {{ city ? 'à ' + city : 'France entière' }} :</span>
-        <span (click)="city = ''"> {{ city ? '(voir France entière)' : '' }}</span>
+        <span (click)="resetCity()"> {{ city ? '(voir France entière)' : '' }}</span>
       </div>
       <div class="session" *ngFor="let session of filterSessions(sessions)">
         <div>
