@@ -21,9 +21,6 @@
     <span>
       <a routerLink="/connexion">Déja un compte ?</a>
     </span>
-    <div class="error-container">
-      <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
-    </div>
     <button type="submit" [disabled]="isLoading">S'inscrire</button>
   </form>
   <img class="logo" src="assets/logo-it-light.svg" alt="">

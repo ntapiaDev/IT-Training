@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { getSession } from './core/stores/session/session.actions';
 import { appInit } from './core/stores/app.actions';
+import { Session } from './core/models/Session';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +12,10 @@ import { appInit } from './core/stores/app.actions';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  session$ = this.store.select('session');
   title = 'IT-Training';
 
-  constructor(private location: Location, private router: Router, private store: Store) { }
+  constructor(private location: Location, private router: Router, private store: Store<{ session: Session }>) { }
 
   ngOnInit(): void {
     this.store.dispatch(appInit());

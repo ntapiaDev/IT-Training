@@ -1,79 +1,55 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
-import { Session, UserRole } from '../models/Session';
 import { TrainingService } from './training.service';
+import { Session } from '../models/Session';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
   private readonly serverUrl = 'http://localhost:8080';
-  private readonly tokenKey = 'auth_token';
 
   constructor(private http: HttpClient, private cookieService: CookieService, private trainingService: TrainingService) { }
 
-  login(email: string, password: string): Observable<any> {
-    if (!email || !password) {
-      return throwError('Veuillez fournir un nom d\'utilisateur et un mot de passe.');
-    }
-
-    return this.http.post(`${this.serverUrl}/login`, { email, password }).pipe(
-      catchError(error => {
-        return throwError('Erreur lors de l\'authentification.');
-      })
-    );
-  }
-
-  verifyToken(token: string): Observable<any> {
-    return this.http.get(`${this.serverUrl}/verify?token=${token}`).pipe(
-      catchError(error => {
-        return throwError('Erreur lors de la vérification du token.');
-      })
-    );
+  login(email: string, password: string) {
+    return this.http.post(`${this.serverUrl}/auth/login`, { username: email, password });
   }
 
   setToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
+    const expiredDate = new Date();
+    expiredDate.setDate(expiredDate.getDate() + 365);
+    this.cookieService.set('JWT', token, expiredDate);
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    return this.cookieService.get('JWT');
   }
 
-  removeToken(): void {
-    localStorage.removeItem(this.tokenKey);
+  logout(): void {
+    this.cookieService.delete('JWT');
   }
 
   isLoggedIn(): boolean {
     return this.getToken() !== null;
   }
 
-  register(email: string, password: string): Observable<any> {
-    if (!email || !password) {
-      return throwError('Veuillez fournir un nom d\'utilisateur et un mot de passe.');
-    }
-
-    const userData = {
-      email,
-      password
-    };
-
-    return this.http.post(`${this.serverUrl}/register`, userData).pipe(
-      catchError(error => {
-        return throwError('Erreur lors de l\'inscription.');
-      })
-    );
+  register(email: string, password: string) {
+    return this.http.post(`${this.serverUrl}/auth/create-user`, { username: email, password });
   }
 
-  getSession(): Session {
-    return {
-        role: UserRole.null,
-        token: '',
-        cart: this.trainingService.storage.getSize()
-    }
+  getSession(): Observable<Session> {
+    return this.http.get<any>(`${this.serverUrl}/auth/profil`).pipe(
+      map(user => {
+        const role = user?.tokenAttributes.scope;
+        return {
+          role,
+          token: this.getToken() ?? '',
+          cart: this.trainingService.storage.getSize()
+        };
+      })
+    );
   }
 }

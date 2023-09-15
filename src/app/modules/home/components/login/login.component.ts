@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../../../core/services/auth.service';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +14,8 @@ export class LoginComponent {
 
   loginForm: FormGroup;
   isLoading = false;
-  errorMessage: string | null = null;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private store: Store, private toastr: ToastrService) {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
@@ -22,26 +24,27 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.invalid) {
+      this.toastr.error('Merci de remplir tous les champs!');
       return;
     }
 
     this.isLoading = true;
-    this.errorMessage = null;
 
     const { email, password } = this.loginForm.value;
 
     this.authService.login(email, password).subscribe({
-      next: (isAuthenticated) => {
+      next: (response: any) => {
         this.isLoading = false;
-        if (isAuthenticated) {
-          // nicolas tu peux mettre lla redirection
-        } else {
-          this.errorMessage = 'Identifiants incorrects. Veuillez réessayer.';
-        }
+        this.authService.setToken(response.accessToken);
+        this.toastr.success('Connexion effectuée avec succès!');
+        this.authService.getSession().subscribe(session => {
+          this.store.dispatch({ type: '[Session] Get Session Success', session });
+          this.router.navigate(['/']);
+        });
       },
       error: (error) => {
         this.isLoading = false;
-        this.errorMessage = 'Une erreur est survenue lors de l\'authentification. Veuillez réessayer plus tard.';
+        this.toastr.error('Vos identifiants ne sont pas valides!');
       }
     });
   }

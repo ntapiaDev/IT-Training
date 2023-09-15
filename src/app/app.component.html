@@ -1,5 +1,5 @@
 <main>
-  <a *ngIf="!isAdminPage()" class="admin-panel" routerLink="/admin">Panneau d'administration</a>
+  <a *ngIf="!isAdminPage() && (session$ | async)?.role === 'ROLE_ADMIN'" class="admin-panel" routerLink="/admin">Panneau d'administration</a>
 
   <ng-container *ngIf="isAuthPage() || isAdminPage(); else website">
     <router-outlet></router-outlet>
