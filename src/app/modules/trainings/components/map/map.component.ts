@@ -28,6 +28,7 @@ export class MapComponent {
   ngOnInit() {
     this.sessions$.forEach((sessions) =>
       sessions.forEach((session) => {
+        if (session.type !== 'Inter') return;
         if (!this.training.length) {
           this.incrementOrAddMarker(session, false);
         } else if (session.formation.nom === this.training) {

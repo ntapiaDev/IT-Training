@@ -25,6 +25,7 @@ main {
     background-color: #f1f1f1;
     position: sticky;
     top: 0;
+    z-index: 999;
 
     div {
       max-width: $max-width;

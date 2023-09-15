@@ -20,7 +20,7 @@ export class TrainingComponent {
 
   ngOnInit() {
     this.store.select('trainings').subscribe(trainings => {
-      this.training = trainings.find(training => training.nom === this.name);
+      this.training = trainings.find(training => training.nom.replace(/ /g, '-') === this.name);
       if (!this.training) {
         this.router.navigate(['../formations']);
       }

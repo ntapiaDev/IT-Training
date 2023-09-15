@@ -37,7 +37,7 @@ export class AppComponent {
     let links = "<a href='/' class='custom-link'>Accueil</a>";
     let url = '';
     for (let i = 1; i < params.length; i++) {
-      links += ` > <a href='${url + '/' + params[i].split('?')[0]}' class='custom-link'>${params[i].split('?')[0].replace('-', ' ')}</a>`;
+      links += ` > <a href='${url + '/' + params[i].split('?')[0]}' class='custom-link'>${decodeURIComponent(params[i].split('?')[0].replace(/-/g, ' '))}</a>`;
       url += `/${params[i]}`;
     }
     return links;

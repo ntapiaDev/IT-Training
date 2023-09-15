@@ -16,6 +16,7 @@ export class AdminDashboardComponent {
   modaleAction = '';
   modaleId = 0;
   modaleIsOpen = false;
+  sessionToEdit?: TrainingSession;
   selected = '';
   reversed = false;
   currentTab = 'Inter';
@@ -83,6 +84,11 @@ export class AdminDashboardComponent {
       this.reversed = false;
     }
     this.data = newData;
+  }
+
+  editSession(session: TrainingSession) {
+    this.sessionToEdit = session;
+    this.formIsOpen = true;
   }
 
   delete(e: Event) {

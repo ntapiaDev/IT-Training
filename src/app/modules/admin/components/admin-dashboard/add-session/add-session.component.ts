@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
@@ -14,6 +14,7 @@ import { TrainingSessionService } from 'src/app/core/services/trainingSession.se
   styleUrls: ['./add-session.component.scss'],
 })
 export class AddSessionComponent {
+  @Input() sessionToEdit?: TrainingSession;
   @Output() sessionAdded = new EventEmitter<void>();
 
   modaleAction= '';
@@ -30,6 +31,7 @@ export class AddSessionComponent {
 
   constructor(private formBuilder: FormBuilder, private store: Store<{ centers: Center[], formers: Former[], trainings: Training[] }>, private sessionService: TrainingSessionService, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
+      id: [0],
       formation_id: [0, Validators.required],
       type: ['', Validators.required],
       dateDebut: [new Date(), Validators.required],
@@ -41,6 +43,25 @@ export class AddSessionComponent {
       remote: [false, Validators.required],
       prix: [0, Validators.required]
     });
+  }
+
+  ngOnInit() {
+    if (this.sessionToEdit) {
+      this.startDate = this.sessionToEdit.dateDebut;
+      this.endDate = this.sessionToEdit.dateFin;
+      this.duration = this.sessionToEdit.duree;
+
+      this.form.patchValue({
+        id: this.sessionToEdit.id,
+        formation_id: this.sessionToEdit.formation.id,
+        type: this.sessionToEdit.type,
+        centre_id: this.sessionToEdit.centre.id,
+        referent_id: this.sessionToEdit.formateur.id,
+        nombreParticipants: this.sessionToEdit.nombreParticipants,
+        remote: this.sessionToEdit.remote ? 'true' : 'false',
+        prix: this.sessionToEdit.prix
+      });
+    } 
   }
 
   setDurationAndPrice() {
@@ -61,6 +82,20 @@ export class AddSessionComponent {
       if (!isWeekend(date)) duration--;
     }
     return date;
+  };
+
+  getDuration = (start: Date, end: Date) => {
+    const startDate: Date = new Date(start);
+    const endDate: Date = new Date(end);
+    const isWeekend = (date: Date) => [0, 6].includes(date.getDay());
+    let duration = 0;  
+    while (startDate < endDate) {
+      startDate.setDate(startDate.getDate() + 1);
+      if (!isWeekend(startDate)) {
+        duration++;
+      }
+    }  
+    return duration;
   };
 
   formatEndDate() {
@@ -91,7 +126,20 @@ export class AddSessionComponent {
     newSession.centre = center;
     newSession.formateur = former;
 
-    this.sessionService.add(this.form.value).subscribe({
+    if (newSession.id) this.sessionService.update(newSession).subscribe({
+      next: (data) => {
+        this.store.dispatch({ type: '[sessions] Editer sessions', data });
+        this.toastr.success('Session modifiée avec succès!');
+        this.form.reset();
+        this.sessionToEdit = undefined;
+        this.sessionAdded.emit();
+      },
+      error: () => {
+        this.toastr.success("Erreur lors de la modification d'une session!");    
+      }
+    });
+
+    else this.sessionService.add(newSession).subscribe({
       next: (data) => {
         this.store.dispatch({ type: '[sessions] Ajouter sessions', data });
         this.toastr.success('Session ajouté avec succès!');

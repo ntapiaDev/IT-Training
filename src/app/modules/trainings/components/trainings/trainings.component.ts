@@ -19,6 +19,10 @@ export class TrainingsComponent {
     this.store.select('trainings').subscribe(trainings => this.trainings = trainings);
   }
 
+  formatName(name: string) {
+    return name.replace(/ /g, '-');
+  }
+
   filter(e: Event) {
     const inputElement = e.target as HTMLInputElement;
     this.filterValue = inputElement.value;

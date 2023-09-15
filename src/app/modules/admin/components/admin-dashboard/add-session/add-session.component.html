@@ -1,7 +1,8 @@
 <div class="container">
-  <h3>Création d'une session</h3>
+  <h3>{{ sessionToEdit ? 'Modification' : 'Création'}} d'une session</h3>
   <form [formGroup]="form" (ngSubmit)="submit()">
     <h4>Nom de la formation</h4>
+    <input type="number" formControlName="id" hidden>
     <label>Formation :
       <select #trainingSelect formControlName="formation_id" (change)="setDurationAndPrice()">
         <option *ngFor="let training of trainings$ | async" [value]="training.id">{{ training.nom }}</option>
@@ -63,7 +64,7 @@
     <label>Prix :
       <input type="number" formControlName="prix">
     </label>
-    <button>Ajouter</button>
+    <button>{{ sessionToEdit ? 'Modifier' : 'Ajouter'}}</button>
   </form>
 </div>
 

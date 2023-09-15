@@ -8,10 +8,10 @@
     <div class="infos">
         <div><span><b>Nom du référent :</b> {{ session?.formateur?.prenom + ' ' + session?.formateur?.nom }}</span></div>
         <div>
-            <span><b>Durée</b> : {{ session?.formation?.duree }} jours</span>
+            <span><b>Durée</b> : {{ session?.duree }} jours</span>
             <span><b>Date de début</b> : {{ formatDate(session?.dateDebut!) }}</span>
             <span><b>Date de fin</b> : {{ formatDate(session?.dateFin!) }}</span>
-            <span><b>Prix</b> : {{ session?.formation?.prix }}€</span>
+            <span><b>Prix</b> : {{ session?.prix }}€</span>
         </div>
         <div><span><b>Nombre de participants :</b> ??/{{ session?.nombreParticipants }}</span></div>
         <div><span><b>Formation à distance :</b> {{ session?.remote ? 'Oui' : 'Non'}}</span></div>
