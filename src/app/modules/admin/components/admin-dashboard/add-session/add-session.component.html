@@ -36,14 +36,14 @@
     <h4>Adresse de la session</h4>
     <label>Structure :
       <select #centerSelect formControlName="centre_id">
-        <option *ngFor="let center of centers$ | async" [value]="center.id">{{ center.nom }}</option>
+        <option *ngFor="let center of (admin$ | async)?.centers" [value]="center.id">{{ center.nom }}</option>
       </select>
       <button type="button" (click)="toggleModale('center')">+</button>
     </label>
     <h4>Responsable de la session</h4>
     <label>Formateur référent :
       <select #formerSelect formControlName="referent_id">
-        <option *ngFor="let former of formers$ | async" [value]="former.id">{{ former.nom + ' ' + former.prenom }}</option>
+        <option *ngFor="let former of (admin$ | async)?.formers" [value]="former.id">{{ former.nom + ' ' + former.prenom }}</option>
       </select>
       <button type="button" (click)="toggleModale('former')">+</button>
     </label>

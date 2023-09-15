@@ -24,7 +24,7 @@ export class AdminDashboardComponent {
   formIsOpen = false;
   detailedSession = 0;
 
-  constructor(private store: Store<{ trainingSessions: TrainingSession[]} >, private sessionService: TrainingSessionService, private toastr: ToastrService) { }
+  constructor(private store: Store<{ trainingSessions: TrainingSession[] } >, private sessionService: TrainingSessionService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.selectData(this.currentTab);

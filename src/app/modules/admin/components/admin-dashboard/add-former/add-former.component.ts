@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { Address, City } from 'src/app/core/models/Address';
+import { AdminStore } from 'src/app/core/models/Stores';
 import { Former } from 'src/app/core/models/User';
 import { AddressService } from 'src/app/core/services/address.service';
 import { CityService } from 'src/app/core/services/city.service';
@@ -18,7 +19,7 @@ export class AddFormerComponent {
 
   form: FormGroup;
 
-  constructor(private addressService: AddressService, private cityService: CityService, private formBuilder: FormBuilder, private formerService: FormerService, private store: Store<{ cities: City[] }>, private toastr: ToastrService) {
+  constructor(private addressService: AddressService, private cityService: CityService, private formBuilder: FormBuilder, private formerService: FormerService, private store: Store<{ admin: AdminStore }>, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
@@ -61,7 +62,7 @@ export class AddFormerComponent {
     }
     const newCity: City = this.form.value.adresse.ville;
     let existingCity = false;
-    this.store.select('cities').subscribe(cities => existingCity = cities.some(c => (c.nom === newCity.nom) && (c.codePostal === newCity.codePostal)));
+    this.store.select('admin').subscribe(({ cities }) => existingCity = cities.some(c => (c.nom === newCity.nom) && (c.codePostal === newCity.codePostal)));
     this.cityService.add(newCity).subscribe({
       next: (data: any) => {
         if (!existingCity) this.store.dispatch({ type: '[villes] Ajouter villes', data });

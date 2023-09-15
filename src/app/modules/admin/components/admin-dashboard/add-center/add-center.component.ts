@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { Address, City } from 'src/app/core/models/Address';
 import { Center } from 'src/app/core/models/Center';
+import { AdminStore } from 'src/app/core/models/Stores';
 import { AddressService } from 'src/app/core/services/address.service';
 import { CenterService } from 'src/app/core/services/center.service';
 import { CityService } from 'src/app/core/services/city.service';
@@ -18,7 +19,7 @@ export class AddCenterComponent {
 
   form: FormGroup;
 
-  constructor(private addressService: AddressService, private centerService: CenterService, private cityService: CityService, private formBuilder: FormBuilder, private store: Store<{ cities: City[] }>, private toastr: ToastrService) {
+  constructor(private addressService: AddressService, private centerService: CenterService, private cityService: CityService, private formBuilder: FormBuilder, private store: Store<{ admin: AdminStore }>, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
       nom: ['', Validators.required],
       adresse: this.formBuilder.group({
@@ -56,7 +57,7 @@ export class AddCenterComponent {
     }
     const newCity: City = this.form.value.adresse.ville;
     let existingCity = false;
-    this.store.select('cities').subscribe(cities => existingCity = cities.some(c => (c.nom === newCity.nom) && (c.codePostal === newCity.codePostal)));
+    this.store.select('admin').subscribe(({ cities }) => existingCity = cities.some(c => (c.nom === newCity.nom) && (c.codePostal === newCity.codePostal)));
     this.cityService.add(newCity).subscribe({
       next: (data: any) => {
         if (!existingCity) this.store.dispatch({ type: '[villes] Ajouter villes', data });

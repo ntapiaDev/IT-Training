@@ -44,11 +44,7 @@ import { SharedModule } from './shared/shared.module';
     AdminModule,
     EffectsModule.forRoot([AppEffects, SessionEffects]),
     StoreModule.forRoot({
-      address: addressesReducer,
       areas: areasReducer,
-      centers: centersReducer,
-      cities: citiesReducer,
-      formers: formersReducer,
       session: sessionReducer,
       themes: themesReducer,
       trainings: trainingsReducer,

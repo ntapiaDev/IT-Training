@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { Center } from 'src/app/core/models/Center';
+import { AdminStore } from 'src/app/core/models/Stores';
 import { Training } from 'src/app/core/models/Training';
 import { TrainingSession } from 'src/app/core/models/TrainingSession';
 import { Former } from 'src/app/core/models/User';
@@ -21,15 +22,14 @@ export class AddSessionComponent {
   modaleIsOpen = false;
 
   form: FormGroup;
-  centers$ = this.store.select('centers');
-  formers$ = this.store.select('formers');
+  admin$ = this.store.select('admin');
   trainings$ = this.store.select('trainings');
   
   startDate?: Date;
   duration?: number;
   endDate?: any;
 
-  constructor(private formBuilder: FormBuilder, private store: Store<{ centers: Center[], formers: Former[], trainings: Training[] }>, private sessionService: TrainingSessionService, private toastr: ToastrService) {
+  constructor(private formBuilder: FormBuilder, private store: Store<{ admin: AdminStore, trainings: Training[] }>, private sessionService: TrainingSessionService, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
       id: [0],
       formation_id: [0, Validators.required],
@@ -117,9 +117,9 @@ export class AddSessionComponent {
     let training!: Training;
     this.store.select('trainings').forEach(trainings => training = trainings.find(t => t.id == this.form.value.formation_id)!);
     let center!: Center;
-    this.store.select('centers').forEach(centers => center = centers.find(c => c.id == this.form.value.centre_id)!);
+    this.store.select('admin').forEach(({ centers }) => center = centers.find(c => c.id == this.form.value.centre_id)!);
     let former!: Former;
-    this.store.select('formers').forEach(formers => former = formers.find(f => f.id == this.form.value.referent_id)!);
+    this.store.select('admin').forEach(({ formers }) => former = formers.find(f => f.id == this.form.value.referent_id)!);
 
     const newSession: TrainingSession = this.form.value;
     newSession.formation = training;
