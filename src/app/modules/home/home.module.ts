@@ -13,6 +13,7 @@ import { RegisterFormComponent } from './components/register/register-form.compo
 import { WhatComponent } from './components/what/what.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { SearchComponent } from './components/search/search.component';
+import { JobsComponent } from './components/jobs/jobs.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SearchComponent } from './components/search/search.component';
     ContactFormComponent,
     WhatComponent,
     CarouselComponent,
-    SearchComponent
+    SearchComponent,
+    JobsComponent
   ],
   imports: [
     CommonModule,

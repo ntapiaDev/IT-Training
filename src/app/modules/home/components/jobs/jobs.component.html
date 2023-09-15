@@ -1,0 +1,44 @@
+<div class="container">
+  <!-- <section>
+    <div>
+      <div class="fond">
+        <div class="titles">
+          <h3>Info - 20/04/2023</h3>
+          <h4>Chef de projets</h4>
+        </div>
+      </div>
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere
+        excepturi repellendus eveniet, quos tempore dolores optio nemo dicta
+        amet aliquid est?
+      </p>
+    </div>
+  </section> -->
+  <section>
+    <h2>Les métiers les plus recherchés pas les entreprises</h2>
+    <div class="fond">
+      <div
+        id="picture"
+        *ngFor="let job of jobs"
+        [ngStyle]="{ 'background-image': getCurrentJobUrl() }"
+      >
+        <ng-container *ngFor="let job of jobs">
+          <div id="titles" *ngIf="currentIndex === job.id">
+            <h3 class="tree">{{ job.title }}</h3>
+            <h4 class="four">{{ job.subtitle }}</h4>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="fond" id="para">
+      <div id="paragraphe" *ngFor="let job of jobs">
+        <ng-container *ngFor="let job of jobs">
+          <p *ngIf="currentIndex === job.id">
+            {{ job.description }}
+          </p>
+        </ng-container>
+      </div>
+    </div>
+  </section>
+</div>
