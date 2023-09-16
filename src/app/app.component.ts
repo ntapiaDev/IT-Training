@@ -38,10 +38,11 @@ export class AppComponent {
     const params = this.location.path().split('/');
     let links = "<a href='/' class='custom-link'>Accueil</a>";
     let url = '';
-    for (let i = 1; i < params.length; i++) {
-      links += ` > <a href='${url + '/' + params[i].split('?')[0]}' class='custom-link'>${decodeURIComponent(params[i].split('?')[0].replace(/-/g, ' '))}</a>`;
+    for (let i = 1; i < params.length - 1; i++) {
+      links += ` > <a href='${url + '/' + params[i]}' class='custom-link'>${decodeURIComponent(params[i].replace(/-/g, ' '))}</a>`;
       url += `/${params[i]}`;
     }
+    links += ` > ${decodeURIComponent(params[params.length -1].split('?')[0].replace(/-/g, ' '))}`;
     return links;
   }
 

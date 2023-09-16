@@ -24,7 +24,7 @@ export class AddSessionComponent {
   form: FormGroup;
   admin$ = this.store.select('admin');
   trainings$ = this.store.select('trainings');
-  
+
   startDate?: Date;
   duration?: number;
   endDate?: any;
@@ -61,7 +61,19 @@ export class AddSessionComponent {
         remote: this.sessionToEdit.remote ? 'true' : 'false',
         prix: this.sessionToEdit.prix
       });
-    } 
+    }
+  }
+
+  getToday() {
+    return this.formatDate(new Date());
+  }
+
+  formatDate(d: Date) {
+    const date = new Date(d);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const year = date.getFullYear().toString();
+    return `${year}-${month}-${day}`;
   }
 
   setDurationAndPrice() {
@@ -88,13 +100,13 @@ export class AddSessionComponent {
     const startDate: Date = new Date(start);
     const endDate: Date = new Date(end);
     const isWeekend = (date: Date) => [0, 6].includes(date.getDay());
-    let duration = 0;  
+    let duration = 0;
     while (startDate < endDate) {
       startDate.setDate(startDate.getDate() + 1);
       if (!isWeekend(startDate)) {
         duration++;
       }
-    }  
+    }
     return duration;
   };
 
@@ -113,7 +125,7 @@ export class AddSessionComponent {
       this.toastr.error('Merci de remplir tous les champs!');
       return;
     }
-    
+
     let training!: Training;
     this.store.select('trainings').forEach(trainings => training = trainings.find(t => t.id == this.form.value.formation_id)!);
     let center!: Center;
@@ -135,7 +147,7 @@ export class AddSessionComponent {
         this.sessionAdded.emit();
       },
       error: () => {
-        this.toastr.success("Erreur lors de la modification d'une session!");    
+        this.toastr.success("Erreur lors de la modification d'une session!");
       }
     });
 
@@ -147,7 +159,7 @@ export class AddSessionComponent {
         this.sessionAdded.emit();
       },
       error: () => {
-        this.toastr.success("Erreur lors de l'ajout d'une session!");    
+        this.toastr.success("Erreur lors de l'ajout d'une session!");
       }
     });
   }

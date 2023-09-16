@@ -53,7 +53,7 @@ export class RegisterFormComponent implements OnInit {
             this.authService.setToken(response.accessToken);
             this.toastr.success('Connexion effectuée avec succès!');
             this.authService.getSession().subscribe(session => {
-              this.store.dispatch({ type: '[Session] Get Session Success', session: this.authService.getSession() });
+              this.store.dispatch({ type: '[Session] Get Session Success', session });
               this.router.navigate(['/']);
             });
           },

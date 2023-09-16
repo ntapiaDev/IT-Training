@@ -27,7 +27,7 @@ export class AsidePanelComponent {
   @Input() prix!: number;
   @Input() prerequis!: boolean;
   @Input() city: string = '';
-  
+
   currentTab = 1;
   sessions: TrainingSession[] = [];
 
@@ -36,7 +36,7 @@ export class AsidePanelComponent {
   ngOnInit() {
     this.store.select('trainingSessions').subscribe(
       sessions => this.sessions = sessions
-        .filter(session => (session.formation.nom === this.name) && (session.type === 'Inter'))
+        .filter(session => (session.formation?.nom === this.name) && (session.type === 'Inter'))
         .sort((a, b) => a['dateDebut'] < b['dateDebut'] ? -1 : a['dateDebut'] > b['dateDebut'] ? 1 : 0)
       );
     if (this.city) this.currentTab = 2;
@@ -64,7 +64,6 @@ export class AsidePanelComponent {
 
   resetCity() {
     this.city = '';
-    this.currentTab = 1;
   }
 
   register(id: number) {

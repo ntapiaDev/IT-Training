@@ -14,6 +14,7 @@
       <div class="title"><span>Sessions {{ city ? 'à ' + city : 'France entière' }} :</span>
         <span (click)="resetCity()"> {{ city ? '(voir France entière)' : '' }}</span>
       </div>
+      <span *ngIf="!filterSessions(sessions).length">Aucune session disponible pour le moment.</span>
       <div class="session" *ngFor="let session of filterSessions(sessions)">
         <div>
           <div>{{ formatDate(session.dateDebut, session.dateFin) }}</div>

@@ -13,7 +13,7 @@
     <div class="list">
       <div class="reset">
         <h3>Formations {{ city ? 'à ' + city + ' (' + filterMap.length + ')' : 'France entière (' + trainings.length + ')'}}</h3>
-        <div (click)="mapFilter({ city: '', trainings: []})">Réinitialiser la liste.</div>
+        <div *ngIf="city.length" (click)="mapFilter({ city: '', trainings: []})">Réinitialiser la liste.</div>
       </div>
       <div class="input">
         <input type="text" (input)="filter($event)" placeholder="Rechercher une formation..."/>

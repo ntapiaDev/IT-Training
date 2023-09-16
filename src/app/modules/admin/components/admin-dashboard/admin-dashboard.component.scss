@@ -120,7 +120,7 @@ table {
       .actions-list {
         display: flex;
         justify-content: space-between;
-        
+
         svg {
           cursor: pointer;
 
@@ -135,6 +135,7 @@ table {
     &.details {
       padding: 0;
       border: none;
+      cursor: default;
     }
   }
 }

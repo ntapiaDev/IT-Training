@@ -24,13 +24,13 @@
     <div>
       <h4>Dates de la session</h4>
       <label>Date de début :
-        <input type="date" formControlName="dateDebut" [(ngModel)]="startDate" (input)="formatEndDate()">
+        <input type="date" formControlName="dateDebut" [(ngModel)]="startDate" (input)="formatEndDate()" [min]="getToday()">
       </label>
       <label>Durée (jours) :
         <input type="number" formControlName="duree" [(ngModel)]="duration" (input)="formatEndDate()">
       </label>
       <label>Date de fin :
-        <input type="date" formControlName="dateFin" [(ngModel)]="endDate">
+        <input type="date" formControlName="dateFin" [(ngModel)]="endDate" [min]="getToday()">
       </label>
     </div>
     <h4>Adresse de la session</h4>
