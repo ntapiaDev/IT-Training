@@ -1,6 +1,6 @@
 import { Center } from "./Center"
 import { Training } from "./Training"
-import { Former } from "./User"
+import { Former, User } from "./User"
 
 export interface TrainingSession {
   id: number,
@@ -13,6 +13,7 @@ export interface TrainingSession {
   formateur: Former,
   nombreParticipants: number,
   remote: boolean,
-  prix: number
+  prix: number,
+  candidats: User[],
   [key: string]: any
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,12 +7,15 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent {
-  formTarget: string = 'particulier';
-  registerForm: FormGroup;
+  @Input() sessionId! : number;
 
-  constructor() {
+  formTarget: string = 'particulier';
+  registerForm!: FormGroup;
+
+  ngOnInit() {
     // Récupérer les infos du user si il y a une session
     this.registerForm = new FormGroup({
+      session_id: new FormControl(this.sessionId, [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
       firstName: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -40,7 +43,6 @@ export class FormComponent {
   }
 
   register() {
-    //Ajouter les id des formations choisies
     console.log(this.registerForm.value);
   }
 }

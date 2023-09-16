@@ -1,7 +1,6 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { Session } from 'src/app/core/models/Session';
 import { TrainingSession } from 'src/app/core/models/TrainingSession';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -13,9 +12,9 @@ import { TrainingSessionService } from 'src/app/core/services/trainingSession.se
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent {
-  selectedSession?: TrainingSession;
   session$ = this.store.select('session');
-  trainingSession$: Observable<TrainingSession[]> = this.store.select('trainingSessions');
+  trainingSession$ = this.store.select('trainingSessions');
+  selectedSession?: TrainingSession;
 
   constructor(private authService: AuthService, private location: Location, private store: Store<{ session: Session, trainingSessions: TrainingSession[] }>, private trainingSessionService: TrainingSessionService) {
     this.loadSessions();

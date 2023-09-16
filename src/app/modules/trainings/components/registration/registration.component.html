@@ -8,7 +8,7 @@
 
 <div class="register" *ngIf="selectedSession">
   <app-selected-training [session]="selectedSession" (deleteEvent)="deleteSession($event)"></app-selected-training>
-  <app-form *ngIf="(session$ | async)?.token"></app-form>
+  <app-form *ngIf="(session$ | async)?.token" [sessionId]="selectedSession.id"></app-form>
 </div>
 
 <div class="login" *ngIf="selectedSession && !(session$ | async)?.token">
