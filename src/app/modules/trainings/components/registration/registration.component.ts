@@ -3,9 +3,9 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Session } from 'src/app/core/models/Session';
-import { Training } from 'src/app/core/models/Training';
+import { TrainingSession } from 'src/app/core/models/TrainingSession';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { TrainingService } from 'src/app/core/services/training.service';
+import { TrainingSessionService } from 'src/app/core/services/trainingSession.service';
 
 @Component({
   selector: 'app-registration',
@@ -13,28 +13,28 @@ import { TrainingService } from 'src/app/core/services/training.service';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent {
-  selectedTrainings: Training[] = [];
+  selectedSession?: TrainingSession;
   session$ = this.store.select('session');
-  trainings: Observable<Training[]> = this.store.select('trainings');
+  trainingSession$: Observable<TrainingSession[]> = this.store.select('trainingSessions');
 
-  constructor(private authService: AuthService, private location: Location, private store: Store<{ session: Session, trainings: Training[] }>, private trainingService: TrainingService) {
-    this.loadTrainings();
+  constructor(private authService: AuthService, private location: Location, private store: Store<{ session: Session, trainingSessions: TrainingSession[] }>, private trainingSessionService: TrainingSessionService) {
+    this.loadSessions();
   }
 
-  loadTrainings() {
-    this.trainings.subscribe(trainings => {
-      this.selectedTrainings = trainings.filter(training => this.trainingService.storage.get().includes(training.id));
+  loadSessions() {
+    this.trainingSession$.subscribe(sessions => {
+      this.selectedSession = sessions.find(session => this.trainingSessionService.storage.get().includes(session.id));
     })
   }
 
-  addTraining(id: number) {
-    this.trainingService.storage.add(id);
-    this.loadTrainings();
+  addSession(id: number) {
+    this.trainingSessionService.storage.add(id);
+    this.loadSessions();
   }
 
-  deleteTraining(id: number) {
-    this.trainingService.storage.delete(id);
-    this.loadTrainings();
+  deleteSession(id: number) {
+    this.trainingSessionService.storage.delete(id);
+    this.loadSessions();
   }
 
   redirect() {

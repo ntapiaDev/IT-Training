@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { trigger, state, transition, style, animate } from '@angular/animations';
-import { TrainingService } from 'src/app/core/services/training.service';
 import { Store } from '@ngrx/store';
 import { TrainingSession } from 'src/app/core/models/TrainingSession';
+import { TrainingSessionService } from 'src/app/core/services/trainingSession.service';
 
 @Component({
   selector: 'app-asidePanel',
@@ -31,7 +31,7 @@ export class AsidePanelComponent {
   currentTab = 1;
   sessions: TrainingSession[] = [];
 
-  constructor(private store: Store<{ trainingSessions: TrainingSession[] }>, private trainingService: TrainingService) { }
+  constructor(private store: Store<{ trainingSessions: TrainingSession[] }>, private trainingSessionService: TrainingSessionService) { }
 
   ngOnInit() {
     this.store.select('trainingSessions').subscribe(
@@ -67,6 +67,6 @@ export class AsidePanelComponent {
   }
 
   register(id: number) {
-    this.trainingService.storage.add(id);
+    this.trainingSessionService.storage.add(id);
   }
 }

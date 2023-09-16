@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
-import { TrainingService } from './training.service';
+import { TrainingSessionService } from './trainingSession.service';
 import { Session } from '../models/Session';
 
 @Injectable({
@@ -13,7 +13,7 @@ import { Session } from '../models/Session';
 export class AuthService {
   private readonly serverUrl = 'http://localhost:8080';
 
-  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, private trainingService: TrainingService) { }
+  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, private trainingSessionService: TrainingSessionService) { }
 
   login(email: string, password: string) {
     return this.http.post(`${this.serverUrl}/auth/login`, { username: email, password });
@@ -48,7 +48,7 @@ export class AuthService {
         return {
           role,
           token: this.getToken() ?? '',
-          cart: this.trainingService.storage.getSize()
+          cart: this.trainingSessionService.storage.getSize()
         };
       })
     );

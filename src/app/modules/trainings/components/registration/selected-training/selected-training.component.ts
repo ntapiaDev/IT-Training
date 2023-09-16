@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Training } from 'src/app/core/models/Training';
+import { TrainingSession } from 'src/app/core/models/TrainingSession';
 
 @Component({
   selector: 'app-selected-training',
@@ -7,10 +7,10 @@ import { Training } from 'src/app/core/models/Training';
   styleUrls: ['./selected-training.component.scss']
 })
 export class SelectedTrainingComponent {
-  @Input() training!: Training;
+  @Input() session!: TrainingSession;
   @Output() deleteEvent: EventEmitter<number> = new EventEmitter<number>();
 
-  deleteTraining(id: number) {
+  deleteSession(id: number) {
     this.deleteEvent.emit(id);
   }
 }

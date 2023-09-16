@@ -20,9 +20,9 @@
           <div>{{ formatDate(session.dateDebut, session.dateFin) }}</div>
           <div>{{ session.centre.nom }}</div>
         </div>
-        <svg width="30" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+        <a routerLink="/formations/inscription"><svg width="30" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" (click)="register(session.id)">
           <path d="M1600 736v192q0 40-28 68t-68 28h-416v416q0 40-28 68t-68 28h-192q-40 0-68-28t-28-68v-416h-416q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h416v-416q0-40 28-68t68-28h192q40 0 68 28t28 68v416h416q40 0 68 28t28 68z"/>
-        </svg>
+        </svg></a>
       </div>
     </div>
   </div>
