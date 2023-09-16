@@ -1,7 +1,10 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { Session } from 'src/app/core/models/Session';
 import { Training } from 'src/app/core/models/Training';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { TrainingService } from 'src/app/core/services/training.service';
 
 @Component({
@@ -11,9 +14,10 @@ import { TrainingService } from 'src/app/core/services/training.service';
 })
 export class RegistrationComponent {
   selectedTrainings: Training[] = [];
+  session$ = this.store.select('session');
   trainings: Observable<Training[]> = this.store.select('trainings');
 
-  constructor(private store: Store<{ trainings: Training[] }>, private trainingService: TrainingService) {
+  constructor(private authService: AuthService, private location: Location, private store: Store<{ session: Session, trainings: Training[] }>, private trainingService: TrainingService) {
     this.loadTrainings();
   }
 
@@ -31,5 +35,9 @@ export class RegistrationComponent {
   deleteTraining(id: number) {
     this.trainingService.storage.delete(id);
     this.loadTrainings();
+  }
+
+  redirect() {
+    this.authService.setRedirect(this.location.path());
   }
 }

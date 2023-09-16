@@ -1,7 +1,8 @@
 @import "variables";
 
 .empty,
-.register {
+.register,
+.login {
   max-width: 980px;
   margin: 4em auto 3em;
   color: $dark-grey;
@@ -11,7 +12,8 @@
   }
 }
 
-.empty {
+.empty,
+.login {
   padding: 2em;
   border-top: 2px solid #b0b2b5;
   border-bottom: 2px solid #b0b2b5;
@@ -31,5 +33,13 @@
     text-transform: uppercase;
     font-weight: bold;
     color: $primary-color;
+  }
+}
+
+.login {
+
+  a {
+    margin-top: 2em;
+    display: inline-block;
   }
 }

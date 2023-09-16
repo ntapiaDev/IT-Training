@@ -9,7 +9,7 @@
           <ul class="select" *ngIf="input">
             <ng-container *ngFor="let training of (trainings | async)">
               <li *ngIf="training.nom.toLowerCase().includes(this.input.toLowerCase())">
-                <a [routerLink]="['/formations', training.nom]">{{ training.nom }}</a>
+                <a [routerLink]="['/formations', formatName(training.nom)]">{{ training.nom }}</a>
               </li>
             </ng-container>
           </ul>

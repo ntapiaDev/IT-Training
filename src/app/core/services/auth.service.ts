@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
@@ -12,7 +13,7 @@ import { Session } from '../models/Session';
 export class AuthService {
   private readonly serverUrl = 'http://localhost:8080';
 
-  constructor(private http: HttpClient, private cookieService: CookieService, private trainingService: TrainingService) { }
+  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, private trainingService: TrainingService) { }
 
   login(email: string, password: string) {
     return this.http.post(`${this.serverUrl}/auth/login`, { username: email, password });
@@ -51,5 +52,18 @@ export class AuthService {
         };
       })
     );
+  }
+
+  setRedirect(url: string) {
+    this.cookieService.set('redirect', url);
+  }
+
+  getRedirect() {
+    const url = this.cookieService.get('redirect');
+    if (url) {
+      this.cookieService.delete('redirect');
+      this.router.navigate([decodeURIComponent(url)]);
+      return true;
+    } else return false;
   }
 }

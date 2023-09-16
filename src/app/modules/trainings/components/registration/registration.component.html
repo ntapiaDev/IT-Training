@@ -8,5 +8,10 @@
 
 <div class="register" *ngIf="selectedTrainings.length > 0">
   <app-selected-training *ngFor="let training of selectedTrainings" [training]="training" (deleteEvent)="deleteTraining($event)"></app-selected-training>
-  <app-form></app-form>
+  <app-form *ngIf="(session$ | async)?.token"></app-form>
+</div>
+
+<div class="login" *ngIf="selectedTrainings.length > 0 && !(session$ | async)?.token">
+  <p>Vous devez être connecté pour vous inscrire à une formation</p>
+  <a routerLink="/connexion" (click)="redirect()">Se connecter</a>
 </div>
