@@ -9,6 +9,7 @@
   </div>
 </form>
 <form [formGroup]="registerForm" (ngSubmit)="register()">
+
   <div *ngIf="formTarget === 'entreprise'">
     <div class="formGroup">
       <input type="text" formControlName="company" placeholder="Entreprise" />
@@ -19,21 +20,35 @@
       <input type="text" formControlName="position" placeholder="Fonction" />
     </div>
   </div>
+
   <div class="formGroup">
-    <input type="text" formControlName="lastName" placeholder="Nom" />
-    <input type="text" formControlName="firstName" placeholder="Prénom" />
+    <input type="text" formControlName="nom" placeholder="Nom" />
+    <input type="text" formControlName="prenom" placeholder="Prénom" />
   </div>
   <div class="formGroup">
-    <input type="text" formControlName="email" placeholder="Email" />
-    <input type="text" formControlName="phone" placeholder="Téléphone" />
+    <input type="text" formControlName="email" placeholder="Email" readonly />
+    <input type="text" formControlName="telephone" placeholder="Téléphone" />
   </div>
-  <div class="formGroup">
-    <input type="text" formControlName="adresse" placeholder="Adresse" />
-    <input class="small" type="text" formControlName="code" placeholder="Code postal" />
+  <div class="formGroup" *ngIf="formTarget === 'particulier'">
+    <input type="text" formControlName="securiteSociale" placeholder="Numéro de sécurité sociale" />
+    <input type="text" formControlName="identifiantPoleEmploi" placeholder="Identifiant Pôle emploi" />
   </div>
-  <div class="formGroup">
-    <input type="text" formControlName="city" placeholder="Ville" />
-    <input class="small" type="text" formControlName="country" placeholder="Pays" />
+
+  <div class="address-form">
+    <app-address-form (addressEvent)="loadAddress($event)"></app-address-form>
+  </div>
+
+  <div class="address" formGroupName="adresse">
+    <div class="formGroup">
+      <input type="text" formControlName="numero" placeholder="Numéro" readonly>
+      <input type="text" formControlName="adresse" placeholder="Rue" readonly>
+    </div>
+    <div class="formGroup" formGroupName="ville">
+      <input type="text" formControlName="codePostal" placeholder="Code Postal" readonly>
+      <input type="text" formControlName="nom" placeholder="Ville" readonly>
+      <input type="number" formControlName="lon" readonly hidden>
+      <input type="number" formControlName="lat" readonly hidden>
+    </div>
   </div>
   <button>Envoyer</button>
 </form>

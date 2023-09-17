@@ -47,11 +47,16 @@ export class AuthService {
         const role = user?.tokenAttributes.scope;
         return {
           role,
+          email: user?.name,
           token: this.getToken() ?? '',
           cart: this.trainingSessionService.storage.getSize()
         };
       })
     );
+  }
+
+  getProfil() {
+    return this.http.get<any>(`${this.serverUrl}/auth/profil`);
   }
 
   setRedirect(url: string) {

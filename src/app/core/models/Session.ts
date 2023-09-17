@@ -6,6 +6,7 @@ export enum UserRole {
 
 export interface Session {
   role: string,
+  email: string,
   token: string,
   cart: number
 }

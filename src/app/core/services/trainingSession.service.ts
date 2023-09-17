@@ -56,10 +56,10 @@ export class TrainingSessionService {
         this.toastr.error('Vous êtes déjà inscrit pour cette session de formation!');
       }
     },
-    delete(id: number) {
+    delete(id: number, toastr: boolean = true) {
       this.set([]);
-      this.toastr.success('Cette session a bien été supprimée.');
       this.store.dispatch({ type: '[Session] Decrement Cart' });
+      if (toastr) this.toastr.success('Cette session a bien été supprimée.');
     },
     getSize(): number {
       return this.get().length;

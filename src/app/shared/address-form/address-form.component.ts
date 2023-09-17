@@ -17,7 +17,7 @@ export class AddressFormComponent {
   constructor(private http: HttpClient) { }
 
   getAddress() {
-    if (this.address.length > 2) {
+    if (this.address.length > 3) {
       const url = 'https://api-adresse.data.gouv.fr/search/';
       const address: Observable<any> = this.http.get(`${url}?q=${this.address}`);
       address.subscribe(data => this.adressList = data.features);
