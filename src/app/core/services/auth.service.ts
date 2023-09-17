@@ -1,79 +1,75 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
-import { Session, UserRole } from '../models/Session';
-import { TrainingService } from './training.service';
+import { TrainingSessionService } from './trainingSession.service';
+import { Session } from '../models/Session';
+import { server_url } from './server';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private readonly serverUrl = `${server_url}/auth`;
 
-  private readonly serverUrl = 'http://localhost:8080';
-  private readonly tokenKey = 'auth_token';
+  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, private trainingSessionService: TrainingSessionService) { }
 
-  constructor(private http: HttpClient, private cookieService: CookieService, private trainingService: TrainingService) { }
-
-  login(email: string, password: string): Observable<any> {
-    if (!email || !password) {
-      return throwError('Veuillez fournir un nom d\'utilisateur et un mot de passe.');
-    }
-
-    return this.http.post(`${this.serverUrl}/login`, { email, password }).pipe(
-      catchError(error => {
-        return throwError('Erreur lors de l\'authentification.');
-      })
-    );
-  }
-
-  verifyToken(token: string): Observable<any> {
-    return this.http.get(`${this.serverUrl}/verify?token=${token}`).pipe(
-      catchError(error => {
-        return throwError('Erreur lors de la vérification du token.');
-      })
-    );
+  login(email: string, password: string) {
+    return this.http.post(`${this.serverUrl}/login`, { username: email, password });
   }
 
   setToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
+    const expiredDate = new Date();
+    expiredDate.setDate(expiredDate.getDate() + 365);
+    this.cookieService.set('JWT', token, expiredDate);
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    return this.cookieService.get('JWT');
   }
 
-  removeToken(): void {
-    localStorage.removeItem(this.tokenKey);
+  logout(): void {
+    this.cookieService.delete('JWT');
   }
 
   isLoggedIn(): boolean {
     return this.getToken() !== null;
   }
 
-  register(email: string, password: string): Observable<any> {
-    if (!email || !password) {
-      return throwError('Veuillez fournir un nom d\'utilisateur et un mot de passe.');
-    }
+  register(email: string, password: string) {
+    return this.http.post(`${this.serverUrl}/create-user`, { username: email, password });
+  }
 
-    const userData = {
-      email,
-      password
-    };
-
-    return this.http.post(`${this.serverUrl}/register`, userData).pipe(
-      catchError(error => {
-        return throwError('Erreur lors de l\'inscription.');
+  getSession(): Observable<Session> {
+    return this.http.get<any>(`${this.serverUrl}/profil`).pipe(
+      map(user => {
+        const role = user?.tokenAttributes.scope;
+        return {
+          role,
+          email: user?.name,
+          token: this.getToken() ?? '',
+          cart: this.trainingSessionService.storage.getSize()
+        };
       })
     );
   }
 
-  getSession(): Session {
-    return {
-        role: UserRole.null,
-        token: '',
-        cart: this.trainingService.storage.getSize()
-    }
+  getProfil() {
+    return this.http.get<any>(`${this.serverUrl}/profil`);
+  }
+
+  setRedirect(url: string) {
+    this.cookieService.set('redirect', url);
+  }
+
+  getRedirect() {
+    const url = this.cookieService.get('redirect');
+    if (url) {
+      this.cookieService.delete('redirect');
+      this.router.navigate([decodeURIComponent(url)]);
+      return true;
+    } else return false;
   }
 }

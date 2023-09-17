@@ -1,11 +1,12 @@
 export enum UserRole {
-  User = 'user',
-  Admin = 'admin',
+  ROLE_USER = 'Utilisateur',
+  ROLE_ADMIN = 'Administrateur',
   null = ''
 }
 
 export interface Session {
-  role: UserRole,
+  role: string,
+  email: string,
   token: string,
   cart: number
 }

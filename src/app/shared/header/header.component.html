@@ -9,11 +9,14 @@
         <li><a routerLink="">Particulier</a></li>
         <li><a routerLink="">Entreprise</a></li>
         <li><a routerLink="">Qui sommes-nous ?</a></li>
+        <li><a routerLink="/formations/inscription">S'inscrire à une formation ({{ (session$ | async)?.cart }})</a></li>
         <ng-container *ngIf="!(session$ | async)?.token">
-          <li><a routerLink="/formations/inscription">S'inscrire à une formation ({{ (session$ | async)?.cart }})</a></li>
-          <li><a routerLink="/connexion">Mon compte</a></li>
+          <li><a routerLink="/connexion">Se connecter</a></li>
         </ng-container>
-        <li *ngIf="(session$ | async)?.token"><a routerLink="/tableau-de-bord">Tableau de bord</a></li>
+        <ng-container *ngIf="(session$ | async)?.token">
+          <li><a routerLink="/tableau-de-bord">Mon compte</a></li>
+          <li><span (click)="logout()">Déconnexion</span></li>
+        </ng-container>
       </ul>
       <div class="burger" (click)="toggleBurger()">
         <div class="line" [ngClass]="{'line1-active': isBurgerOpen}"></div>
@@ -25,11 +28,14 @@
         <li><a routerLink="">Particulier</a></li>
         <li><a routerLink="">Entreprise</a></li>
         <li><a routerLink="">Qui sommes-nous ?</a></li>
+        <li><a routerLink="/formations/inscription">S'inscrire à une formation ({{ (session$ | async)?.cart }})</a></li>
         <ng-container *ngIf="!(session$ | async)?.token">
-          <li><a routerLink="/formations/inscription">S'inscrire à une formation</a></li>
-          <li><a routerLink="/connexion">Mon compte</a></li>
+          <li><a routerLink="/connexion">Se connecter</a></li>
         </ng-container>
-        <li *ngIf="(session$ | async)?.token"><a routerLink="/tableau-de-bord">Tableau de bord</a></li>
+        <ng-container *ngIf="(session$ | async)?.token">
+          <li><a routerLink="/tableau-de-bord">Mon compte</a></li>
+          <li><span (click)="logout()">Déconnexion</span></li>
+        </ng-container>
       </ul>
     </nav>
   </div>

@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
+import { Theme } from 'src/app/core/models/Theme';
+import { Training } from 'src/app/core/models/Training';
+import { TrainingService } from 'src/app/core/services/training.service';
 
 @Component({
   selector: 'app-add-training',
@@ -11,11 +15,12 @@ export class AddTrainingComponent {
   @Output() trainingAdded = new EventEmitter<void>();
 
   form: FormGroup;
+  themes$ = this.store.select('themes');
 
   isAreaOpen = false;
   isThemeOpen = false;
 
-  constructor(private formBuilder: FormBuilder, private toastr: ToastrService) {
+  constructor(private formBuilder: FormBuilder, private store: Store<{ themes: Theme[] }>, private toastr: ToastrService, private trainingService: TrainingService) {
     this.form = this.formBuilder.group({
       nom: ['', Validators.required],
       description: ['', Validators.required],
@@ -37,8 +42,22 @@ export class AddTrainingComponent {
   }
 
   submit() {
-    console.log(this.form.value);
-    this.toastr.success('Formation ajoutée avec succès!')
-    this.trainingAdded.emit();
+    if (this.form.invalid) {
+      this.toastr.error('Merci de remplir tous les champs!');
+      return;
+    }
+    const newTraining: Training = this.form.value;
+    this.themes$.subscribe(themes => newTraining.theme = themes.find(t => t.id == this.form.value.theme_id)!)
+    this.trainingService.add(newTraining).subscribe({
+      next: (data) => {
+        this.store.dispatch({ type: '[formations] Ajouter formations', data });
+        this.toastr.success('Formation ajouté avec succès!');
+        this.form.reset();
+        this.trainingAdded.emit();
+      },
+      error: () => {
+        this.toastr.success("Erreur lors de l'ajout d'une formation!");    
+      }
+    });
   }
 }

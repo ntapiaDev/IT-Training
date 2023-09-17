@@ -1,39 +1,44 @@
 <div class="details" [style.height.px]="isOpen ? maxHeight : height">
   <div #container class="container">
     <div class="title">
-      <h3>Formation Java - <span [style.color]="true ? '#409E1E' : '#FF0008'">{{true ? 'OK' : 'En attente'}}</span></h3>
+      <h3>Formation {{ session?.formation?.nom }} - <span [style.color]="true ? '#409E1E' : '#FF0008'">{{true ? 'OK' : 'En attente'}}</span></h3>
       <span class="button" (click)="handleClose()">X</span>
     </div>
-    <div class="legend">Informatique - Langages de programmation</div>
+    <div class="legend">{{ session?.formation?.theme?.domaine?.nom + ' - ' + session?.formation?.theme?.nom }}</div>
     <div class="infos">
-        <div><span><b>Nom du référent :</b> Référent</span></div>
+        <div><span><b>Nom du référent :</b> {{ session?.formateur?.prenom + ' ' + session?.formateur?.nom }}</span></div>
         <div>
-            <span><b>Durée</b> : 3 jours</span>
-            <span><b>Date de début</b> : 08/09/2023</span>
-            <span><b>Date de fin</b> : 11/09/2023</span>
-            <span><b>Prix</b> : 999€</span>
+            <span><b>Durée</b> : {{ session?.duree }} jours</span>
+            <span><b>Date de début</b> : {{ formatDate(session?.dateDebut!) }}</span>
+            <span><b>Date de fin</b> : {{ formatDate(session?.dateFin!) }}</span>
+            <span><b>Prix</b> : {{ session?.prix }}€</span>
         </div>
-        <div><span><b>Nombre de participants :</b> 8/12</span></div>
-        <div><span><b>Formation à distance :</b> Non</span></div>
+        <div><span><b>Nombre de participants :</b> {{ valid + '/' + session?.nombreParticipants }} <span *ngIf="invalid" class="invalid">(+{{invalid}})</span></span></div>
+        <div><span><b>Formation à distance :</b> {{ session?.remote ? 'Oui' : 'Non'}}</span></div>
         <div class="split">
             <div class="col">
                 <h4>Liste des candidats :</h4>
                 <ul>
-                    <li><span>Cédric BOUCHER</span></li>
-                    <li><span>Mehdi GAMOUH</span></li>
-                    <li><span>Nicolas TAPIA</span></li>
-                    <li><span>Un petit chat</span></li>
-                    <li><span>Un gros chien</span></li>
-                    <li><span>Quentin LeLutin</span></li>
-                    <li><span>Alexandre LaGrande</span></li>
-                    <li><span>Une chaise De Bureau</span></li>
+                  <span *ngIf="!valid" class="valid">Aucun candidat validé pour le moment.</span>
+                  <li *ngFor="let candidat of filterCandidates(session?.candidats).valid">
+                    <span>{{ candidat.nom + ' ' + candidat.prenom }} </span>
+                    <svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" title="Invalider" class="svgInvalid" (click)="invalideCandidate(candidat.username)">
+                      <path d="M1490 1322q0 40-28 68l-136 136q-28 28-68 28t-68-28l-294-294-294 294q-28 28-68 28t-68-28l-136-136q-28-28-28-68t28-68l294-294-294-294q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 294 294-294q28-28 68-28t68 28l136 136q28 28 28 68t-28 68l-294 294 294 294q28 28 28 68z"/>
+                    </svg>
+                  </li>
+                  <span *ngIf="invalid" class="invalid">Candidats en attente de validation :</span>
+                  <li *ngFor="let candidat of filterCandidates(session?.candidats).invalid">
+                    <span>{{ candidat.nom + ' ' + candidat.prenom }} </span>
+                    <svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" title="Valider" class="svgValid" (click)="valideCandidate(candidat.username)">
+                      <path d="M1671 566q0 40-28 68l-724 724-136 136q-28 28-68 28t-68-28l-136-136-362-362q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 295 656-657q28-28 68-28t68 28l136 136q28 28 28 68z"/>
+                    </svg>
+                  </li>
                 </ul>
             </div>
             <div class="col">
                 <h4>Centre de formation :</h4>
-                <span><b>Nom de l'entreprise :</b> IT-Training Rouen</span>
-                <span><b>Responsable :</b> Jean Francis NDJUIKO</span>
-                <span><b>Adresse :</b> 21 rue des chats, 75101 PARIS</span>
+                <span><b>Nom du centre :</b> {{ session?.centre?.nom }}</span>
+                <span><b>Adresse :</b> {{ session?.centre?.adresse?.numero + ' ' + session?.centre?.adresse?.adresse + ', ' + session?.centre?.adresse?.ville?.codePostal + ' ' + session?.centre?.adresse?.ville?.nom }}</span>
             </div>
         </div>
         <div class="col programme">

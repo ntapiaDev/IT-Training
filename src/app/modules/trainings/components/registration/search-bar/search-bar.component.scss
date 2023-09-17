@@ -40,11 +40,13 @@
 
     .select {
       width: 400px;
+      max-height: 250px;
       border-radius: 0.5em;
       background-color: $white;
       border: 1px solid $dark-grey;
-      overflow: hidden;
+      overflow: auto;
       position: absolute;
+      z-index: 999;
 
       @media screen and (max-width: 768px) {
         width: 100%;
@@ -63,6 +65,7 @@
 
   img {
     width: 200px;
+    opacity: 0.10;
 
     @media screen and (max-width: 768px) {
       display: none;

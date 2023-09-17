@@ -73,5 +73,9 @@ button[type="button"] {
     background-color: $white;
     border: 3px double $secondary-color;
     border-radius: 0.5em;
+
+    button {
+      margin-bottom: 1em;
+    }
   }
 }

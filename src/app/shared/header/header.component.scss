@@ -32,9 +32,10 @@ header {
         display: none;
       }
 
-      a {
+      a, span {
         padding: 1em;
         color: $primary-color;
+        cursor: pointer;
       }
     }
 
@@ -80,10 +81,11 @@ header {
       overflow: hidden;
       z-index: 10;
 
-      a {
+      a, span {
         color: $secondary-color;
         padding: 0.5em 1em;
         display: block;
+        cursor: pointer;
       }
     }
   }

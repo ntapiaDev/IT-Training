@@ -2,7 +2,7 @@
 
 h3 {
   color: $primary-color;
-  text-transform: capitalize;
+  text-transform: uppercase;
 }
 
 svg {
@@ -79,6 +79,7 @@ table {
 
   tr {
     background-color: $white;
+    cursor: pointer;
 
     &:nth-child(1) {
       color: $white;
@@ -113,13 +114,17 @@ table {
     border-top: 1px solid $dark-grey;
     border-bottom: 1px solid $dark-grey;
 
+    .invalid {
+      color: red;
+    }
+
     &.actions-container {
       width: 105px;
 
       .actions-list {
         display: flex;
         justify-content: space-between;
-        
+
         svg {
           cursor: pointer;
 
@@ -134,6 +139,7 @@ table {
     &.details {
       padding: 0;
       border: none;
+      cursor: default;
     }
   }
 }

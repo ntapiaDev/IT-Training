@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../../../core/services/auth.service';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-register-form',
@@ -14,28 +17,29 @@ export class RegisterFormComponent implements OnInit {
     confirmPassword: ['', Validators.required]
   });
   isLoading = false;
-  errorMessage = '';
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
+    private store: Store,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {}
 
   onSubmit() {
     if (this.registerForm.invalid) {
+      this.toastr.error("Merci de remplir tous les champs!");
       return;
     }
-
-    this.errorMessage = '';
 
     const email = this.registerForm.value.email;
     const password = this.registerForm.value.password;
     const confirmPassword = this.registerForm.value.confirmPassword;
 
     if (password !== confirmPassword) {
-      this.errorMessage = "Votre mot de passe ne correspond pas";
+      this.toastr.error("Vos mots de passe ne correspondend pas!");
       return;
     };
 
@@ -44,12 +48,24 @@ export class RegisterFormComponent implements OnInit {
     this.authService.register(email, password).subscribe(
       response => {
         this.isLoading = false;
-        console.log('Inscription réussie !', response);
+        this.authService.login(email, password).subscribe({
+          next: (response: any) => {
+            this.authService.setToken(response.accessToken);
+            this.toastr.success('Inscription effectuée avec succès!');
+            this.authService.getSession().subscribe(session => {
+              this.store.dispatch({ type: '[Session] Get Session Success', session });
+              if (!this.authService.getRedirect()) this.router.navigate(['/']);
+            });
+          },
+          error: (error) => {
+            this.isLoading = false;
+            this.toastr.error('Vos identifiants ne sont pas valides!');
+          }
+        });
       },
       error => {
         this.isLoading = false;
-        this.errorMessage = 'Erreur lors de l\'inscription';
-        console.error('Erreur lors de l\'inscription', error);
+        this.toastr.error('Cette adresse email est déjà utilisée!');
       }
     );
   }

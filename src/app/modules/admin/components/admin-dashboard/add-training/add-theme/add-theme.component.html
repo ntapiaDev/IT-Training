@@ -12,8 +12,7 @@
       </label>
       <label>Domaine :
         <select formControlName="domaine_id">
-          <option value="1">Information</option>
-          <option value="2">Management</option>
+          <option *ngFor="let area of areas$ | async" [value]="area.id">{{ area.nom }}</option>
         </select>
       </label>
       <button>Envoyer</button>

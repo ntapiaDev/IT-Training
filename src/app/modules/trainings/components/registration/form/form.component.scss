@@ -44,6 +44,11 @@ form:nth-child(2) {
       border: 1px solid $dark-grey;
       border-radius: 0.5em;
 
+      &:read-only {
+        background-color: #EEE;
+        cursor: not-allowed;
+      }
+
       &.small {
         width: 100px;
 
@@ -51,6 +56,14 @@ form:nth-child(2) {
           width: 100%;
         }
       }
+    }
+  }
+
+  .address {
+    margin-top: 1em;
+
+    div:nth-child(1) input:nth-child(1) {
+      width: 25%;
     }
   }
 

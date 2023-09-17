@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Theme } from '../models/Theme';
+import { server_url } from './server';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
-  private readonly serverUrl = 'http://localhost:8080/sousthemes';
+  private readonly serverUrl = `${server_url}/themes`;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

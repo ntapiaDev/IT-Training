@@ -4,6 +4,7 @@ import { Session, UserRole } from '../../models/Session';
 
 export const initialState: Session = {
   role: UserRole.null,
+  email: '',
   token: '',
   cart: 0
 };

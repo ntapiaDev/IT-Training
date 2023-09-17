@@ -13,4 +13,8 @@ export class LandingComponent {
   trainings: Observable<Training[]> = this.store.select('trainings')
 
   constructor(private store: Store<{ trainings: Training[] }>) { }
+
+  formatName(name: string) {
+    return name.replace(/ /g, '-');
+  }
 }

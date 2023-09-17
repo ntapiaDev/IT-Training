@@ -6,6 +6,8 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./marker.component.scss'],
 })
 export class MarkerComponent {
+  @Input() active: boolean = false;
+  @Input() city: string = '';
   @Input() quantity: number = 0;
   @Input() x: number = 0;
   @Input() y: number = 0;

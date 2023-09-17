@@ -45,11 +45,32 @@
         }
 
         ul {
-            display: flex;
-            flex-direction: column;
-            gap: 1em;
-            list-style: circle;
-            margin-left: 2em;
+          display: flex;
+          flex-direction: column;
+          gap: 1em;
+          list-style: circle;
+          margin-left: 2em;
+
+          .valid,
+          .invalid {
+            margin-left: -2em;
+            text-decoration: underline;
+          }
+
+          svg {
+            position: relative;
+            cursor: pointer;
+
+            &.svgValid {
+              top: 2px;
+              fill: green;
+            }
+
+            &.svgInvalid {
+              top: 3px;
+              fill: $red;
+            }
+          }
         }
 
         div {
@@ -63,6 +84,10 @@
 
             &.col {
                 flex-direction: column;
+            }
+
+            .invalid {
+              color: red;
             }
         }
 

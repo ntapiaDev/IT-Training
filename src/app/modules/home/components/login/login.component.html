@@ -19,9 +19,6 @@
       <a routerLink="/">Mot de passe oublié</a>
       <a routerLink="/">Problème de connexion</a>
     </span>
-    <div class="error-container">
-      <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
-    </div>
     <button type="submit" [disabled]="isLoading">Se connecter</button>
   </form>
   <img class="logo" src="assets/logo-it-light.svg" alt="">

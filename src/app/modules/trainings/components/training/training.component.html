@@ -4,7 +4,6 @@
     <p>{{ training.description }}</p>
 
     <div class="icons">
-      <p class="icon">Icone {{ training.remote ? "Remote" : "Présentiel" }}</p>
       <p class="icon">Icone Niveau</p>
     </div>
 
@@ -31,11 +30,12 @@
     </ul>
   </div>
   <app-asidePanel
+    [name]="training.nom"
     [id]="training.id"
-    [reference]="training.reference"
-    [days]="training.days"
-    [price]="training.price"
-    [remote]="training.remote"
+    [duree]="training.duree"
+    [prix]="training.prix"
+    [prerequis]="training.prerequis"
+    [city]="city"
   ></app-asidePanel>
 </section>
 

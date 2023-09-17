@@ -1,12 +1,17 @@
-<app-search-bar [selectedTrainings]="selectedTrainings" [trainings]="trainings" (addEvent)="addTraining($event)"></app-search-bar>
+<app-search-bar (addEvent)="addSession($event)"></app-search-bar>
 
-<div class="empty" *ngIf="selectedTrainings.length === 0">
-  <p>Aucune formation trouvée</p>
+<div class="empty" *ngIf="!selectedSession">
+  <p>Aucune session de formation trouvée</p>
   <p>Retrouvez nos formations sur notre page</p>
   <a routerLink="/formations">Formations</a>
 </div>
 
-<div class="register" *ngIf="selectedTrainings.length > 0">
-  <app-selected-training *ngFor="let training of selectedTrainings" [training]="training" (deleteEvent)="deleteTraining($event)"></app-selected-training>
-  <app-form></app-form>
+<div class="register" *ngIf="selectedSession">
+  <app-selected-training [session]="selectedSession" (deleteEvent)="deleteSession($event)"></app-selected-training>
+  <app-form *ngIf="(session$ | async)?.token" [session]="selectedSession"></app-form>
+</div>
+
+<div class="login" *ngIf="selectedSession && !(session$ | async)?.token">
+  <p>Vous devez être connecté pour vous inscrire à une formation</p>
+  <a routerLink="/connexion" (click)="redirect()">Se connecter</a>
 </div>

@@ -30,8 +30,7 @@
       </label>
       <label>Thème :
         <select formControlName="theme_id">
-          <option value="1">Langages de programmation</option>
-          <option value="2">Réseaux informatiques</option>
+          <option *ngFor="let theme of themes$ | async" [value]="theme.id">{{ theme.nom }}</option>
         </select>
       </label>
       <button>Envoyer</button>

@@ -41,6 +41,8 @@ aside {
 
   .container {
     padding: 1em;
+    max-height: 100vh;
+    overflow: auto;
 
     p:nth-child(1) {
       margin-bottom: 1em;
@@ -66,8 +68,42 @@ aside {
     .options {
       margin-top: 1em;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 1em;
+
+      .title {
+        span:nth-child(1) {
+          text-decoration: underline;
+        }
+        span:nth-child(2) {
+          cursor: pointer;
+        }
+        
+      }
+      
+      .session {
+        padding: 0.5em 1em;
+        border: 1px solid $secondary-color;
+        border-radius: 0.5em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        div {
+          text-align: center;
+          color: $secondary-color;
+          flex-grow: 1;
+
+          div:nth-child(1) {
+            text-transform: uppercase;
+          }
+        }
+
+        svg {
+          fill: $secondary-color;
+          cursor: pointer;
+        }
+      }
     }
   }
 }

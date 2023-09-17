@@ -11,6 +11,7 @@ import { TrainingComponent } from './components/training/training.component';
 import { TrainingsComponent } from './components/trainings/trainings.component';
 import { MapComponent } from './components/map/map.component';
 import { MarkerComponent } from './components/map/marker/marker.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MarkerComponent } from './components/map/marker/marker.component';
     CommonModule,
     TrainingRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class TrainingsModule { }

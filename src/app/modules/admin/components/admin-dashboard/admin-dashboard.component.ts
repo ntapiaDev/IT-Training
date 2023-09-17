@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
 import { TrainingSession } from 'src/app/core/models/TrainingSession';
+import { User } from 'src/app/core/models/User';
+import { TrainingSessionService } from 'src/app/core/services/trainingSession.service';
+import { adminInit, appInit } from 'src/app/core/stores/app.actions';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -16,22 +18,33 @@ export class AdminDashboardComponent {
   modaleAction = '';
   modaleId = 0;
   modaleIsOpen = false;
-  selected = 1;
+  sessionToEdit?: TrainingSession;
+  selected = '';
   reversed = false;
-  currentTab = 1;
+  currentTab = 'Inter';
   detailsId = 0;
   formIsOpen = false;
-
-  //FAKE DATA
-  session = {
-    id: 1,
-    nom: 'Super Session',
-    formation_id: 1,
-    date: 12345
-  }
   detailedSession = 0;
 
-  constructor(private store: Store<{ trainingSessions: TrainingSession[]} >, private toastr: ToastrService) { }
+  constructor(private store: Store<{ trainingSessions: TrainingSession[] } >, private sessionService: TrainingSessionService, private toastr: ToastrService) { }
+
+  ngOnInit() {
+    this.selectData(this.currentTab);
+  }
+
+  refresh() {
+    this.store.dispatch(appInit());
+    this.store.dispatch(adminInit());
+    this.toastr.success('Actualisation effectuée!')
+  }
+
+  formatDate(d: Date) {
+    const date = new Date(d);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const year = date.getFullYear().toString();
+    return `${day}/${month}/${year}`;
+  }
 
   toogleForm() {
     this.formIsOpen = !this.formIsOpen;
@@ -39,42 +52,72 @@ export class AdminDashboardComponent {
   }
 
   toggleDetails(id: number) {
-    this.detailedSession = this.detailedSession ? 0 : id;
+    this.detailedSession = this.detailedSession === id ? 0 : id;
   }
 
-  toggleModale(action: string = '', id: number = 0) {
-    // this.data = this.sessions$.find(data => data.id === id)!;
+  toggleModale(e: Event, action: string = '', id: number = 0) {
+    e.stopPropagation();
     this.modaleAction = action;
     this.modaleId = id;
     this.modaleIsOpen = !this.modaleIsOpen;
   }
 
+  getSession() {
+    return this.data.find(session => session.id === this.modaleId);
+  }
+
   filterData(sessions: TrainingSession[]) {
-    // return sessions.filter(session => !session.nom || session.nom?.toLowerCase().includes(this.filter.toLowerCase()));
+    return sessions.filter(session => session['formation'].nom.toLowerCase().includes(this.filter.toLowerCase()));
   }
 
-  selectData(tab: number) {
+  selectData(tab: string) {
     this.currentTab = tab;
-    //Filtrer en fonction du type de session
+    this.sessions$.subscribe(sessions => this.data = sessions.filter(s => s.type === tab));
   }
 
-  order(key: number) {
+  getCandidates(candidats: User[]) {
+    let valid = 0;
+    let invalid = 0;
+    for (let candidat of candidats) {
+      if (candidat.validate) valid++;
+      else invalid++;
+    }
+    return { valid, invalid };
+  }
+
+  order(key: string) {
     const doReverse = this.selected === key;
     if (!doReverse) {
       this.selected = key;
       this.reversed = false;
     }
-    // const newData = [...this.currentData].sort((a, b) => a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0);
+    const newData = [...this.data].sort((a, b) => {
+      return a[key] < b[key] ? -1 : a[key] > b[key] ? 1 :
+      a[key].nom < b[key].nom ? -1 : a[key].nom > b[key].nom ? 1 : 0
+    });
     if (doReverse && !this.reversed) {
-      // newData.reverse();
+      newData.reverse();
       this.reversed = true;
     } else {
       this.reversed = false;
     }
-    // this.currentData = newData;
+    this.data = newData;
   }
 
-  showMore(id: number) {}
+  editSession(session: TrainingSession) {
+    this.sessionToEdit = session;
+    this.formIsOpen = true;
+  }
 
-  delete() {}
+  delete(e: Event) {
+    const id = this.modaleId;
+    this.sessionService.delete(id).subscribe({
+      next: () => {
+        this.store.dispatch({ type: '[sessions] Supprimer sessions', id });
+        this.toastr.success('Session supprimée avec succès!');
+        this.toggleModale(e);
+      },
+      error: () => this.toastr.error("Erreur lors de la suppression d'une session!")
+    });
+  }
 }
