@@ -3,12 +3,13 @@ import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TrainingSession } from '../models/TrainingSession';
+import { server_url } from './server';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrainingSessionService {
-  private readonly serverUrl = 'http://localhost:8080/sessions';
+  private readonly serverUrl = `${server_url}/sessions`;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Area } from '../models/Area';
+import { server_url } from './server';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AreaService {
-  private readonly serverUrl = 'http://localhost:8080/domaines';
+  private readonly serverUrl = `${server_url}/domaines`;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Address } from '../models/Address';
+import { server_url } from './server';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AddressService {
-  private readonly serverUrl = 'http://localhost:8080/adresses';
+  private readonly serverUrl = `${server_url}/adresses`;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

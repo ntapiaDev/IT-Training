@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Training } from '../models/Training';
+import { server_url } from './server';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrainingService {
-  private readonly serverUrl = 'http://localhost:8080/formations';
+  private readonly serverUrl = `${server_url}/formations`;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

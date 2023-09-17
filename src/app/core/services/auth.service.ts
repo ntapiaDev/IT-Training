@@ -6,17 +6,18 @@ import { map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import { TrainingSessionService } from './trainingSession.service';
 import { Session } from '../models/Session';
+import { server_url } from './server';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly serverUrl = 'http://localhost:8080';
+  private readonly serverUrl = `${server_url}/auth`;
 
   constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, private trainingSessionService: TrainingSessionService) { }
 
   login(email: string, password: string) {
-    return this.http.post(`${this.serverUrl}/auth/login`, { username: email, password });
+    return this.http.post(`${this.serverUrl}/login`, { username: email, password });
   }
 
   setToken(token: string): void {
@@ -38,11 +39,11 @@ export class AuthService {
   }
 
   register(email: string, password: string) {
-    return this.http.post(`${this.serverUrl}/auth/create-user`, { username: email, password });
+    return this.http.post(`${this.serverUrl}/create-user`, { username: email, password });
   }
 
   getSession(): Observable<Session> {
-    return this.http.get<any>(`${this.serverUrl}/auth/profil`).pipe(
+    return this.http.get<any>(`${this.serverUrl}/profil`).pipe(
       map(user => {
         const role = user?.tokenAttributes.scope;
         return {
@@ -56,7 +57,7 @@ export class AuthService {
   }
 
   getProfil() {
-    return this.http.get<any>(`${this.serverUrl}/auth/profil`);
+    return this.http.get<any>(`${this.serverUrl}/profil`);
   }
 
   setRedirect(url: string) {
