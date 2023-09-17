@@ -65,7 +65,7 @@ export class RegisterFormComponent implements OnInit {
       },
       error => {
         this.isLoading = false;
-        this.toastr.error('Erreur lors de l\'inscription');
+        this.toastr.error('Cette adresse email est déjà utilisée!');
       }
     );
   }

@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { TrainingSession } from 'src/app/core/models/TrainingSession';
+import { User } from 'src/app/core/models/User';
 import { TrainingSessionService } from 'src/app/core/services/trainingSession.service';
+import { adminInit, appInit } from 'src/app/core/stores/app.actions';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -28,6 +30,12 @@ export class AdminDashboardComponent {
 
   ngOnInit() {
     this.selectData(this.currentTab);
+  }
+
+  refresh() {
+    this.store.dispatch(appInit());
+    this.store.dispatch(adminInit());
+    this.toastr.success('Actualisation effectuée!')
   }
 
   formatDate(d: Date) {
@@ -65,6 +73,16 @@ export class AdminDashboardComponent {
   selectData(tab: string) {
     this.currentTab = tab;
     this.sessions$.subscribe(sessions => this.data = sessions.filter(s => s.type === tab));
+  }
+
+  getCandidates(candidats: User[]) {
+    let valid = 0;
+    let invalid = 0;
+    for (let candidat of candidats) {
+      if (candidat.validate) valid++;
+      else invalid++;
+    }
+    return { valid, invalid };
   }
 
   order(key: string) {

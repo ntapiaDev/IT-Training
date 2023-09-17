@@ -8,9 +8,11 @@ import { User } from '../models/User';
 export class UserService {
   private readonly serverUrl = 'http://localhost:8080/candidats';
   httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-    }),
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  httpOptionsText ={
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    responseType: 'text' as 'json'
   };
 
   constructor(private http: HttpClient) { }
@@ -33,5 +35,13 @@ export class UserService {
 
   delete(id: number) {
     return this.http.delete(`${this.serverUrl}/${id}`);
+  }
+
+  validate(username: string) {
+    return this.http.post(`${this.serverUrl}/validate`, { username }, this.httpOptionsText);
+  }
+
+  invalidate(username: string) {
+    return this.http.post(`${this.serverUrl}/invalidate`, { username }, this.httpOptionsText);
   }
 }

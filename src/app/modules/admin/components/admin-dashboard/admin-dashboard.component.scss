@@ -114,6 +114,10 @@ table {
     border-top: 1px solid $dark-grey;
     border-bottom: 1px solid $dark-grey;
 
+    .invalid {
+      color: red;
+    }
+
     &.actions-container {
       width: 105px;
 
