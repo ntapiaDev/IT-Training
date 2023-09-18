@@ -10,6 +10,11 @@ import { ContactFormComponent } from './components/contact-form/contact-form.com
 import { LandingComponent } from './components/landing/landing.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterFormComponent } from './components/register/register-form.component';
+import { WhatComponent } from './components/what/what.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
+import { SearchComponent } from './components/search/search.component';
+import { JobsComponent } from './components/jobs/jobs.component';
+import { CubeComponent } from './components/cube/cube.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +24,12 @@ import { RegisterFormComponent } from './components/register/register-form.compo
     AreaComponent,
     LoginComponent,
     RegisterFormComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    WhatComponent,
+    CarouselComponent,
+    SearchComponent,
+    JobsComponent,
+    CubeComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,61 @@
+@import "variables";
+
+.container {
+  max-width: $max-width;
+  margin: auto;
+  padding: 5em 1em 1em 1em;
+
+  section {
+    margin-top: 30px;
+
+    h2 {
+      margin-bottom: 30px;
+    }
+
+    .fond {
+      display: flex;
+      justify-content: space-around;
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+      }
+      .cont {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .card {
+        width: 90%;
+        height: 250px;
+        display: flex;
+        margin: 0 0 10px 0;
+        align-items: flex-end;
+        background-size: cover;
+        border-radius: 10px;
+        @media screen and (max-width: 768px) {
+          margin-bottom: 10px;
+        }
+      }
+
+      #titles {
+        width: 100%;
+        padding: 10px;
+        border-radius: 0 0 10px 10px;
+        background-color: rgba(255, 255, 255, 0.7);
+
+        .tree {
+          color: $primary-color;
+        }
+        .four {
+          color: $secondary-color;
+        }
+      }
+      p {
+        width: 90%;
+        margin: 0 0 30px 0;
+        @media screen and (max-width: 768px) {
+          margin-bottom: 30px;
+        }
+      }
+    }
+  }
+}

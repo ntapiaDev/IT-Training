@@ -1,0 +1,36 @@
+<div class="container">
+  <!-- <section>
+    <div>
+      <div class="fond">
+        <div class="titles">
+          <h3>Info - 20/04/2023</h3>
+          <h4>Chef de projets</h4>
+        </div>
+      </div>
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere
+        excepturi repellendus eveniet, quos tempore dolores optio nemo dicta
+        amet aliquid est?
+      </p>
+    </div>
+  </section> -->
+  <h2>Les métiers les plus recherchés par les entreprises</h2>
+  <section>
+    <div class="fond">
+      <ng-container class="cont" *ngFor="let job of jobs">
+        <div>
+          <div
+            class="card"
+            [ngStyle]="{ 'background-image': 'url(' + job.url + ')' }"
+          >
+            <div id="titles">
+              <h3 class="tree">{{ job.title }}</h3>
+              <h4 class="four">{{ job.subtitle }}</h4>
+            </div>
+          </div>
+          <p class="four">{{ job.description }}</p>
+        </div>
+      </ng-container>
+    </div>
+  </section>
+</div>

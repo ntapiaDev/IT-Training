@@ -1,0 +1,149 @@
+@import "variables";
+
+.container {
+  max-width: $max-width;
+  margin: auto;
+  padding: 5em 1em 1em 1em;
+
+  h2 {
+    margin-bottom: 30px;
+  }
+
+  section {
+    width: 100%;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-evenly;
+
+    @media screen and (max-width: 768px) {
+      margin: 0;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    ul {
+      height: 200px;
+      margin: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      position: relative;
+      bottom: 30px;
+
+      @media screen and (max-width: 768px) {
+        margin: 30px 0 0 0;
+        height: auto;
+        flex-direction: row;
+        bottom: 10px;
+      }
+
+      li {
+        width: 100px;
+        padding: 5px;
+        display: flex;
+        list-style: none;
+        text-align: center;
+        justify-content: center;
+        background-color: #121275;
+        color: #fff;
+        border-radius: 7px;
+        cursor: pointer;
+
+        &.clicked {
+          background-color: #fff;
+          color: #121275;
+        }
+      }
+    }
+
+    .slider {
+      position: relative;
+      width: 50%;
+      cursor: no-drop;
+
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
+
+      .rightArrow {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        right: 32px;
+        font-size: 45px;
+        color: #ffffff;
+        z-index: 1;
+      }
+
+      .leftArrow {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        left: 32px;
+        font-size: 45px;
+        color: #fff;
+        z-index: 1;
+        cursor: pointer;
+      }
+
+      .svg {
+        width: 30px;
+        height: 30px;
+      }
+
+      .slide {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        @media screen and (max-width: 768px) {
+          width: 100%;
+          height: 250px;
+          margin-bottom: 10px;
+        }
+
+        .name {
+          width: 15%;
+          padding: 10px;
+          text-align: center;
+          border-radius: 0px 10px 0 10px;
+          background-color: #1e4f9e;
+          color: #fff;
+          position: relative;
+          top: 221px;
+
+          @media screen and (max-width: 768px) {
+            width: 15%;
+            top: 211px;
+          }
+        }
+      }
+    }
+
+    .finance {
+      width: 25%;
+      height: 100%;
+      margin-bottom: 30px;
+
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
+
+      h3 {
+        margin-bottom: 10px;
+        color: #1e4f9e;
+      }
+
+      h4 {
+        margin-bottom: 5px;
+        color: #121275;
+      }
+
+      p {
+        text-align: justify;
+      }
+    }
+  }
+}
