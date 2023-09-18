@@ -14,6 +14,7 @@ import { WhatComponent } from './components/what/what.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { SearchComponent } from './components/search/search.component';
 import { JobsComponent } from './components/jobs/jobs.component';
+import { CubeComponent } from './components/cube/cube.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { JobsComponent } from './components/jobs/jobs.component';
     WhatComponent,
     CarouselComponent,
     SearchComponent,
-    JobsComponent
+    JobsComponent,
+    CubeComponent
   ],
   imports: [
     CommonModule,

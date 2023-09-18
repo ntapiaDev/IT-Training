@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, HostListener } from "@angular/core";
 import { SlideInterface } from "./types/slide.interface";
 import { animate, style, transition, trigger } from '@angular/animations';
 
@@ -27,6 +27,7 @@ export class CarouselComponent implements OnInit, OnDestroy{
     isOpen = true;
     isMove = true;
     slide: any;
+    isMouseOver = false;
 
     private autoScrollInterval: any;
   
@@ -39,11 +40,19 @@ export class CarouselComponent implements OnInit, OnDestroy{
         this.stopAutoScroll();
       }
       startAutoScroll(): void {
-        // Démarrez le défilement automatique toutes les 5 secondes (ajustez la valeur selon vos préférences)
-        this.autoScrollInterval = setInterval(() => {
-          this.goToNext();
-        }, 5000); // 5000 millisecondes = 5 secondes
+        // // Démarrez le défilement automatique toutes les 5 secondes (ajustez la valeur selon vos préférences)
+        // this.autoScrollInterval = setInterval(() => {
+        //   this.goToNext();
+        // }, 5000); // 5000 millisecondes = 5 secondes
+
+        if (!this.isMouseOver) {
+          // Démarrez le défilement automatique toutes les 5 secondes (ajustez la valeur selon vos préférences)
+          this.autoScrollInterval = setInterval(() => {
+            this.goToNext();
+          }, 5000); // 5000 millisecondes = 5 secondes
+        }
       }
+      
       stopAutoScroll(): void {
         // Arrêtez le défilement automatique en effaçant l'intervalle
         clearInterval(this.autoScrollInterval);
@@ -86,4 +95,25 @@ export class CarouselComponent implements OnInit, OnDestroy{
     getCurrentSliderTitle(): string {
         return `${this.slides[this.currentIndex].title}`
     }
+
+    toggleAutoScroll(enabled: boolean): void {
+      if (enabled) {
+        this.startAutoScroll();
+      } else {
+        this.stopAutoScroll();
+      }
+    }
+   
+    @HostListener('mouseenter')
+onMouseEnter(): void {
+  this.isMouseOver = true;
+  this.toggleAutoScroll(false); // Désactive le défilement automatique
+}
+
+@HostListener('mouseleave')
+onMouseLeave(): void {
+  this.isMouseOver = false;
+  this.toggleAutoScroll(true); // Réactive le défilement automatique
+}
+
 }

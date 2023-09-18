@@ -14,31 +14,23 @@
       </p>
     </div>
   </section> -->
+  <h2>Les métiers les plus recherchés par les entreprises</h2>
   <section>
-    <h2>Les métiers les plus recherchés pas les entreprises</h2>
     <div class="fond">
-      <div
-        id="picture"
-        *ngFor="let job of jobs"
-        [ngStyle]="{ 'background-image': getCurrentJobUrl() }"
-      >
-        <ng-container *ngFor="let job of jobs">
-          <div id="titles" *ngIf="currentIndex === job.id">
-            <h3 class="tree">{{ job.title }}</h3>
-            <h4 class="four">{{ job.subtitle }}</h4>
+      <ng-container class="cont" *ngFor="let job of jobs">
+        <div>
+          <div
+            class="card"
+            [ngStyle]="{ 'background-image': 'url(' + job.url + ')' }"
+          >
+            <div id="titles">
+              <h3 class="tree">{{ job.title }}</h3>
+              <h4 class="four">{{ job.subtitle }}</h4>
+            </div>
           </div>
-        </ng-container>
-      </div>
-    </div>
-
-    <div class="fond" id="para">
-      <div id="paragraphe" *ngFor="let job of jobs">
-        <ng-container *ngFor="let job of jobs">
-          <p *ngIf="currentIndex === job.id">
-            {{ job.description }}
-          </p>
-        </ng-container>
-      </div>
+          <p class="four">{{ job.description }}</p>
+        </div>
+      </ng-container>
     </div>
   </section>
 </div>
