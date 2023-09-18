@@ -78,7 +78,7 @@ export class AdminDashboardComponent {
   getCandidates(candidats: User[]) {
     let valid = 0;
     let invalid = 0;
-    for (let candidat of candidats) {
+    for (let candidat of candidats || []) {
       if (candidat.validate) valid++;
       else invalid++;
     }

@@ -11,6 +11,8 @@ import { AddressService } from 'src/app/core/services/address.service';
 import { CityService } from 'src/app/core/services/city.service';
 import { TrainingSessionService } from 'src/app/core/services/trainingSession.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { appInit } from 'src/app/core/stores/app.actions';
+import { addCandidate, removeCandidate } from 'src/app/core/stores/trainingSession/trainingSessions.actions';
 
 @Component({
   selector: 'app-form',
@@ -19,6 +21,7 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class FormComponent {
   @Input() session!: TrainingSession;
+  @Input() foundSession?: TrainingSession;
 
   formTarget: string = 'particulier';
   registerForm!: FormGroup;
@@ -27,21 +30,23 @@ export class FormComponent {
 
   ngOnInit() {
     this.store.select('session').subscribe(session => {
+      let foundUser;
+      if (this.foundSession) foundUser = this.foundSession.candidats.find(c => c.username === session.email);
       this.registerForm = this.formBuilder.group({
-        nom: ['', Validators.required],
-        prenom: ['', Validators.required],
+        nom: [foundUser?.nom ?? '', Validators.required],
+        prenom: [foundUser?.prenom ??'', Validators.required],
         email: [session.email, Validators.required],
-        telephone: ['', Validators.required],
-        securiteSociale: ['', Validators.required],
-        identifiantPoleEmploi: ['', Validators.required],
+        telephone: [foundUser?.telephone ?? '', Validators.required],
+        securiteSociale: [foundUser?.securiteSociale ?? '', Validators.required],
+        identifiantPoleEmploi: [foundUser?.identifiantPoleEmploi ?? '', Validators.required],
         adresse: this.formBuilder.group({
-          numero: ['', Validators.required],
-          adresse: ['', Validators.required],
+          numero: [foundUser?.adresse.numero ?? '', Validators.required],
+          adresse: [foundUser?.adresse.adresse ?? '', Validators.required],
           ville: this.formBuilder.group({
-            nom: ['', Validators.required],
-            codePostal: ['', Validators.required],
-            lon: [0, Validators.required],
-            lat: [0, Validators.required]
+            nom: [foundUser?.adresse.ville.nom ?? '', Validators.required],
+            codePostal: [foundUser?.adresse.ville.codePostal ?? '', Validators.required],
+            lon: [foundUser?.adresse.ville.lon ?? '', Validators.required],
+            lat: [foundUser?.adresse.ville.lat ?? '', Validators.required]
           })
         }),
       });
@@ -110,11 +115,13 @@ export class FormComponent {
               validate: false
             }
             this.userService.convert(user).subscribe({
-              next: (data) => {
+              next: (data: any) => {
                 this.toastr.success('Votre candidature a bien été envoyée!');
                 this.registerForm.reset();
                 this.trainingSessionService.storage.delete(this.session.id, false);
-                this.router.navigate(['/']);
+                // if (this.foundSession) this.store.dispatch(removeCandidate({ id: this.foundSession.id, candidat: data }));
+                // this.store.dispatch(addCandidate({ id: this.session!.id, candidat: data }));
+                this.store.dispatch(appInit());
               },
               error: (error) => {
                 console.log(error);

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { first } from 'rxjs/operators';
 import { Session } from 'src/app/core/models/Session';
 import { Training } from 'src/app/core/models/Training';
 import { TrainingSession } from 'src/app/core/models/TrainingSession';
@@ -58,7 +59,7 @@ export class SearchBarComponent {
     this.selectedCity = '';
     this.sessions = [];
     this.selectedSession = '';
-    this.sessions$.subscribe(sessions => sessions.forEach(session => {
+    this.sessions$.pipe(first()).subscribe(sessions => sessions.forEach(session => {
       if (session.formation?.nom === name) {
         const city = session.centre.adresse.ville.nom;
         if (!this.cities.includes(city)) this.cities.push(city);

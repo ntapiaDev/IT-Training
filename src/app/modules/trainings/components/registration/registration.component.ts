@@ -15,9 +15,18 @@ export class RegistrationComponent {
   session$ = this.store.select('session');
   trainingSession$ = this.store.select('trainingSessions');
   selectedSession?: TrainingSession;
+  foundSession?: TrainingSession;
 
   constructor(private authService: AuthService, private location: Location, private store: Store<{ session: Session, trainingSessions: TrainingSession[] }>, private trainingSessionService: TrainingSessionService) {
     this.loadSessions();
+  }
+
+  ngOnInit() {
+    this.trainingSession$.subscribe(sessions => {
+      this.session$.subscribe(userSession => {
+        this.foundSession = sessions.find(session => session.candidats.find(candidat => candidat.username === userSession.email));
+      });
+    });
   }
 
   loadSessions() {
@@ -34,6 +43,16 @@ export class RegistrationComponent {
   deleteSession(id: number) {
     this.trainingSessionService.storage.delete(id);
     this.loadSessions();
+  }
+
+  formatDate(s: Date, e: Date) {
+    const start = (new Date(s)).toLocaleString('fr-FR', { day: 'numeric', month: 'short' });
+    const end = new Date(e).toLocaleString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
+    return start + ' au ' + end;
+  }
+
+  formatName(name: string) {
+    return name.replace(/ /g, '-');
   }
 
   redirect() {

@@ -36,6 +36,14 @@
   }
 }
 
+.register p {
+  position: relative;
+  top: -2em;
+  color: $red;
+  font-style: italic;
+  text-align: center;
+}
+
 .login {
 
   a {

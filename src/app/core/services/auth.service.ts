@@ -31,7 +31,8 @@ export class AuthService {
   }
 
   logout(): void {
-    this.cookieService.delete('JWT');
+    // this.cookieService.delete('JWT');
+    document.cookie = 'JWT=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
   }
 
   isLoggedIn(): boolean {

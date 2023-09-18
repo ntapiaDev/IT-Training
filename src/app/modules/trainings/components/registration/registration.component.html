@@ -1,14 +1,21 @@
 <app-search-bar (addEvent)="addSession($event)"></app-search-bar>
 
-<div class="empty" *ngIf="!selectedSession">
+<div class="empty" *ngIf="!selectedSession && !foundSession">
   <p>Aucune session de formation trouvée</p>
   <p>Retrouvez nos formations sur notre page</p>
   <a routerLink="/formations">Formations</a>
 </div>
 
+<div class="empty" *ngIf="foundSession">
+  <p>Vous êtes actuellement inscrit pour la session suivante :</p>
+  <p>{{ foundSession.formation.nom }} du {{ formatDate(foundSession.dateDebut, foundSession.dateFin) }} au {{ foundSession.centre.nom }}</p>
+  <a [routerLink]="['/formations', formatName(foundSession.formation.nom)]">Voir le détail de cette formation</a>
+</div>
+
 <div class="register" *ngIf="selectedSession">
+  <p *ngIf="foundSession">Attention, votre inscription précédente sera annulée si vous vous inscrivez à cette session.</p>
   <app-selected-training [session]="selectedSession" (deleteEvent)="deleteSession($event)"></app-selected-training>
-  <app-form *ngIf="(session$ | async)?.token" [session]="selectedSession"></app-form>
+  <app-form *ngIf="(session$ | async)?.token" [session]="selectedSession" [foundSession]="foundSession"></app-form>
 </div>
 
 <div class="login" *ngIf="selectedSession && !(session$ | async)?.token">
