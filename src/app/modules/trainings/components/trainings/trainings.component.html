@@ -2,29 +2,77 @@
   <h1>Liste des formations</h1>
   <div class="infos">
     <div>
-      <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore quaerat adipisci dolor illum, neque doloribus, sint magnam ad inventore officia voluptate expedita voluptatum tenetur est.</p>
-      <p>Tu ne sais pas encore ce qui te correspond le mieux. Aide toi avec ce test d'orientation de carrière gratuit et utilisé par de nombreuses entreprises.<br>
-      <a href="https://app.assessfirst.com/login" target="_blank">https://app.assessfirst.com/login</a></p>
+      <p>
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+        eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+        voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+        clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+        amet. Lorem ipsum dolor sit amet, consetetur.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore quaerat
+        adipisci dolor illum, neque doloribus, sint magnam ad inventore officia
+        voluptate expedita voluptatum tenetur est.
+      </p>
+      <p style="color: #1e4f9e">
+        Tu ne sais pas encore ce qui te correspond le mieux. Aide toi avec ce
+        test d'orientation de carrière gratuit et utilisé par de nombreuses
+        entreprises.<br />
+        <a href="https://app.assessfirst.com/login" target="_blank"
+          >https://app.assessfirst.com/login</a
+        >
+      </p>
     </div>
-    <img src="assets/Icone IT gris claire.svg" alt="">
+    <img src="assets/Icone IT gris claire.svg" alt="" />
   </div>
   <div class="area-container">
     <div class="list">
       <div class="reset">
-        <h3>Formations {{ city ? 'à ' + city + ' (' + filterMap.length + ')' : 'France entière (' + trainings.length + ')'}}</h3>
-        <div *ngIf="city.length" (click)="mapFilter({ city: '', trainings: []})">Réinitialiser la liste.</div>
+        <h3>
+          Formations
+          {{
+            city
+              ? "à " + city + " (" + filterMap.length + ")"
+              : "France entière (" + trainings.length + ")"
+          }}
+        </h3>
+        <div
+          *ngIf="city.length"
+          (click)="mapFilter({ city: '', trainings: [] })"
+        >
+          Réinitialiser la liste.
+        </div>
       </div>
       <div class="input">
-        <input type="text" (input)="filter($event)" placeholder="Rechercher une formation..."/>
-        <svg width="25" height="25" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1216 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z"/>
-      </svg>
+        <input
+          type="text"
+          (input)="filter($event)"
+          placeholder="Rechercher une formation..."
+        />
+        <svg
+          width="25"
+          height="25"
+          viewBox="0 0 1792 1792"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1216 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z"
+          />
+        </svg>
       </div>
       <ul>
         <ng-container *ngFor="let training of filterFromMap(trainings)">
-          <li *ngIf="training.nom.toLowerCase().includes(filterValue.toLowerCase())">
-            <a [routerLink]="['/formations', formatName(training.nom)]" [queryParams]="city ? { ville: city } : null"> {{ training.nom }}</a>
+          <li
+            *ngIf="
+              training.nom.toLowerCase().includes(filterValue.toLowerCase())
+            "
+          >
+            <a
+              [routerLink]="['/formations', formatName(training.nom)]"
+              [queryParams]="city ? { ville: city } : null"
+            >
+              {{ training.nom }}</a
+            >
           </li>
         </ng-container>
       </ul>
