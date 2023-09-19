@@ -4,6 +4,7 @@ h1 {
   text-align: center;
 }
 
+
 #form_contact {
   margin-bottom: 30px;
   display: flex;
@@ -26,6 +27,7 @@ h1 {
       gap: 1em;
     }
 
+
     figure {
       width: 100px;
       text-align: center;
@@ -43,6 +45,12 @@ h1 {
       figcaption {
         color: $primary-color;
       }
+    }
+
+    p {
+      width: 100px;
+      color: $primary-color;
+      text-align: center;
     }
   }
 
